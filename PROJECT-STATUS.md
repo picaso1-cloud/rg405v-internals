@@ -235,6 +235,11 @@ Full profile: `rg405v-internals/02-recon-results.md`.
 - **Rollback:** GammaOS RG405V unbricker (Google Drive; Windows
   `UpgradeDownload.exe`) — **must be verified before flashing**; no root =
   no full eMMC dump.
+- **Installed (2026-11-08, no root):** **Daijishō 1.5.0** (32 platforms
+  imported; ROM paths pending), **Droidify 0.7.8** (F-Droid client),
+  **Shizuku-Next 14.0.33** (running, shell UID, transport adb).
+- **Prepared updates:** Cromite, Fennec, PPSSPP 1.20.4, RetroArch 1.22.2,
+  Flycast 2.7, Azahar 2126.2; details in `rg405v-internals/04-apps-and-launcher.md`.
 - **Status:** **recon complete; decision 2026-11-08: STAY STOCK for now** —
   no unlock, no flash, no device changes. GammaOS Next Lite plan remains ready;
   the user has a Windows PC/VM for the unbricker when the flash is eventually
@@ -326,8 +331,13 @@ opened #2 manually).
   **Nothing flashed.**
 - **User decision: RG405V stays stock for now** — no unlock, no backup, no
   device changes. Plan + Windows unbricker path recorded for later.
-- **Next:** Max 2 waits for an A2 card to test the ROCKNIX RK3326 image + key
-  overlay; RG353V TF1 Linux remains ready when wanted.
+- **RG405V user-space setup (no root):** installed **Daijishō 1.5.0** (32
+  platforms imported), **Droidify 0.7.8** (F-Droid client), **Shizuku-Next
+  14.0.33** (running, UID 2000/shell). Prepared official APKs for Cromite,
+  Fennec, PPSSPP 1.20.4, RetroArch 1.22.2, Flycast 2.7, Azahar 2126.2.
+  Chrome left untouched (no Google account; Play/Aurora needed).
+- **Next:** Daijishō ROM paths + default home, install FOSS apps from Droidify,
+  safe performance tweaks; Max 2 waits for an A2 card.
 
 ---
 

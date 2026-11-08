@@ -55,6 +55,9 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 - [ ] Unbricker downloaded/verified (rollback gate).
 - [ ] GammaOS Next Lite (Android 14) installed — plan:
   [03-gammaos-next-plan.md](03-gammaos-next-plan.md).
+- [x] **Daijishō 1.5.0 installed**, 32 platforms imported (paths pending).
+- [x] **Droidify 0.7.8 installed** (F-Droid client for FOSS apps).
+- [x] **Shizuku-Next 14.0.33 installed and running** (shell UID, transport adb).
 - [ ] andr36oid layer ported.
 - [ ] Emulation/perf baseline recorded.
 
@@ -65,7 +68,8 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 | [01-recon-plan.md](01-recon-plan.md) | Step-by-step probing + backup/rollback checklist |
 | [02-recon-results.md](02-recon-results.md) | **Live read-only profile**: build, partitions, CPU/GPU, panel, input, battery, Wi-Fi, ROM library |
 | [03-gammaos-next-plan.md](03-gammaos-next-plan.md) | GammaOS Next Lite install, unlock, backup, rollback and post-install validation |
-| `04-optimization.md` | (to write) andr36oid layer port |
+| [04-apps-and-launcher.md](04-apps-and-launcher.md) | Installed apps (Daijishō, Droidify, Shizuku-Next), prepared updates, Chrome/browser notes |
+| `05-optimization.md` | (to write) andr36oid layer port |
 
 ## First contact checklist
 
