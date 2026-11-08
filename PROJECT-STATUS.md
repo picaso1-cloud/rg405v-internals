@@ -224,7 +224,7 @@ Full plan: `13-archr-rk3566-plan.md` · analysis: `14-rocknix-image-analysis.md`
 |---|---|
 | `picaso1-cloud/rgb10max2-internals` | RGB10 Max 2 knowledge base (10 docs + artifacts) |
 | `picaso1-cloud/rg353v-internals` | RG353V knowledge base (15 docs + survey incl. ROCKNIX teardown) |
-| `picaso1-cloud/rg405v-internals` | RG405V knowledge base (new: goals + recon plan) — push pending |
+| `picaso1-cloud/rg405v-internals` | RG405V knowledge base (goals + recon plan + shared docs) @ `fee8d20` |
 | `andr36oid/andr36oid_sdflasher` PR **#2** (`picaso1-cloud:rgb10max2-port`) | open, mergeable, head **`649dee6`** — docs + DTS + service + builder |
 | Shared docs (mirrored) | `MASTER-PLAN.md`, `SHARED-KNOWLEDGE.md`, `PROJECT-STATUS.md`, `docs/DECISIONS.md`, `docs/RE-METHOD.md` |
 | Local workspace | `/home/souhail/Andr36oid` — PORT-REPORT, VALIDATION, device-work, image-patcher, dist |
