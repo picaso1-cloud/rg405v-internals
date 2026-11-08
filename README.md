@@ -60,6 +60,9 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 - [x] **Shizuku-Next 14.0.33 installed and running** (shell UID, transport adb).
 - [x] **Kernel/DT/driver deep dive** captured: kernel config, full running DTS,
   PMIC/charger/panel/touch/WiFi/GPU topology (`recon/20261108/`).
+- [x] **Performance tuning applied** (no root): Daijishō default home, 0.5×
+  animations, Doze exemptions, AOT compile of 17 apps, safe debloat
+  (`06-optimization.md`).
 - [ ] andr36oid layer ported.
 - [ ] Emulation/perf baseline recorded.
 
@@ -72,7 +75,7 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 | [03-gammaos-next-plan.md](03-gammaos-next-plan.md) | GammaOS Next Lite install, unlock, backup, rollback and post-install validation |
 | [04-apps-and-launcher.md](04-apps-and-launcher.md) | Installed apps (Daijishō, Droidify, Shizuku-Next), prepared updates, Chrome/browser notes |
 | [05-kernel-drivers-deep-dive.md](05-kernel-drivers-deep-dive.md) | Kernel 5.4.161 config, full running DTS, PMIC/charger/display/touch/WiFi/GPU topology |
-| `06-optimization.md` | (to write) andr36oid layer port |
+| [06-optimization.md](06-optimization.md) | Applied performance tuning: Daijishō default home, 0.5× animations, Doze exemptions, AOT compile, safe debloat + revert commands |
 
 ## First contact checklist
 

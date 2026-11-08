@@ -76,6 +76,7 @@ Evidence legend: **[seen]** observed here · **[inferred]** reasoned/public ·
 | A24 | RG405V display/input/WiFi/GPU: generic MIPI panel **480×640**; Goodix **GT9xx** touch; `singleadc-joypad` (`retrogame_joypad`); **SC2355 SDIO** WiFi (marlin3lite) + BT/GNSS/FM; **Mali-Gondul G52** 384–850 MHz | RG405V | [seen] | running DTS |
 | A25 | RG405V security: bootloader locked, verity enforcing, SELinux **Permissive**; no root. **Shizuku-Next = shell UID 2000 (same as ADB)** — no extra kernel/debugfs access | RG405V | [seen] | live probe |
 | A26 | RG405V clean boot timeline (USB ADB, Wi-Fi/BT off): SC2730 @0.47 s, mmc/eMMC/SD @0.8–0.96 s, Goodix GT9xx @0.91 s, joypad DEFER `-517`, Mali-Gondul @3.46 s, charger/AW32257/FGU/Type-C @3.68–3.76 s, SC2355 @3.94 s, DSI `480x640@60` @6.2 s. Wi-Fi debug flood is why early logs were lost before | RG405V | [seen] | `05-kernel-drivers-deep-dive.md` §8 |
+| A27 | RG405V perf tuning (no root): Daijishō default home (`cmd package set-home-activity`), animations 0.5×, `deviceidle whitelist`, **AOT compile works via shell** (`cmd package compile -m speed -f`), safe reversible debloat | RG405V | [seen] | `06-optimization.md` |
 
 **Porting the L3 layer:** the *logic* (sysctl values, floors, janitor loop,
 service keep-alives) is portable; the *paths* (`/sys/devices/system/cpu/...`,

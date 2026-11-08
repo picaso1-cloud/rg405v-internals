@@ -238,6 +238,10 @@ Full profile: `rg405v-internals/02-recon-results.md`.
 - **Installed (2026-11-08, no root):** **Daijishō 1.5.0** (32 platforms
   imported; ROM paths pending), **Droidify 0.7.8** (F-Droid client),
   **Shizuku-Next 14.0.33** (running, shell UID, transport adb).
+- **Performance tuning (2026-11-08, no root):** Daijishō default home, 0.5×
+  animations, Doze exemptions for 17 apps, **AOT compile** of 17 apps (all
+  Success), safe 6-package Google debloat. Reversible commands in
+  `rg405v-internals/06-optimization.md`.
 - **Prepared updates:** Cromite, Fennec, PPSSPP 1.20.4, RetroArch 1.22.2,
   Flycast 2.7, Azahar 2126.2; details in `rg405v-internals/04-apps-and-launcher.md`.
 - **Kernel/DT deep dive (2026-11-08):** kernel **5.4.161** BSP, `/proc/config.gz`
@@ -356,8 +360,13 @@ opened #2 manually).
   `05-kernel-drivers-deep-dive.md` §8.
 - **Shizuku-Next stops on reboot**; restart via the app's pairing flow when
   needed (it was running before the reboot).
-- **Next:** Daijishō ROM paths + default home, install FOSS apps from Droidify,
-  safe performance tweaks; Max 2 waits for an A2 card.
+- **Performance tuning applied (no root):** Daijishō set as default home,
+  animations 0.5×, Doze exemptions for Daijishō + 16 emulator/tool packages,
+  AOT compile (`cmd package compile -m speed -f`) for 17 apps (all Success),
+  safe debloat of 6 Google packages. Reversible; details in
+  `rg405v-internals/06-optimization.md`.
+- **Next:** Daijishō ROM paths + default browser, install FOSS apps from
+  Droidify, update emulators; Max 2 waits for an A2 card.
 
 ---
 
