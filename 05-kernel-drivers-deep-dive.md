@@ -137,12 +137,27 @@ sprd-fm { compatible = "sprd,marlin3-fm"; };
 - **Shizuku-Next** runs as shell UID 2000 over ADB; grants ADB-level
   permissions to apps only.
 
-## 8. What is still unknown / next probes
+## 8. Boot-log capture attempt (2026-11-08)
 
-- **Early boot log:** the kernel ring buffer is flooded by `sprd-wlan` debug
-  messages and starts at ~9021 s; early probes are lost. `pstore` is empty and
-  `/proc/last_kmsg` is absent. To capture boot driver probes, reboot and
-  immediately `adb shell dmesg` (or `logcat -b kernel`).
+- Rebooted the device, reconnected ADB, and pulled `dmesg` at **uptime 178 s**.
+- The kernel ring buffer already **started at 166 s** — the `sprd-wlan` driver
+  emits a continuous debug flood (tens of thousands of lines) that overwrote
+  every early boot message. `logcat -b kernel -d` is empty.
+- `pstore` (`/sys/fs/pstore`) exists but the `console-ramoops-0` contains only
+  4 early lines plus `systemserver` spam; `pmsg-ramoops-0` contained personal
+  account data and was **deleted, not committed**.
+- **To get a clean boot log:** use **USB ADB** (persists across reboot), run
+  `adb reboot`, then `adb wait-for-device` and immediately `adb shell dmesg`
+  within the first seconds. Alternatively, reduce the Wi-Fi driver log level or
+  enlarge `log_buf_len` (both need root / a rebuilt kernel).
+- The current post-boot dmesg (`dmesg-boot-filtered.txt`, 10,675 lines) is kept for
+  reference, but it only covers t ≥ 166 s.
+
+
+## 9. What is still unknown / next probes
+
+- **Early boot log:** see §8 — needs USB ADB + immediate capture, or a quieter
+  Wi-Fi driver / larger log buffer.
 - **Full `/sys/firmware/fdt`** is root-only; we have the **sysfs DT tree**
   (`dt-base` → DTS) which is equivalent for most nodes.
 - **Module file path** probe was slow under WiFi log load; `lsmod` and
@@ -158,7 +173,7 @@ sprd-fm { compatible = "sprd,marlin3-fm"; };
   addresses are hidden, module signatures enforced. A custom module would need
   the vendor signing key or a rebuilt kernel.
 
-## 9. Artifacts (`recon/20261108/`)
+## 10. Artifacts (`recon/20261108/`)
 
 | File | Content |
 |---|---|
@@ -167,9 +182,10 @@ sprd-fm { compatible = "sprd,marlin3-fm"; };
 | `dmesg-filtered.txt` | dmesg with `sprd-wlan`/`goodix` flood removed (1,080 lines) |
 | `lsmod.txt`, `module-params.txt` | loaded modules + readable parameters |
 | `vendor-firmware.txt` | `/vendor/firmware` listing (wcnmodem, gnssmodem, BT/WiFi configs) |
+| `dmesg-boot-filtered.txt`, `lsmod-boot.txt`, `uptime.txt` | post-reboot capture (t ≥ 166 s; see §8) |
 | `identity.txt`, `partitions.txt`, `mounts.txt`, `cpufreq.txt`, `devfreq.txt`, `thermal.txt`, `battery.txt`, `input.txt`, `display.txt`, `packages.txt` | earlier live profile |
 
-## 10. Practical takeaway
+## 11. Practical takeaway
 
 - The kernel is a **5.4 Android BSP** with 152 modules, signed and mostly
   built-in; the hardware is a Unisoc UMS512/T618 platform (SC2730 PMIC +

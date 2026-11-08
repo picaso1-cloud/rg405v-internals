@@ -1,0 +1,27 @@
+[  166.953803] c1[  T720] uniber: CPUs balance changed
+[  166.954907] c1[  T720] uniber: ACTION_RESET triggered
+[  169.118410] c3[  T538] ieee80211 phy0: channel num 1
+[  169.120332] c3[  T699] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -55 noise=0, txlegacy 0 txmcs:8 txflags:0x:4a, rxlegacy 0 rxmcs:5 rxflags:0x:a
+[  169.692022] c0[    C0] [drm] sprd_dpu_disable_vblank()
+[  169.949329] c2[    T7] charger-manager charger-manager: cant not get input_cur.
+[  169.952725] c2[    T7] charger-manager charger-manager: vbat: 3841000, vbat_avg: 3848000, OCV: 3928992, ibat: -647000, ibat_avg: -578000, ibus: 0, vbus: 0, msoc: 907, chg_sts: 2, frce_full: 0, chg_lmt_cur: 0, inpt_lmt_cur: 0, chgr_type: 0, Tboard: 375, Tbatt: 321, thm_cur: -22, thm_pwr: 0, is_fchg: 0, fchg_en: 0, tflush: 166, tperiod: 15
+[  169.952736] c2[    T7] charger-manager charger-manager: new_uisoc = 907, old_uisoc = 907
+[  170.210384] c1[  T281] 
+[  170.226275] c3[  T377] 
+[  170.997009] c3[  T617] [drm] sprd_dpu_enable_vblank()
+[  171.959003] c1[  T720] uniber: CPUs balance changed
+[  171.960579] c1[  T720] uniber: ACTION_RESET triggered
+[  172.073147] c6[  T387] ap watchdog sprd_wdt_fiq start: timeout = 40, pretimeout = 20
+[  172.073150] c6[  T387] sprd_wdt: sprd wdt load value timeout =40, pretimeout =20
+[  172.142832] c3[  T538] ieee80211 phy0: channel num 1
+[  172.146458] c3[  T699] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -52 noise=0, txlegacy 0 txmcs:8 txflags:0x:a, rxlegacy 0 rxmcs:5 rxflags:0x:a
+[  172.868978] c6[  T594] tx_work_queue: 3378 callbacks suppressed
+[  175.177325] c3[  T538] ieee80211 phy0: channel num 1
+[  175.185508] c3[  T699] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -51 noise=0, txlegacy 0 txmcs:8 txflags:0x:a, rxlegacy 0 rxmcs:8 rxflags:0x:4a
+[  175.330110] c1[  T281] 
+[  175.343117] c1[  T377] 
+[  176.608196] c7[   T53] sc27xx-fgu 32100000.spi:pmic@0:fgu@c00: not satisfy power on start condition.
+[  176.608205] c7[   T53] sc27xx-fgu 32100000.spi:pmic@0:fgu@c00: init_cap = 889, init_mah = 0, init_clbcnt = 44613576, cur_clbcnt = 44344702, normal_cap = 884, data->cc_mah = -27, Tbat = 321, uusoc_vbat = 0, uusoc_mah = 0, cur_1000ma_adc = 1394, track_sts = 1
+[  178.084739] c1[  T594] tx_work_queue: 2 callbacks suppressed
+[  178.210444] c3[  T538] ieee80211 phy0: channel num 1
+[  178.214623] c3[  T699] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -57 noise=0, txlegacy 0 txmcs:8 txflags:0x:4a, rxlegacy 0 rxmcs:7 rxflags:0x:4a
