@@ -41,12 +41,12 @@ projects:
 | RAM | 1 GB | 2 GB | 4 GB LPDDR4X |
 | Display | 5″ 480×854 (portrait panel, rotated) | 3.5″ 640×480 touch | 4″ 640×480 touch |
 | Storage / boot | **single microSD** (whole OS on card) | 32 GB eMMC + **TF1** (OS) + **TF2** (ROMs) | 128 GB eMMC + microSD |
-| Current OS | **andr36oid Android 11** (v31 DTB + v32 service) | eMMC **GammaOS Lite 12**; TF1 **ArkOS** | Stock **Android 12** (verify) |
+| Current OS | **andr36oid Android 11** (v31 DTB + v32 service) | eMMC **GammaOS Lite 12**; TF1 **ArkOS** | Stock **Android 12, not rooted** (user-confirmed) |
 | Target systems | **2 cards, swapped:** Android card + Linux card | eMMC Android + TF1 Linux + TF2 ROMs (simultaneous) | **Android only** (Linux unlikely on T618) |
 | Android goal | newest **feasible** Android (11 now → 12/13 research) | 12 stable (GammaOS); 13/14 experiment only | **GammaOS Next 13/14** + andr36oid layer |
 | Linux goal | shared **andr36oid Linux** core (port device) | **same core**, RK3566 patched | investigate only (no mainline T618 support) |
 | Use case | light, ultra-portable; streaming + retro | daily driver; PS2/GC/Wii-class + Android apps | most powerful; Android + high-end emulation |
-| Status | Android feature-complete; OS-card rebuild pending | Android optimized; ROCKNIX analyzed; Linux not flashed | **new, not surveyed** |
+| Status | Android feature-complete; OS-card rebuild pending | Android optimized; ROCKNIX analyzed; Linux not flashed | stock 12, unrooted; full recon planned |
 
 **Verified notes**
 
@@ -79,10 +79,10 @@ L0  Hardware knowledge   DTS · PMIC · panel · input · WiFi · thermal · bat
 Everything below L3 is device-specific only where it must be. L3 is the part
 we want to **write once and port** — it is the real "andr36oid" value.
 
-### 3.2 Linux core — decision needed
+### 3.2 Linux core — decided: ROCKNIX
 
 The goal: **one Linux core** used on the RGB10 Max 2 first, then carried to the
-RG353V with only board patches.
+RG353V with only board patches. **Decision (2026-11-08): ROCKNIX** (ADR-001).
 
 | Candidate | Max 2 support | RG353V support | Modernity | PS2/ARMSX2 | Effort | Verdict |
 |---|---|---|---|---|---|---|
@@ -91,11 +91,11 @@ RG353V with only board patches.
 | **ArkOS** | supported family [inferred] | ✅ (current) | Ubuntu 19.10, kernel 4.19, weston 5 [seen] | ❌ display stack blocks Qt6 [seen] | Low | Only as fallback |
 | **Batocera** | ✅ Max/Max 2 [inferred] | likely [inferred] | older stack | limited | Low | Not "bleeding edge" |
 
-**Recommendation:** use **ROCKNIX as the shared core**. RG353V is already a
-supported device; the RGB10 Max 2 port is "only" DTB + panel + input + power
-quirks, and we already know this board in detail from the Android port (v31
-DTS). Keep Arch-R as the alternative if a rolling `pacman` system is a hard
-requirement.
+**Recommendation adopted:** use **ROCKNIX as the shared core** (ADR-001). RG353V
+is already a supported device; the RGB10 Max 2 port is "only" DTB + panel +
+input + power quirks, and we already know this board in detail from the Android
+port (v31 DTS). Arch-R remains the alternative only if a rolling `pacman`
+system is a hard requirement.
 
 ### 3.3 Android core
 
@@ -152,8 +152,10 @@ Only sysfs paths and package names change per SoC.
 ### Phase 1 — RGB10 Max 2 (weakest device, reference implementation)
 - Rebuild Android card from `dist/andr36oid-rgb10max2-master.img` + restore
   state (pending new SD).
-- Bring up the **shared Linux core** on the Max 2 (ROCKNIX port: DTB, panel,
-  input, power/Wi-Fi quirks), or validate an existing RK3326 image first.
+- Bring up the **shared Linux core** on the Max 2: ROCKNIX **RK3326-a** image;
+  the board identifies as ODROID-GO Super class, so the OGS DTB is the first
+  contact. Then add the Max 2 DTS/quirk (extra buttons, Wi-Fi hub power).
+  Port plan: `rgb10max2-internals/11-rocknix-rk3326-port.md`.
 - Acceptance: boot Android card and Linux card from the same slot; Wi-Fi,
   charging, input, panel, emulation, streaming all work.
 
@@ -196,17 +198,23 @@ Only sysfs paths and package names change per SoC.
 
 ---
 
-## 7. Open decisions
+## 7. Decisions — resolved and open
 
-1. **Linux core:** confirm ROCKNIX (recommended) vs Arch-R (pacman/Arch).
-2. **RGB10 Max 2 cards:** confirm two separate cards (one Android, one Linux)
-   swapped in the single slot.
-3. **Android ambition:** how far to push each device (Max 2 GSI 12/13? RG353V
-   13/14? RG405V Next 13/14).
-4. **RG405V Linux:** investigate only (default) or attempt a T618 port (high
-   risk, poor upstream support).
-5. **Community release scope/timing:** after Phase 2 or Phase 3?
-6. **RG405V access:** when can it be probed (ADB/root state, firmware version)?
+**Resolved (user, 2026-11-08):**
+- ✅ **Linux core = ROCKNIX** (ADR-001).
+- ✅ **RGB10 Max 2 = two cards swapped** in the single slot (ADR-004).
+- ✅ **Android = stable first, experiments separate** (ADR-005).
+- ✅ **RG405V = stock Android 12, not rooted**, ADB available (ADR-002).
+- ✅ **RG405V = Android-first**; Linux investigation-only (ADR-006).
+
+**Open:**
+1. **Andr36oid packaging/unified docs:** final names for the shared Linux core
+   and the Android layer (e.g. "andr36oid Linux" / "andr36oid Android").
+2. **Community release scope/timing:** after Phase 2 or Phase 3? (ADR-007)
+3. **RG405V backup/rollback:** with no root, decide the exact backup path
+   (fastboot/vendor image vs temporary root) before any flash.
+4. **Max 2 Linux acceptance:** which emulator/streaming set defines "done"
+   (e.g. PS1/N64/DC + Moonlight) and which performance numbers to record.
 
 ---
 
@@ -218,6 +226,7 @@ Only sysfs paths and package names change per SoC.
 | Shared techniques/findings | `SHARED-KNOWLEDGE.md` |
 | Decisions (ADR log) | `docs/DECISIONS.md` |
 | Reverse-engineering method | `docs/RE-METHOD.md` |
+| Curated sources/tools | `REFERENCES.md` |
 | RGB10 Max 2 knowledge base | `rgb10max2-internals/` |
 | RG353V knowledge base | `rg353v-internals/` |
 | RG405V knowledge base | `rg405v-internals/` |

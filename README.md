@@ -18,7 +18,7 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 | Display | 4″ IPS touch, 640×480 | [inferred] anbernic.com |
 | Battery | 5500 mAh | [inferred] anbernic.com |
 | Connectivity | Wi-Fi 2.4/5 GHz 802.11ac, BT 5.0 | [inferred] anbernic.com |
-| Stock OS | **Android 12** | [inferred] anbernic.com |
+| Stock OS | **Android 12, not rooted** | [seen] user-confirmed 2026-11-08 |
 | Custom OS | **GammaOS Next v1.1** for RG405M/V/RG505 (Android 13/14) | [inferred] GammaOSNext repo |
 | Linux | No community/mainline T618 handheld port known | [inferred] |
 
@@ -38,9 +38,12 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 
 ## Status
 
-- [inferred] Public specs collected (this file).
-- [ ] Device probed (ADB/root/bootloader/partitions/sysfs).
-- [ ] Full partition backup + rollback proven.
+- [seen] Public specs collected (this file).
+- [seen] Device state: **stock Android 12, not rooted, ADB available**
+  (user-confirmed 2026-11-08).
+- [ ] Device probed (ADB identity/partitions/sysfs; bootloader read-only).
+- [ ] Full partition backup + rollback proven (no root → use fastboot/vendor
+  image or a documented temporary-root path).
 - [ ] GammaOS Next installed and validated.
 - [ ] andr36oid layer ported.
 - [ ] Emulation/perf baseline recorded.
@@ -62,3 +65,13 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 4. Verify the exact model/firmware (`ro.product.model`, `ro.build.display.id`).
 5. Confirm bootloader unlock state and the correct flash tool for T618.
 6. Then decide GammaOS Next and the rollback plan.
+
+## Useful references
+
+- **No-root dashboard:** [`Zaruber/ohmyanbernic`](https://github.com/Zaruber/ohmyanbernic)
+  — Termux web panel (CPU/RAM/storage/battery, files, processes, script runner),
+  zero dependencies. Good for unrooted recon/telemetry; needs battery-optimization
+  exemption + `termux-wake-lock`; local network only. See `../REFERENCES.md` §6.
+- **Target OS:** GammaOS Next v1.1 (RG405M/V/RG505, Android 13/14).
+- **Backup/flash:** T618 toolchain still **[unknown]** — verify `fastboot`/
+  Unisoc tooling and a vendor image before writing.

@@ -68,6 +68,12 @@ kit. Console currently has no working card.
   (preinstalled) + Sunshine on PC. Service v32 runnable on any card.
 - **Docs**: `PORT-REPORT.md`, `device-work/kernel/VALIDATION.md` (v9→v32),
   `FIRMWARE-GUIDE.md`, `OS-RESEARCH.md`, repo **rgb10max2-internals**.
+- **ROCKNIX RK3326 port analysis** (2026-11-08, offline): the board identifies
+  as **ODROID-GO Super class** (`hwrev=v10-go3`, ADC 85); ROCKNIX's
+  `RK3326-a` image auto-selects `rk3326-odroid-go3.dtb`, which already matches
+  the panel (kd50t048a, 2 lanes), RK817 charger, sticks and d-pad/face pins.
+  Extra buttons need a Max 2 DTS; Wi-Fi hub power is the main risk. Plan:
+  `rgb10max2-internals/11-rocknix-rk3326-port.md`.
 
 ### Next actions (ordered)
 1. **Android card — new SD**: flash `dist/andr36oid-rgb10max2-master.img`
@@ -76,9 +82,12 @@ kit. Console currently has no working card.
    `dist/essentials.tgz` (tailscale auth into `/data/local/tmp/ts/state/`) →
    boot → verify: Wi-Fi + charging + mouse mode + tailscale (`100.x.x.x`)
    + Moonlight hosts.
-2. **Linux card (new goal)**: bring up the shared Linux core on the Max 2
-   (ROCKNIX port — DTB/panel/input/power quirks) or validate an existing
-   RK3326 image first. Two separate cards, swapped in the single slot.
+2. **Linux card (new goal)**: flash **ROCKNIX RK3326-a** (`dist/ROCKNIX-RK3326-a.img.gz`,
+   SHA-256 `4e96c257…02ce`) to an A2 card, then apply the validated key overlay
+   (`rgb10max2-internals/dts/apply-rocknix-max2.sh /dev/sdX1`). The Max 2 is
+   OGS-class; the OGS DTB boots it. Test panel/input/Wi-Fi/charging; remaining
+   work = Wi-Fi hub power + stick axis check + upstream DTS/quirk. Full plan:
+   `rgb10max2-internals/11-rocknix-rk3326-port.md`. Two cards, swapped.
 3. Gameplay test of GPU 600 MHz + `gamemode` → keep or revert.
 4. **Android upgrade research**: newest *feasible* Android (11 → 12/13 GSI on
    the RK3326 BSP); do not touch the stable card without a proven rollback.
@@ -97,6 +106,10 @@ kit. Console currently has no working card.
 - `userdata-full.tar` (1.5 GB) — full /data snapshot (apps+data+wifi).
 - `essentials.tgz` (1.6 KB) — tailscale auth (`ts/state/tailscaled.state`).
 - `andr36oid-20261024-1750-rk3326.img.xz` — official base release.
+- `ROCKNIX-RK3326-a.img.gz` (+ raw `.img`) — shared Linux core, Max 2/OGS
+  class; SHA-256 `4e96c2574e7856f9c35963cd8aba1c1ba40a87694b8676f42b8bb2e5efaa02ce`.
+- `rgb10max2-internals/dts/rk3326-rgb10max2-keys-overlay.dts` (+ `.dtbo`,
+  `apply-rocknix-max2.sh`) — validated key remap for ROCKNIX.
 - Builders: `image-patcher/build-rgb10max2-image.sh` (mtools BOOT rebuild),
   `image-patcher/migrate-console-state.sh`.
 
@@ -214,7 +227,9 @@ Full plan: `13-archr-rk3566-plan.md` · analysis: `14-rocknix-image-analysis.md`
   Moonlight, input remaps).
 - **Caution:** Anbernic warns third-party OS may block returning to stock —
   backup first, prove rollback.
-- **Status:** not surveyed; device access/firmware version needed.
+- **Status:** **stock Android 12, not rooted** (user-confirmed 2026-11-08),
+  ADB available; recon not started. Backup/rollback path must be chosen before
+  any flash.
 
 ---
 
@@ -226,7 +241,7 @@ Full plan: `13-archr-rk3566-plan.md` · analysis: `14-rocknix-image-analysis.md`
 | `picaso1-cloud/rg353v-internals` | RG353V knowledge base (15 docs + survey incl. ROCKNIX teardown) |
 | `picaso1-cloud/rg405v-internals` | RG405V knowledge base (goals + recon plan + shared docs) @ `fee8d20` |
 | `andr36oid/andr36oid_sdflasher` PR **#2** (`picaso1-cloud:rgb10max2-port`) | open, mergeable, head **`649dee6`** — docs + DTS + service + builder |
-| Shared docs (mirrored) | `MASTER-PLAN.md`, `SHARED-KNOWLEDGE.md`, `PROJECT-STATUS.md`, `docs/DECISIONS.md`, `docs/RE-METHOD.md` |
+| Shared docs (mirrored) | `MASTER-PLAN.md`, `SHARED-KNOWLEDGE.md`, `PROJECT-STATUS.md`, `REFERENCES.md`, `docs/DECISIONS.md`, `docs/RE-METHOD.md` |
 | Local workspace | `/home/souhail/Andr36oid` — PORT-REPORT, VALIDATION, device-work, image-patcher, dist |
 
 GitHub token: fine-grained, `picaso1-cloud` (push via explicit URL form;
@@ -235,24 +250,24 @@ opened #2 manually).
 
 ---
 
-## Open decisions for the user
+## Decisions — resolved and open
 
-1. **RGB10 Max 2**: new card size/class → flash master + migrate state (Project 1 step 1).
-2. **Linux core (shared):** confirm **ROCKNIX** (recommended) vs **Arch-R**
-   (pacman/rolling) — this choice drives the Max 2 port and the RG353V image.
-   See `MASTER-PLAN.md` §3.2 and `docs/DECISIONS.md` ADR-001.
-3. **RGB10 Max 2 cards:** confirm the plan is two separate cards (Android +
-   Linux) swapped in its single slot.
-4. **Android ambition:** how far to push each device — Max 2 (11 → 12/13 GSI),
-   RG353V (12 stable; 13/14 experiment), RG405V (**GammaOS Next 13/14**).
-5. **RG405V access:** need ADB/root state, exact firmware version, and whether a
-   full backup/rollback is possible before installing GammaOS Next.
-6. **RG405V Linux:** keep as investigation-only (default) or attempt a T618
-   port (high risk, poor upstream support)?
-7. **Community release:** after the shared core is proven on two devices
-   (`docs/DECISIONS.md` ADR-007) — or earlier?
-8. **Priority order:** RGB10 rebuild → RG353V shared Linux core → RG405V recon
-   → community builder/flasher.
+**Resolved (user, 2026-11-08):**
+- ✅ **Linux core = ROCKNIX** (ADR-001).
+- ✅ **RGB10 Max 2 = two cards swapped** in the single slot (ADR-004).
+- ✅ **Android = stable first, experiments on separate media** (ADR-005).
+- ✅ **RG405V = stock Android 12, not rooted**, ADB available (ADR-002).
+- ✅ **RG405V = Android-first**; Linux investigation-only (ADR-006).
+
+**Open:**
+1. **RGB10 Max 2 card purchase:** size/class → flash master + migrate state.
+2. **RG405V backup/rollback:** no root → decide fastboot/vendor-image path vs
+   temporary root before any flash.
+3. **Community release timing:** after Phase 2 or Phase 3? (ADR-007)
+4. **Max 2 Linux acceptance:** which emulator/streaming set and numbers define
+   "done".
+5. **Priority order:** RGB10 rebuild → shared Linux core (ROCKNIX Max 2 port +
+   RG353V TF1) → RG405V recon/GammaOS Next → community builder/flasher.
 
 ---
 
@@ -277,8 +292,20 @@ opened #2 manually).
 - No hardware was touched; all devices remain offline/not surveyed.
 - **RG353V hardware remains deferred** (documentation-only for now); the new
   master plan defines what to do when it resumes.
-- **Next:** confirm the Linux core choice (ADR-001) + RG405V access, then
-  execute Phase 1 (RGB10 rebuild/Linux card port).
+- **Decisions confirmed (user):** Linux core = **ROCKNIX**; Max 2 = **two cards
+  swapped**; Android = **stable first, experiments separate**; RG405V =
+  **stock Android 12, not rooted**.
+- **ROCKNIX RK3326-a analysed offline** (SHA-256 `4e96c257…02ce`): kernel 7.1.2,
+  glibc 2.44, Mesa 26.2.4, no ARMSX2; `boot.scr` maps the Max 2's ADC 85 to
+  `rk3326-odroid-go3.dtb`; the go3 DTB already has every Max 2 button pin, only
+  the key codes differ. **Validated a DT overlay** that remaps all keys
+  (`rgb10max2-internals/dts/`, `apply-rocknix-max2.sh`). Wi-Fi driver + firmware
+  present; hub power and stick axes remain hardware tests.
+- **Added `REFERENCES.md`** (curated sources) — includes the user-provided
+  [`Zaruber/ohmyanbernic`](https://github.com/Zaruber/ohmyanbernic) Termux
+  no-root dashboard (useful for unrooted RG405V recon/telemetry).
+- **Next:** when an A2 card is available, flash the RK3326-a image, apply the
+  key overlay, and run the hardware checklist; then the Android card rebuild.
 
 ---
 

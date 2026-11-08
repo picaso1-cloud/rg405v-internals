@@ -62,6 +62,7 @@ Evidence legend: **[seen]** observed here · **[inferred]** reasoned/public ·
 | A10 | GammaOS = debloated LineageOS/GSI + RK3566 vendor BSP; Magisk root; dynamic partitions | RG353V | [seen] | `02-gammaos-internals.md` |
 | A11 | GammaOS Next v1.1 supports RG405M/V/RG505 (Android 13/14); RG353 stays on GammaOS 12 | RG405V / RG353V | [inferred] | gammaos.org, GammaOSNext repo |
 | A12 | RG405V stock warning: third-party OS may not be flashable back to official → back up first | RG405V | [inferred] | anbernic.com notice |
+| A13 | No-root Android telemetry (Termux): CPU/RAM/storage/battery, processes, script runner; battery via `termux-battery-status` or `/sys/class/power_supply/battery/*`; needs battery-optimization exemption + `termux-wake-lock` | all Android | [seen] | `REFERENCES.md` §6 (Zaruber/ohmyanbernic) |
 
 **Porting the L3 layer:** the *logic* (sysctl values, floors, janitor loop,
 service keep-alives) is portable; the *paths* (`/sys/devices/system/cpu/...`,
@@ -84,6 +85,14 @@ per device. Never copy a path without verifying it exists.
 | L8 | Arch-R supports RGB10 (not Max 2) and has **no RK3566 device** | both | [inferred] | Arch-R supported hardware |
 | L9 | Batocera lists RGB10 Max/Max 2 support | RGB10 Max 2 | [inferred] | Batocera wiki |
 | L10 | RG405V Linux: no mainline T618 handheld support → Android-only (default) | RG405V | [inferred] | community/upstream |
+| L11 | RGB10 Max 2 identifies as **ODROID-GO Super class** (`hwrev=v10-go3`, ADC 85); ROCKNIX `a_boot.ini` selects `rk3326-odroid-go3.dtb` | RGB10 Max 2 | [seen] | `rgb10max2-internals/11-rocknix-rk3326-port.md` |
+| L12 | OGS DTS already matches the Max 2 panel (`elida,kd50t048a` + `sitronix,st7701`, st7701 driver forces 2 lanes), RK817 charger, amux pins (GPIO3 PB3/PB0/PB5) and d-pad/face pins | RGB10 Max 2 | [seen] | same |
+| L13 | ROCKNIX `singleadc-joypad` has per-axis tuning props (`abs_rx-p-tuning`, …) but **no** `amux-channel-mapping` / `invert-absrx` | RGB10 Max 2 | [seen] | driver patch |
+| L14 | RTL8723BU (USB `0bda:b720`) is in `rtl8xxxu`'s known-to-work list; hub power comes from the RK817 OTG 5 V net (latch) | RGB10 Max 2 | [inferred] | kernel Kconfig + Android port |
+| L15 | ROCKNIX RK3326 boot flow = legacy U-Boot + `boot.ini` (ADC→DTB) + `sysboot` extlinux; FAT DTB swap is the fast iteration path | RGB10 Max 2 | [seen] | ROCKNIX `a_boot.ini` |
+| L16 | Max 2 extra buttons (Start/Select/L1/L2/R1/R2/L3/R3/F1/F2) are on GPIOs that the OGS tree maps to F3/F4/TL/TR/F1/F2 — pins match, codes differ | RGB10 Max 2 | [seen] | v31 DTS vs OGS dtsi |
+| L17 | ROCKNIX RK3326-a image: kernel **7.1.2**, glibc 2.44, Mesa 26.2.4, no ARMSX2, `rtl8xxxu` + `rtl8723bu_nic.bin` present, `boot.scr` ADC 85 → `rk3326-odroid-go3.dtb` | RGB10 Max 2 | [seen] | `rgb10max2-internals/11-rocknix-rk3326-port.md` §2 |
+| L18 | The image's go3 DTB already has all Max 2 button pins; only the `linux,code` values need an **overlay** (validated with `fdtoverlay`) | RGB10 Max 2 | [seen] | `rgb10max2-internals/dts/` |
 
 **Shared Linux decision:** ROCKNIX is the only candidate that already covers
 one device fully (RG353V) and shares the SoC family with the other (RK3326).
@@ -103,6 +112,7 @@ Port the Max 2 into it rather than maintaining two distros.
 | B6 | Prefer A2/quality cards; stock cards die and corrupt BOOT FAT | [seen] | `10-rebuild-guide.md` |
 | B7 | GammaOS/ArkOS: do **not** use Etcher/Win32DiskImager; use the documented tools (SDDiskTool / dd / ApplePi-Baker) | [seen] | `rg353v-internals/07-rebuild-firmware.md` |
 | B8 | Unisoc (RG405V): expected flash path is fastboot/Unisoc tool — must be verified before touching the device | [unknown] | RG405V recon |
+| B9 | Max 2 controls fixed by a **DT overlay** (not a DTB replacement); `dts/apply-rocknix-max2.sh` installs it and edits `FDTOVERLAYS` with a backup | [seen] | `rgb10max2-internals/dts/` |
 
 ---
 

@@ -9,7 +9,7 @@ consequences. Hardware facts follow the evidence tags used across the docs
 
 ## ADR-001 — One Linux core for all Linux-capable devices
 
-**Status:** proposed (needs user confirmation) · 2026-11-08
+**Status:** **accepted** (user, 2026-11-08) · 2026-11-08
 
 **Context:** RGB10 Max 2 (RK3326) and RG353V (RK3566) should run "bleeding edge"
 Linux with the best emulator compatibility, and we want to maintain **one**
@@ -24,10 +24,10 @@ core, not two forks. RG405V (T618) is Android-only by default.
    blocks Qt6 apps and modern Mesa.
 4. **Batocera** — supports Max 2 today; less bleeding-edge.
 
-**Decision (recommended):** ROCKNIX as the shared core. Port the RGB10 Max 2
+**Decision:** **ROCKNIX** as the shared core (confirmed). Port the RGB10 Max 2
 device into it (DTB + panel + input + power/Wi-Fi quirks) using the v31 DTS and
-hardware knowledge from `rgb10max2-internals/`. Keep Arch-R as plan B if a
-rolling `pacman` system is required.
+hardware knowledge from `rgb10max2-internals/`. Arch-R remains plan B only if a
+rolling `pacman` system is later required.
 
 **Consequences:** medium device-port effort for the Max 2; one build system and
 one tuning layer for both devices; RG353V path is already validated offline.
@@ -46,9 +46,13 @@ one tuning layer for both devices; RG353V path is already validated offline.
 - **RG353V:** **GammaOS Lite 12** as the stable base (already optimized); a
   13/14 GSI is an experiment only after a proven rollback.
 - **RG405V:** **GammaOS Next v1.1 (Android 13/14)** as the target base.
+  Current state (user-confirmed 2026-11-08): **stock Android 12, not rooted**,
+  ADB available → recon is read-only; backup/rollback must be arranged before
+  any flash.
 
 **Consequences:** the andr36oid L3 layer (scripts/services/tuning) is the shared
-asset; OS base stays replaceable.
+asset; OS base stays replaceable. "Newest Android" is a research track on
+separate media, never an in-place jump on a daily device (ADR-005).
 
 ---
 
@@ -71,13 +75,13 @@ repeated investigations.
 
 ## ADR-004 — Two-card strategy on the RGB10 Max 2
 
-**Status:** accepted (needs hardware confirmation of the slot count) · 2026-11-08
+**Status:** **accepted** (user, 2026-11-08; single slot confirmed) · 2026-11-08
 
 **Context:** The user wants Android and Linux on the RGB10 Max 2.
 
-**Decision:** use **two separate microSD cards** (one Android/andr36oid, one
-Linux) swapped in the single slot. Keep the user state (`userdata-full.tar`,
-Tailscale auth) migratable between Android cards.
+**Decision:** **confirmed (2026-11-08)** — use **two separate microSD cards**
+(one Android/andr36oid, one Linux) swapped in the single slot. Keep the user
+state (`userdata-full.tar`, Tailscale auth) migratable between Android cards.
 
 **Consequences:** no dual-boot loader work on the Max 2; card quality and
 backup discipline are critical; the Linux card can be reflashed freely.
@@ -86,7 +90,7 @@ backup discipline are critical; the Linux card can be reflashed freely.
 
 ## ADR-005 — Delta-upgrade discipline for Android
 
-**Status:** accepted · 2026-11-08
+**Status:** **accepted** (user-confirmed 2026-11-08: stable first, experiments separate) · 2026-11-08
 
 **Context:** New Android versions on vendor BSPs can break camera/Wi-Fi/audio/
 power and may be irreversible.
