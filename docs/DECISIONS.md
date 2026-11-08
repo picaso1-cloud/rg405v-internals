@@ -135,7 +135,8 @@ reproducibly from the start.
 
 ## ADR-008 — RG405V target: GammaOS Next Lite (Android 14)
 
-**Status:** accepted in principle; **go-ahead pending** · 2026-11-08
+**Status:** **deferred by user decision (2026-11-08): stay stock for now** ·
+2026-11-08
 
 **Context:** Live recon shows stock Android 12 V1.23 with full GApps (38 Google
 packages), bootloader locked, no usable root. GammaOS Next v1.1 for T618 offers

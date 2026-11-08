@@ -167,11 +167,12 @@ Only sysfs paths and package names change per SoC.
 - Acceptance: TF1 Linux + eMMC Android + TF2 ROMs; PS2 via ARMSX2; Android
   tweaks at parity.
 
-### Phase 3 — RG405V (powerhouse)
+### Phase 3 — RG405V (powerhouse) — **deferred (stay stock, 2026-11-08)**
 - ✅ Full read-only recon: build V1.23 / Android 12, 77 A/B partitions,
   T618 sysfs, panel/input, 128 GB ROM card (`rg405v-internals/02-recon-results.md`).
-- Back up internal `/sdcard` (~4.8 GB), verify the RG405V unbricker, then
-  unlock + flash **GammaOS Next v1.1 Lite (Android 14)**.
+- ⏸ Back up internal `/sdcard` (~4.8 GB), verify the RG405V unbricker
+  (Windows PC/VM available), then unlock + flash **GammaOS Next v1.1 Lite
+  (Android 14)** — only if/when a newer Android is wanted.
 - Port andr36oid L3: perf floors, zram, debloat, launcher, ADB/Wi-Fi,
   Tailscale/Moonlight, input remaps.
 - Acceptance: stable daily Android, measurably faster than stock, streaming +

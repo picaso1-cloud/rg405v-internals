@@ -8,8 +8,10 @@ Sources: GammaOS Next installation wiki (fetched 2026-11-08),
 [`v.1.1.0-ANBERNICT618` release](https://github.com/TheGammaSqueeze/GammaOSNext/releases/tag/v.1.1.0-ANBERNICT618),
 live recon in `02-recon-results.md`.
 
-> **Decision not yet taken.** Nothing in this plan has been executed. The device
-> is stock Android 12, bootloader locked, no usable root.
+> **Decision (2026-11-08): stay on stock Android 12 for now.** Nothing in this
+> plan has been executed. The device is stock, bootloader locked, no usable root.
+> Revisit when a newer Android is actually wanted; the Windows unbricker path is
+> available (user has a Windows PC/VM).
 
 ---
 

@@ -235,8 +235,10 @@ Full profile: `rg405v-internals/02-recon-results.md`.
 - **Rollback:** GammaOS RG405V unbricker (Google Drive; Windows
   `UpgradeDownload.exe`) — **must be verified before flashing**; no root =
   no full eMMC dump.
-- **Status:** recon done; **no writes performed**. Waiting on user decision +
-  backup + unbricker verification.
+- **Status:** **recon complete; decision 2026-11-08: STAY STOCK for now** —
+  no unlock, no flash, no device changes. GammaOS Next Lite plan remains ready;
+  the user has a Windows PC/VM for the unbricker when the flash is eventually
+  considered.
 
 ---
 
@@ -268,9 +270,9 @@ opened #2 manually).
 
 **Open:**
 1. **RGB10 Max 2 card purchase:** size/class → flash master + migrate state.
-2. **RG405V — proceed?** unlock + GammaOS Next Lite (Android 14) wipes internal
-   storage. Need: `/sdcard` backup (~4.8 GB), **verified unbricker** (Windows
-   `UpgradeDownload.exe` path), and Patreon password if the release is locked.
+2. **RG405V — stay stock (user decision 2026-11-08).** Revisit later if a newer
+   Android is wanted; the GammaOS Next Lite plan + Windows unbricker path are
+   ready. No backup/flash performed.
 3. **Community release timing:** after Phase 2 or Phase 3? (ADR-007)
 4. **Max 2 Linux acceptance:** which emulator/streaming set and numbers define
    "done".
@@ -322,9 +324,10 @@ opened #2 manually).
   Android 14 Lite, fresh install, unlock via `unisoc-unlock`/subut-rehost,
   fastbootd flash, mandatory data erase, RG405V unbricker as rollback gate.
   **Nothing flashed.**
-- **Next:** back up internal `/sdcard` (~4.8 GB), verify the unbricker, then
-  decide on unlock + GammaOS Next Lite; meanwhile the Max 2 waits for an A2
-  card to test the ROCKNIX RK3326 image + key overlay.
+- **User decision: RG405V stays stock for now** — no unlock, no backup, no
+  device changes. Plan + Windows unbricker path recorded for later.
+- **Next:** Max 2 waits for an A2 card to test the ROCKNIX RK3326 image + key
+  overlay; RG353V TF1 Linux remains ready when wanted.
 
 ---
 

@@ -39,6 +39,11 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 
 ## Status
 
+> **Decision (2026-11-08): stay on stock Android 12 for now.** No unlock, no
+> flash, no device changes. The GammaOS Next Lite plan
+> ([03-gammaos-next-plan.md](03-gammaos-next-plan.md)) remains ready; the user
+> has a Windows PC/VM for the unbricker when needed.
+
 - [seen] Public specs collected (this file).
 - [seen] Device state: **stock Android 12, not rooted, ADB available**
   (user-confirmed 2026-11-08).
