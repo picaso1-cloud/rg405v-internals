@@ -347,11 +347,13 @@ opened #2 manually).
   module params, firmware and sysfs power/thermal/display/input. Documented
   SC2730 PMIC, AW32257 charger, SC2730 FGU/Type-C, Goodix GT9xx, SC2355 WiFi,
   Mali-G52. Shizuku = shell UID, no extra privilege over ADB.
-- **Boot-log capture attempted after reboot:** the ring buffer was already
-  overwritten by the `sprd-wlan` debug flood (uptime 178 s, dmesg starts at
-  166 s); `logcat -b kernel` empty; `pstore` console only 4 lines and `pmsg`
-  contained personal account data (deleted, never committed). Clean boot log
-  needs **USB ADB + immediate capture**. Post-boot filtered dmesg saved.
+- **Clean boot log captured (USB ADB):** with Wi-Fi/BT off, `dmesg` was pulled at
+  **uptime 7.65 s** from `[0.000000]` — **9,686 lines**. Full probe timeline:
+  SC2730 @0.47 s, mmc/eMMC/SD @0.8–0.96 s, Goodix GT9xx @0.91 s, joypad deferred
+  (`-517`), Mali-Gondul @3.46 s, charger-manager/AW32257/FGU/Type-C @3.68–3.76 s,
+  SC2355 WiFi @3.94 s, DSI `480x640@60` @6.2 s. Artifacts:
+  `recon/20261108/dmesg-clean-boot.txt`, `boot-probes-key.txt`; analysis in
+  `05-kernel-drivers-deep-dive.md` §8.
 - **Shizuku-Next stops on reboot**; restart via the app's pairing flow when
   needed (it was running before the reboot).
 - **Next:** Daijishō ROM paths + default home, install FOSS apps from Droidify,

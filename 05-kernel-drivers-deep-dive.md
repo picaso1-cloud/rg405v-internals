@@ -137,32 +137,60 @@ sprd-fm { compatible = "sprd,marlin3-fm"; };
 - **Shizuku-Next** runs as shell UID 2000 over ADB; grants ADB-level
   permissions to apps only.
 
-## 8. Boot-log capture attempt (2026-11-08)
+## 8. Clean boot log (2026-11-08) — captured from t=0
 
-- Rebooted the device, reconnected ADB, and pulled `dmesg` at **uptime 178 s**.
-- The kernel ring buffer already **started at 166 s** — the `sprd-wlan` driver
-  emits a continuous debug flood (tens of thousands of lines) that overwrote
-  every early boot message. `logcat -b kernel -d` is empty.
-- `pstore` (`/sys/fs/pstore`) exists but the `console-ramoops-0` contains only
-  4 early lines plus `systemserver` spam; `pmsg-ramoops-0` contained personal
-  account data and was **deleted, not committed**.
-- **To get a clean boot log:** use **USB ADB** (persists across reboot), run
-  `adb reboot`, then `adb wait-for-device` and immediately `adb shell dmesg`
-  within the first seconds. Alternatively, reduce the Wi-Fi driver log level or
-  enlarge `log_buf_len` (both need root / a rebuilt kernel).
-- The current post-boot dmesg (`dmesg-boot-filtered.txt`, 10,675 lines) is kept for
-  reference, but it only covers t ≥ 166 s.
+Method: USB ADB (persists across reboot), Wi-Fi/BT disabled to stop the
+`sprd-wlan` flood, `adb reboot` → `adb wait-for-device` → immediate `dmesg`.
+Captured at **uptime 7.65 s**, **9,686 lines**, starting at `[0.000000]`.
 
+### Boot/probe timeline
+
+| Time | Event |
+|---|---|
+| 0.000 | Linux 5.4.161 boots; `Machine model: Spreadtrum UMS512-1H10 SoC` |
+| 0.108 | `smp: Brought up 1 node, 8 CPUs` |
+| 0.286 | thermal governors registered (`step_wise`, `user_space`, `power_allocator`) |
+| 0.470 | PMIC detected: **SC2730** (`sprd-sysdump: detect pmic is sc2730`) |
+| 0.508 | `Run /init as init process` |
+| 0.597–0.655 | modules: `sprd-sc27xx-spi`, `sc2730-regulator`, `nvmem-sc27xx-efuse` |
+| 0.756–0.843 | `sdhci-sprd` loads; mmc0/mmc1/mmc2 controllers |
+| 0.899 | microSD: **SD16G 117 GiB**, SDR104; `mmcblk1: p1` |
+| 0.913–1.029 | **Goodix GT9xx** touch: driver V2.8.0.2, 480×640, 11 IDs, config v72, input0 |
+| 0.960 | eMMC: **DV6DMB 116 GiB**, HS400 ES; 74 partitions + boot0/boot1/rpmb |
+| 1.033 | `singleadc-joypad`: **EPROBE_DEFER (-517)** — ADC IIO not ready yet |
+| 3.213 | joypad retries, still deferred (-517) → later succeeds (input4) |
+| 3.398 | DPU DVFS registered |
+| 3.419–3.55 | `[drm] backlight is not ready, dpu/panel probe deferred` (several) |
+| 3.464–3.512 | **Mali-Gondul** (`mali_gondul.ko`) — DDK r34p0, arch 7.4.0 |
+| 3.497 | `sc27xx:vibrator` input1 |
+| 3.683–3.708 | **SC2730 Type-C** (`sc27xx_typec.ko`) — DRP, state 2 |
+| 3.731–3.763 | **charger-manager**, **SC27xx FGU**, **AW32257 charger** (`4-006a`) |
+| 3.939 | **SC2355 SDIO WiFi** module loads |
+| 5.85–6.04 | Bluetooth service + `sprd-mtty` rfkill init |
+| 6.02 | WCN version: MARLIN3_20A_W22.52.3 / sc2355_marlin3_lite (2022-12-28) |
+| 6.219 | DSI mode `480x640@60` (two timings validated) |
+| 6.44 | full loaded-module list (see `boot-probes-key.txt`) |
+| 7.65 | uptime at capture; `sys.boot_completed=1` |
+
+### Notable observations
+
+- **Deferred probes are normal here:** panel/DPU wait for the backlight, and the
+  joypad waits for the ADC IIO channel (`-517`); both succeed later.
+- **SDHCI tuning warning** on the microSD (`mmc1: Got data interrupt 0x2 …`
+  register dump) but the card enumerates and works (SDR104).
+- **Sensorhub** loads (`sprd-sensorhub`, sipc id 6) but logs repeated
+  `nwrite=-19 … timeout` — likely no physical sensors / unused hub.
+- **Wi-Fi flood** was the only reason the ring buffer was lost before; with
+  Wi-Fi/BT off at boot, the full log survives.
+- Serial/MAC/email redacted before committing (`dmesg-clean-boot.txt`).
 
 ## 9. What is still unknown / next probes
 
-- **Early boot log:** see §8 — needs USB ADB + immediate capture, or a quieter
-  Wi-Fi driver / larger log buffer.
 - **Full `/sys/firmware/fdt`** is root-only; we have the **sysfs DT tree**
   (`dt-base` → DTS) which is equivalent for most nodes.
-- **Module file path** probe was slow under WiFi log load; `lsmod` and
-  `/sys/module/*/parameters` are captured, but the `.ko` directory needs a
-  quiet re-probe.
+- **Module `.ko` path** probe was slow under WiFi log load; `lsmod` and
+  `/sys/module/*/parameters` are captured, but the `/vendor/lib/modules`
+  listing needs a quiet re-probe.
 - **debugfs** (`/sys/kernel/debug`) is not usable as shell (hangs/empty).
 - **Sensors:** DT has `sprd-sensorhub` (Sharkl5Pro), but no IIO devices were
   found; likely no accelerometer/gyro on this handheld — verify.
@@ -179,7 +207,8 @@ sprd-fm { compatible = "sprd,marlin3-fm"; };
 |---|---|
 | `rg405v-running.dts` | full running device tree (sanitized serial) |
 | `kernel-config.txt` | decompressed `/proc/config.gz` (6,528 lines) |
-| `dmesg-filtered.txt` | dmesg with `sprd-wlan`/`goodix` flood removed (1,080 lines) |
+| `dmesg-filtered.txt` | first post-boot dmesg with `sprd-wlan`/`goodix` flood removed (1,080 lines) |
+| `dmesg-clean-boot.txt`, `boot-probes-key.txt`, `uptime.txt` | **clean boot from t=0**, 9,686 lines (serial/MAC redacted) + key probe extract |
 | `lsmod.txt`, `module-params.txt` | loaded modules + readable parameters |
 | `vendor-firmware.txt` | `/vendor/firmware` listing (wcnmodem, gnssmodem, BT/WiFi configs) |
 | `dmesg-boot-filtered.txt`, `lsmod-boot.txt`, `uptime.txt` | post-reboot capture (t ≥ 166 s; see §8) |
