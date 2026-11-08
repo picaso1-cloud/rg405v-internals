@@ -1,0 +1,216 @@
+total 0
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 avbmeta_rs_a -> /dev/block/mmcblk0p68
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 avbmeta_rs_b -> /dev/block/mmcblk0p69
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 boot_a -> /dev/block/mmcblk0p42
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 boot_b -> /dev/block/mmcblk0p43
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 cache -> /dev/block/mmcblk0p53
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 common_rs1_a -> /dev/block/mmcblk0p70
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 common_rs1_b -> /dev/block/mmcblk0p71
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 common_rs2_a -> /dev/block/mmcblk0p72
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 common_rs2_b -> /dev/block/mmcblk0p73
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 dtb_a -> /dev/block/mmcblk0p48
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 dtb_b -> /dev/block/mmcblk0p49
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 dtbo_a -> /dev/block/mmcblk0p50
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 dtbo_b -> /dev/block/mmcblk0p51
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 fbootlogo -> /dev/block/mmcblk0p12
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 gnssmodem_a -> /dev/block/mmcblk0p19
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 gnssmodem_b -> /dev/block/mmcblk0p20
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 hypervsior_a -> /dev/block/mmcblk0p40
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 hypervsior_b -> /dev/block/mmcblk0p41
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 init_boot_a -> /dev/block/mmcblk0p46
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 init_boot_b -> /dev/block/mmcblk0p47
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 l_agdsp_a -> /dev/block/mmcblk0p32
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 l_agdsp_b -> /dev/block/mmcblk0p33
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 l_cdsp_a -> /dev/block/mmcblk0p34
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 l_cdsp_b -> /dev/block/mmcblk0p35
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 l_deltanv_a -> /dev/block/mmcblk0p26
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 l_deltanv_b -> /dev/block/mmcblk0p27
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 l_fixnv1_a -> /dev/block/mmcblk0p13
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 l_fixnv1_b -> /dev/block/mmcblk0p15
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 l_fixnv2_a -> /dev/block/mmcblk0p14
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 l_fixnv2_b -> /dev/block/mmcblk0p16
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 l_gdsp_a -> /dev/block/mmcblk0p28
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 l_gdsp_b -> /dev/block/mmcblk0p29
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 l_ldsp_a -> /dev/block/mmcblk0p30
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 l_ldsp_b -> /dev/block/mmcblk0p31
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 l_modem_a -> /dev/block/mmcblk0p24
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 l_modem_b -> /dev/block/mmcblk0p25
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 l_runtimenv1 -> /dev/block/mmcblk0p17
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 l_runtimenv2 -> /dev/block/mmcblk0p18
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 logo -> /dev/block/mmcblk0p11
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 metadata -> /dev/block/mmcblk0p56
+lrwxrwxrwx 1 root root 20 1970-01-01 00:00 misc -> /dev/block/mmcblk0p3
+lrwxrwxrwx 1 root root 20 1970-01-01 00:00 miscdata -> /dev/block/mmcblk0p2
+lrwxrwxrwx 1 root root 18 1970-01-01 00:00 mmcblk0 -> /dev/block/mmcblk0
+lrwxrwxrwx 1 root root 23 1970-01-01 00:00 mmcblk0boot0 -> /dev/block/mmcblk0boot0
+lrwxrwxrwx 1 root root 23 1970-01-01 00:00 mmcblk0boot1 -> /dev/block/mmcblk0boot1
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 persist -> /dev/block/mmcblk0p23
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 pm_sys_a -> /dev/block/mmcblk0p36
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 pm_sys_b -> /dev/block/mmcblk0p37
+lrwxrwxrwx 1 root root 20 1970-01-01 00:00 prodnv -> /dev/block/mmcblk0p1
+lrwxrwxrwx 1 root root 20 1970-01-01 00:00 sml_a -> /dev/block/mmcblk0p6
+lrwxrwxrwx 1 root root 20 1970-01-01 00:00 sml_b -> /dev/block/mmcblk0p7
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 super -> /dev/block/mmcblk0p52
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 sysdumpdb -> /dev/block/mmcblk0p57
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 teecfg_a -> /dev/block/mmcblk0p38
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 teecfg_b -> /dev/block/mmcblk0p39
+lrwxrwxrwx 1 root root 20 1970-01-01 00:00 trustos_a -> /dev/block/mmcblk0p4
+lrwxrwxrwx 1 root root 20 1970-01-01 00:00 trustos_b -> /dev/block/mmcblk0p5
+lrwxrwxrwx 1 root root 20 1970-01-01 00:00 uboot_a -> /dev/block/mmcblk0p8
+lrwxrwxrwx 1 root root 20 1970-01-01 00:00 uboot_b -> /dev/block/mmcblk0p9
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 uboot_log -> /dev/block/mmcblk0p10
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 userdata -> /dev/block/mmcblk0p74
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 vbmeta_a -> /dev/block/mmcblk0p54
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 vbmeta_b -> /dev/block/mmcblk0p55
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 vbmeta_odm_a -> /dev/block/mmcblk0p66
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 vbmeta_odm_b -> /dev/block/mmcblk0p67
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 vbmeta_product_a -> /dev/block/mmcblk0p64
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 vbmeta_product_b -> /dev/block/mmcblk0p65
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 vbmeta_system_a -> /dev/block/mmcblk0p58
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 vbmeta_system_b -> /dev/block/mmcblk0p59
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 vbmeta_system_ext_a -> /dev/block/mmcblk0p62
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 vbmeta_system_ext_b -> /dev/block/mmcblk0p63
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 vbmeta_vendor_a -> /dev/block/mmcblk0p60
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 vbmeta_vendor_b -> /dev/block/mmcblk0p61
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 vendor_boot_a -> /dev/block/mmcblk0p44
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 vendor_boot_b -> /dev/block/mmcblk0p45
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 wcnmodem_a -> /dev/block/mmcblk0p21
+lrwxrwxrwx 1 root root 21 1970-01-01 00:00 wcnmodem_b -> /dev/block/mmcblk0p22
+---
+major minor  #blocks  name
+
+   1        0       8192 ram0
+   1        1       8192 ram1
+   1        2       8192 ram2
+   1        3       8192 ram3
+   1        4       8192 ram4
+   1        5       8192 ram5
+   1        6       8192 ram6
+   1        7       8192 ram7
+   1        8       8192 ram8
+   1        9       8192 ram9
+   1       10       8192 ram10
+   1       11       8192 ram11
+   1       12       8192 ram12
+   1       13       8192 ram13
+   1       14       8192 ram14
+   1       15       8192 ram15
+   7        0       7752 loop0
+   7        1      40460 loop1
+   7        2        876 loop2
+   7        3      35872 loop3
+   7        4        268 loop4
+   7        5      35872 loop5
+   7        6       2100 loop6
+   7        7       5844 loop7
+   7        8       6252 loop8
+   7        9      63996 loop9
+   7       10      40460 loop10
+   7       11      12968 loop11
+   7       12        876 loop12
+   7       13       5020 loop13
+   7       14        268 loop14
+   7       15       1908 loop15
+ 259        0         64 pmem0
+ 179        0  122880000 mmcblk1
+ 179        1  121702169 mmcblk1p1
+ 179        8  122138624 mmcblk0
+ 179        9      10240 mmcblk0p1
+ 179       10       1024 mmcblk0p2
+ 179       11       1024 mmcblk0p3
+ 179       12       6144 mmcblk0p4
+ 179       13       6144 mmcblk0p5
+ 179       14       1024 mmcblk0p6
+ 179       15       1024 mmcblk0p7
+ 259        1       3072 mmcblk0p8
+ 259        2       3072 mmcblk0p9
+ 259        3       4096 mmcblk0p10
+ 259        4       8192 mmcblk0p11
+ 259        5       8192 mmcblk0p12
+ 259        6       2048 mmcblk0p13
+ 259        7       2048 mmcblk0p14
+ 259        8       2048 mmcblk0p15
+ 259        9       2048 mmcblk0p16
+ 259       10       2048 mmcblk0p17
+ 259       11       2048 mmcblk0p18
+ 259       12       1024 mmcblk0p19
+ 259       13       1024 mmcblk0p20
+ 259       14      10240 mmcblk0p21
+ 259       15      10240 mmcblk0p22
+ 259       16       2048 mmcblk0p23
+ 259       17      25600 mmcblk0p24
+ 259       18      25600 mmcblk0p25
+ 259       19       1024 mmcblk0p26
+ 259       20       1024 mmcblk0p27
+ 259       21      10240 mmcblk0p28
+ 259       22      10240 mmcblk0p29
+ 259       23      20480 mmcblk0p30
+ 259       24      20480 mmcblk0p31
+ 259       25       6144 mmcblk0p32
+ 259       26       6144 mmcblk0p33
+ 259       27       1024 mmcblk0p34
+ 259       28       1024 mmcblk0p35
+ 259       29       1024 mmcblk0p36
+ 259       30       1024 mmcblk0p37
+ 259       31       1024 mmcblk0p38
+ 259       32       1024 mmcblk0p39
+ 259       33      10240 mmcblk0p40
+ 259       34      10240 mmcblk0p41
+ 259       35      65536 mmcblk0p42
+ 259       36      65536 mmcblk0p43
+ 259       37     102400 mmcblk0p44
+ 259       38     102400 mmcblk0p45
+ 259       39       8192 mmcblk0p46
+ 259       40       8192 mmcblk0p47
+ 259       41       8192 mmcblk0p48
+ 259       42       8192 mmcblk0p49
+ 259       43       8192 mmcblk0p50
+ 259       44       8192 mmcblk0p51
+ 259       45    5734400 mmcblk0p52
+ 259       46     102400 mmcblk0p53
+ 259       47       1024 mmcblk0p54
+ 259       48       1024 mmcblk0p55
+ 259       49      16384 mmcblk0p56
+ 259       50      10240 mmcblk0p57
+ 259       51       1024 mmcblk0p58
+ 259       52       1024 mmcblk0p59
+ 259       53       1024 mmcblk0p60
+ 259       54       1024 mmcblk0p61
+ 259       55       1024 mmcblk0p62
+ 259       56       1024 mmcblk0p63
+ 259       57       1024 mmcblk0p64
+ 259       58       1024 mmcblk0p65
+ 259       59       1024 mmcblk0p66
+ 259       60       1024 mmcblk0p67
+ 259       61       1024 mmcblk0p68
+ 259       62       1024 mmcblk0p69
+ 259       63       8192 mmcblk0p70
+ 259       64       8192 mmcblk0p71
+ 259       65      16384 mmcblk0p72
+ 259       66      16384 mmcblk0p73
+ 259       67  115579904 mmcblk0p74
+ 254        0    1923648 dm-0
+ 254        1     247136 dm-1
+ 254        2     794800 dm-2
+ 254        3     585832 dm-3
+ 254        4      16584 dm-4
+ 254        5    1893212 dm-5
+ 254        6     243152 dm-6
+ 254        7     782172 dm-7
+ 254        8     576508 dm-8
+ 254        9      16240 dm-9
+   7       16       6604 loop16
+   7       17       8692 loop17
+   7       18       7068 loop18
+   7       19      19144 loop19
+   7       20       8092 loop20
+   7       21      12036 loop21
+   7       22        776 loop22
+   7       23       2864 loop23
+   7       24       7752 loop24
+   7       25       1728 loop25
+   7       26       3896 loop26
+   7       27        748 loop27
+   7       28     153600 loop28
+ 253        0    2246736 zram0
+ 254       10  115579904 dm-10

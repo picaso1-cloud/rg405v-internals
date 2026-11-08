@@ -11,15 +11,16 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 
 | Item | Value | Evidence |
 |---|---|---|
-| SoC | Unisoc Tiger **T618** (2× Cortex-A75 @2.0 GHz + 6× A55) | [inferred] anbernic.com |
-| GPU | Mali-G52 MP2 @850 MHz | [inferred] anbernic.com |
-| RAM | 4 GB LPDDR4X @1866 MHz | [inferred] anbernic.com |
-| Storage | 128 GB eMMC + microSD slot | [inferred] anbernic.com |
-| Display | 4″ IPS touch, 640×480 | [inferred] anbernic.com |
-| Battery | 5500 mAh | [inferred] anbernic.com |
-| Connectivity | Wi-Fi 2.4/5 GHz 802.11ac, BT 5.0 | [inferred] anbernic.com |
-| Stock OS | **Android 12, not rooted** | [seen] user-confirmed 2026-11-08 |
-| Custom OS | **GammaOS Next v1.1** for RG405M/V/RG505 (Android 13/14) | [inferred] GammaOSNext repo |
+| SoC | Unisoc Tiger **T618** (2× Cortex-A75 @2.0 GHz + 6× A55), `ums512` | [seen] |
+| GPU | Mali-G52, GLES 3.2, devfreq 384–850 MHz | [seen] |
+| RAM | 4 GB LPDDR4X (3,623,772 kB visible), zram 2.14 GB | [seen] |
+| Storage | **116.5 GB eMMC** + **128 GB microSD** (ROM library) | [seen] |
+| Display | 4″ IPS touch, **480×640 portrait** panel; UI runs 640×480 landscape (rotation 1) | [seen] |
+| Battery | 5500 mAh; 100 % = 3.935 V, health Good | [seen] |
+| Connectivity | Wi-Fi 5 GHz (Unisoc **SC2355** SDIO), BT combo, 390/433 Mbps at probe | [seen] |
+| Stock OS | **Android 12**, build **V1.23**, security patch 2022-07-05, full GApps | [seen] |
+| Bootloader / root | **locked** (`flash.locked=1`), no usable root (`su` setgid blocked), SELinux **Permissive** | [seen] |
+| Custom OS | **GammaOS Next v1.1 (T618)** — Android 14, `v.1.1.0-ANBERNICT618` | [inferred] official repo/wiki |
 | Linux | No community/mainline T618 handheld port known | [inferred] |
 
 > ⚠️ Anbernic's own product page warns that installing a third-party OS may make
@@ -41,10 +42,14 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 - [seen] Public specs collected (this file).
 - [seen] Device state: **stock Android 12, not rooted, ADB available**
   (user-confirmed 2026-11-08).
-- [ ] Device probed (ADB identity/partitions/sysfs; bootloader read-only).
-- [ ] Full partition backup + rollback proven (no root → use fastboot/vendor
-  image or a documented temporary-root path).
-- [ ] GammaOS Next installed and validated.
+- [seen] **Live recon complete** (read-only): identity/build V1.23, 77 A/B
+  partitions, 116.5 GB eMMC, 128 GB microSD ROM library, T618 sysfs, panel
+  480×640 portrait (UI 640×480), input devices, battery/thermals, SC2355 Wi-Fi.
+  Full data: [02-recon-results.md](02-recon-results.md).
+- [ ] Internal `/sdcard` backup (~4.8 GB) before any flash.
+- [ ] Unbricker downloaded/verified (rollback gate).
+- [ ] GammaOS Next Lite (Android 14) installed — plan:
+  [03-gammaos-next-plan.md](03-gammaos-next-plan.md).
 - [ ] andr36oid layer ported.
 - [ ] Emulation/perf baseline recorded.
 
@@ -53,8 +58,8 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 | File | Content |
 |---|---|
 | [01-recon-plan.md](01-recon-plan.md) | Step-by-step probing + backup/rollback checklist |
-| `02-hardware.md` | (to write after probing) SoC/GPU/panel/input/power |
-| `03-firmware.md` | (to write) stock + GammaOS Next structure, flashing |
+| [02-recon-results.md](02-recon-results.md) | **Live read-only profile**: build, partitions, CPU/GPU, panel, input, battery, Wi-Fi, ROM library |
+| [03-gammaos-next-plan.md](03-gammaos-next-plan.md) | GammaOS Next Lite install, unlock, backup, rollback and post-install validation |
 | `04-optimization.md` | (to write) andr36oid layer port |
 
 ## First contact checklist

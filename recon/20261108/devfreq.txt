@@ -1,0 +1,48 @@
+== /sys/class/devfreq/60000000.gpu 60000000.gpu
+avail=384000000 512000000 614400000 768000000 850000000
+cur=384000000
+gov=simple_ondemand
+== /sys/class/devfreq/cpp-dvfs cpp-dvfs
+avail=76800000 128000000 256000000 384000000
+cur=0
+gov=cpp_dvfs
+== /sys/class/devfreq/dcam-axi-dvfs dcam-axi-dvfs
+avail=256000000 307200000 384000000 468000000
+cur=0
+gov=dcam_axi_dvfs
+== /sys/class/devfreq/dcam-if-dvfs dcam-if-dvfs
+avail=192000000 256000000 307200000 384000000 468000000
+cur=0
+gov=dcam_if_dvfs
+== /sys/class/devfreq/dpu dpu-dvfs
+avail=153600000 192000000 256000000 307200000 384000000
+cur=384000000
+gov=dpu_dvfs
+== /sys/class/devfreq/fd-dvfs fd-dvfs
+avail=76800000 192000000 307200000 384000000
+cur=0
+gov=fd_dvfs
+== /sys/class/devfreq/isp-dvfs isp-dvfs
+avail=256000000 307200000 384000000 468000000 512000000
+cur=0
+gov=isp_dvfs
+== /sys/class/devfreq/jpg-dvfs jpg-dvfs
+avail=76800000 128000000 256000000 384000000
+cur=0
+gov=jpg_dvfs
+== /sys/class/devfreq/mtx-dvfs mtx-dvfs
+avail=76800000 128000000 256000000 307200000 384000000 468000000 512000000
+cur=0
+gov=mtx_dvfs
+== /sys/class/devfreq/scene-frequency scene-frequency
+avail=256 384 512 768 1024 1333 1866
+cur=1866
+gov=sprd-governor
+== /sys/class/devfreq/vdsp vdsp-dvfs
+avail=256000000 384000000 512000000 614400000 768000000 936000000
+cur=512000000
+gov=vdsp_dvfs
+== /sys/class/devfreq/vsp vsp-dvfs
+avail=256000000 307200000 384000000
+cur=384000000
+gov=vsp_dvfs

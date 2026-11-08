@@ -1,0 +1,29 @@
+== /sys/devices/system/cpu/cpu0/cpufreq
+scaling_driver=sprd-cpufreq
+scaling_available_governors=userspace conservative powersave performance schedutil 
+scaling_available_frequencies=614400 768000 962000 1144000 1228800 1482000 1536000 1716000 1820000 2002000 
+scaling_cur_freq=614400
+scaling_min_freq=614400
+scaling_max_freq=2002000
+== /sys/devices/system/cpu/cpu4/cpufreq
+scaling_driver=sprd-cpufreq
+scaling_available_governors=userspace conservative powersave performance schedutil 
+scaling_available_frequencies=614400 768000 962000 1144000 1228800 1482000 1536000 1716000 1820000 2002000 
+scaling_cur_freq=2002000
+scaling_min_freq=614400
+scaling_max_freq=2002000
+== /sys/devices/system/cpu/cpu6/cpufreq
+scaling_driver=sprd-cpufreq
+scaling_available_governors=userspace conservative powersave performance schedutil 
+scaling_available_frequencies=1228800 1482000 1536000 1742000 1872000 2002000 
+scaling_cur_freq=2002000
+scaling_min_freq=1228800
+scaling_max_freq=2002000
+cpu0=1536000
+cpu1=1482000
+cpu2=1228800
+cpu3=1482000
+cpu4=614400
+cpu5=614400
+cpu6=2002000
+cpu7=2002000

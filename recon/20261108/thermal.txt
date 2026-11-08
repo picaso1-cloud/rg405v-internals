@@ -1,0 +1,17 @@
+board-thmzone=33569
+soc-thmzone=42650
+ank4-thmzone=37258
+ank5-thmzone=36994
+cputop-thmzone=38564
+gpuank2-thmzone=38150
+osctsen-thmzone=
+outtsen-thmzone=
+aw32257=30000
+prometheus6-tzone0=37500
+prometheus6-tzone1=38780
+prometheus7-thmzone=42650
+ank0-thmzone=40350
+ank1-thmzone=41120
+gpu-thmzone=38564
+ank2-thmzone=37758
+ank3-thmzone=38036

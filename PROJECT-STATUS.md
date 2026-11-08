@@ -15,7 +15,7 @@ be compacted and work resumed from this file alone. Mirrored in the device repos
 |---|---|---|---|
 | **Powkiddy RGB10 Max 2** | RK3326, 1 GB | andr36oid (Android 11) on SD | `adb connect <ip>:5555` (192.168.0.99 / 192.168.31.190); root daemon via `/data/local/tmp/cmd.in`; **currently: new SD card pending** |
 | **Anbernic RG353V** | RK3566, 2 GB | **GammaOS_Lite_v1.5** (Android 12, eMMC) + **ArkOS** (TF1) + ROMs (TF2) | Android: wireless adb `192.168.1.148:5555` (Magisk). ArkOS: `ssh ark@192.168.1.148`, password `ark`. Both currently offline |
-| **Anbernic RG405V** | Unisoc T618, 4 GB | Stock **Android 12** (128 GB eMMC + microSD) | **not surveyed yet**; target = GammaOS Next 13/14 + andr36oid layer |
+| **Anbernic RG405V** | Unisoc T618, 4 GB | Stock **Android 12 V1.23** (116.5 GB eMMC + 128 GB microSD ROMs) | **online**: wireless ADB `192.168.1.189:43815` (paired 2026-11-08; port changes after reboot). Recon complete (`rg405v-internals/02-recon-results.md`); target = GammaOS Next Lite (Android 14) + andr36oid layer |
 
 Host: `/home/souhail/Andr36oid` workspace. Devices are on `192.168.x` networks
 that change between sessions — re-scan if connect fails.
@@ -211,25 +211,32 @@ Full plan: `13-archr-rk3566-plan.md` · analysis: `14-rocknix-image-analysis.md`
 
 ---
 
-## Project 5 — RG405V: newest Android + andr36oid layer  🆕 planned
+## Project 5 — RG405V: newest Android + andr36oid layer  🔎 recon complete
 
-**Device:** Unisoc T618, 4 GB, 128 GB eMMC, 4″ 640×480 touch, Android 12 stock
-[inferred/public]. Full profile + recon checklist: `rg405v-internals/`.
+**Device (verified live 2026-11-08):** Unisoc T618, 4 GB, **116.5 GB eMMC**,
+4″ **480×640 portrait** panel (UI 640×480 landscape), **128 GB microSD ROM
+library** (103 GB used). Stock **Android 12 V1.23**, security patch 2022-07-05,
+38 Google packages, bootloader **locked**, no usable root, SELinux **Permissive**.
+Full profile: `rg405v-internals/02-recon-results.md`.
 
-- **Target OS:** **GammaOS Next v1.1** (Android 13/14 for RG405M/V/RG505)
-  [inferred] + the andr36oid tuning layer.
-- **Linux:** not planned (no mainline T618 handheld support) — investigation
-  only.
-- **First step:** read-only recon — identity, partitions, bootloader, sysfs,
-  input, thermal, battery, Treble/slots; full backup + rollback proof.
-- **Then:** install GammaOS Next, validate hardware, port the L3 layer
-  (perf floors, zram, debloat, launcher, wireless ADB, USB modes, Tailscale +
-  Moonlight, input remaps).
-- **Caution:** Anbernic warns third-party OS may block returning to stock —
-  backup first, prove rollback.
-- **Status:** **stock Android 12, not rooted** (user-confirmed 2026-11-08),
-  ADB available; recon not started. Backup/rollback path must be chosen before
-  any flash.
+- **Access:** wireless ADB `192.168.1.189:43815` (paired; port changes after
+  reboot).
+- **Target OS:** **GammaOS Next v1.1 (T618) — RG405V Lite, Android 14**
+  (fresh install, wipes internal storage) + andr36oid layer.
+- **Linux:** not planned (no mainline T618 support) — investigation only.
+- **Recon highlights:** 77 A/B partitions, dynamic `super` 5.6 GB, userdata
+  112.9 GB; schedutil 614 MHz–2.002 GHz, Mali-G52 384–850 MHz, DDR 1866 MHz;
+  `retrogame_joypad` + `touch_joypad` + Goodix touch; SC2355 SDIO Wi-Fi (5 GHz);
+  zram 2.14 GB; emulators preinstalled (AetherSX2, Dolphin, PPSSPP,
+  DuckStation, RetroArch, Citra, …).
+- **Plan:** `rg405v-internals/03-gammaos-next-plan.md` — backup `/sdcard`
+  (~4.8 GB), enable OEM unlock, unlock (wipes), fastbootd flash Lite, erase
+  userdata, validate, port L3 layer.
+- **Rollback:** GammaOS RG405V unbricker (Google Drive; Windows
+  `UpgradeDownload.exe`) — **must be verified before flashing**; no root =
+  no full eMMC dump.
+- **Status:** recon done; **no writes performed**. Waiting on user decision +
+  backup + unbricker verification.
 
 ---
 
@@ -239,7 +246,7 @@ Full plan: `13-archr-rk3566-plan.md` · analysis: `14-rocknix-image-analysis.md`
 |---|---|
 | `picaso1-cloud/rgb10max2-internals` | RGB10 Max 2 knowledge base (10 docs + artifacts) |
 | `picaso1-cloud/rg353v-internals` | RG353V knowledge base (15 docs + survey incl. ROCKNIX teardown) |
-| `picaso1-cloud/rg405v-internals` | RG405V knowledge base (goals + recon plan + shared docs) @ `fee8d20` |
+| `picaso1-cloud/rg405v-internals` | RG405V knowledge base (recon results + GammaOS Next plan + shared docs) |
 | `andr36oid/andr36oid_sdflasher` PR **#2** (`picaso1-cloud:rgb10max2-port`) | open, mergeable, head **`649dee6`** — docs + DTS + service + builder |
 | Shared docs (mirrored) | `MASTER-PLAN.md`, `SHARED-KNOWLEDGE.md`, `PROJECT-STATUS.md`, `REFERENCES.md`, `docs/DECISIONS.md`, `docs/RE-METHOD.md` |
 | Local workspace | `/home/souhail/Andr36oid` — PORT-REPORT, VALIDATION, device-work, image-patcher, dist |
@@ -261,13 +268,14 @@ opened #2 manually).
 
 **Open:**
 1. **RGB10 Max 2 card purchase:** size/class → flash master + migrate state.
-2. **RG405V backup/rollback:** no root → decide fastboot/vendor-image path vs
-   temporary root before any flash.
+2. **RG405V — proceed?** unlock + GammaOS Next Lite (Android 14) wipes internal
+   storage. Need: `/sdcard` backup (~4.8 GB), **verified unbricker** (Windows
+   `UpgradeDownload.exe` path), and Patreon password if the release is locked.
 3. **Community release timing:** after Phase 2 or Phase 3? (ADR-007)
 4. **Max 2 Linux acceptance:** which emulator/streaming set and numbers define
    "done".
 5. **Priority order:** RGB10 rebuild → shared Linux core (ROCKNIX Max 2 port +
-   RG353V TF1) → RG405V recon/GammaOS Next → community builder/flasher.
+   RG353V TF1) → RG405V backup/unlock/GammaOS Next → community builder/flasher.
 
 ---
 
@@ -304,8 +312,19 @@ opened #2 manually).
 - **Added `REFERENCES.md`** (curated sources) — includes the user-provided
   [`Zaruber/ohmyanbernic`](https://github.com/Zaruber/ohmyanbernic) Termux
   no-root dashboard (useful for unrooted RG405V recon/telemetry).
-- **Next:** when an A2 card is available, flash the RK3326-a image, apply the
-  key overlay, and run the hardware checklist; then the Android card rebuild.
+- **RG405V recon completed live** (wireless ADB, read-only): stock **Android 12
+  V1.23**, T618, kernel 5.4.161, 116.5 GB eMMC / 77 A/B partitions, 4″
+  480×640 portrait panel (UI 640×480), full gamepad + Goodix touch, SC2355
+  5 GHz Wi-Fi, zram 2.14 GB, 38 Google packages, bootloader locked / no usable
+  root, SELinux Permissive. ROM library (103 GB) is on the 128 GB microSD.
+  Data: `rg405v-internals/02-recon-results.md`.
+- **GammaOS Next plan written** (`rg405v-internals/03-gammaos-next-plan.md`):
+  Android 14 Lite, fresh install, unlock via `unisoc-unlock`/subut-rehost,
+  fastbootd flash, mandatory data erase, RG405V unbricker as rollback gate.
+  **Nothing flashed.**
+- **Next:** back up internal `/sdcard` (~4.8 GB), verify the unbricker, then
+  decide on unlock + GammaOS Next Lite; meanwhile the Max 2 waits for an A2
+  card to test the ROCKNIX RK3326 image + key overlay.
 
 ---
 

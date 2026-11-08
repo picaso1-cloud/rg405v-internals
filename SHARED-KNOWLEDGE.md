@@ -63,6 +63,14 @@ Evidence legend: **[seen]** observed here · **[inferred]** reasoned/public ·
 | A11 | GammaOS Next v1.1 supports RG405M/V/RG505 (Android 13/14); RG353 stays on GammaOS 12 | RG405V / RG353V | [inferred] | gammaos.org, GammaOSNext repo |
 | A12 | RG405V stock warning: third-party OS may not be flashable back to official → back up first | RG405V | [inferred] | anbernic.com notice |
 | A13 | No-root Android telemetry (Termux): CPU/RAM/storage/battery, processes, script runner; battery via `termux-battery-status` or `/sys/class/power_supply/battery/*`; needs battery-optimization exemption + `termux-wake-lock` | all Android | [seen] | `REFERENCES.md` §6 (Zaruber/ohmyanbernic) |
+| A14 | RG405V build: T618 (`ums512`), Android 12 **V1.23**, kernel **5.4.161**, A/B + dynamic partitions (77 parts), eMMC 116.5 GB, userdata 112.9 GB, super 5.6 GB | RG405V | [seen] | `rg405v-internals/02-recon-results.md` |
+| A15 | RG405V locked/unrooted: `flash.locked=1`, verified boot green, `sys.oem_unlock_allowed=0`; `/system/xbin/su` exists but `setgid` fails; SELinux **Permissive** | RG405V | [seen] | same |
+| A16 | RG405V panel is **480×640 portrait** 60 Hz; UI runs **640×480 landscape** (`rotation 1`, `user_rotation=1`); backlight `sprd_backlight` max 255 | RG405V | [seen] | same |
+| A17 | RG405V input: `retrogame_joypad` (all gamepad keys + ABS X/Y/Z/RZ/GAS/BRAKE/HAT0), `touch_joypad`, `goodix-ts` (480×640), `gpio-keys` (vol/power), vibrator | RG405V | [seen] | same |
+| A18 | RG405V perf: schedutil 614.4 MHz–**2.002 GHz** (3 policies), Mali-G52 **384–850 MHz** `simple_ondemand`, DDR scene 256–**1866 MHz**; zram 2.14 GB | RG405V | [seen] | same |
+| A19 | RG405V Wi-Fi: Unisoc **SC2355 SDIO** (`sc2355_sdio_wlan`/`sprd_wlan`), BT combo (`sprdbt_tty`); 5 GHz 390/433 Mbps at probe | RG405V | [seen] | same |
+| A20 | RG405V stock is a **Full/GApps** build (38 Google packages); ROM library (103 GB: PS2/PSP/PSX/Wii-GC/…) is on the **microSD**, internal `/sdcard` has emulator data (~4.8 GB) | RG405V | [seen] | same |
+| A21 | **GammaOS Next RG405V** = v1.1 T618, **Android 14**, Lite (no GApps) ~2.3 GB split 7z; fresh install only, unlock via `unisoc-unlock`/subut-rehost, flash in fastbootd, mandatory userdata erase; rollback via RG405V unbricker | RG405V | [inferred] | GammaOS Next wiki/release |
 
 **Porting the L3 layer:** the *logic* (sysctl values, floors, janitor loop,
 service keep-alives) is portable; the *paths* (`/sys/devices/system/cpu/...`,

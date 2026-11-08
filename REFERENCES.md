@@ -37,7 +37,10 @@ are **[inferred]** until observed on our hardware.
 | Source | What it gives us | Devices | Status |
 |---|---|---|---|
 | [TheGammaSqueeze/GammaOS](https://github.com/TheGammaSqueeze/GammaOS) | Debloated LineageOS base, partition/flash procedure, T618 + RK3566 support | RG353V, RG405V | ✅ RG353V running GammaOS Lite 12 |
-| [TheGammaSqueeze/GammaOSNext](https://github.com/TheGammaSqueeze/GammaOSNext) | Android 13/14 GSI for T618 (RG405M/V/RG505) | RG405V | target (verify build/rollback) |
+| [TheGammaSqueeze/GammaOSNext](https://github.com/TheGammaSqueeze/GammaOSNext) | Android 13/14 GSI for T618 (RG405M/V/RG505) | RG405V | target: v1.1 T618 (Android 14) |
+| [GammaOS Next installation wiki](https://github.com/TheGammaSqueeze/GammaOSNext/wiki/GammaOS-Next-Installation) | Exact unlock/flash/erase/rollback steps per device | RG405V | ✅ used |
+| [unisoc-unlock](https://pypi.org/project/unisoc-unlock/) / [subut-rehost](https://thegammasqueeze.github.io/subut-rehost/) | Unisoc bootloader unlock (Linux/macOS/Chrome) | RG405V | reference |
+| [RG405V unbricker](https://drive.google.com/file/d/1idODOwE197mRHwMHDU_Y7bnAiWiackbN/view) | Stock restore after a bad flash (Windows `UpgradeDownload.exe`) | RG405V | **must verify before flashing** |
 | [gammaos.org](https://gammaos.org) | Compatibility table, install/flash guidance | RG353V, RG405V | reference |
 | [andr36oid](https://github.com/andr36oid) | Android 11 base used on the RGB10 Max 2 | RGB10 Max 2 | ✅ ported |
 | [LineageOS GSI / Treble](https://source.android.com/docs/core/architecture/gsi) | GSI strategy for Android upgrades | RGB10 Max 2 (research), RG353V (experiment) | research |

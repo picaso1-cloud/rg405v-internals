@@ -41,12 +41,12 @@ projects:
 | RAM | 1 GB | 2 GB | 4 GB LPDDR4X |
 | Display | 5″ 480×854 (portrait panel, rotated) | 3.5″ 640×480 touch | 4″ 640×480 touch |
 | Storage / boot | **single microSD** (whole OS on card) | 32 GB eMMC + **TF1** (OS) + **TF2** (ROMs) | 128 GB eMMC + microSD |
-| Current OS | **andr36oid Android 11** (v31 DTB + v32 service) | eMMC **GammaOS Lite 12**; TF1 **ArkOS** | Stock **Android 12, not rooted** (user-confirmed) |
+| Current OS | **andr36oid Android 11** (v31 DTB + v32 service) | eMMC **GammaOS Lite 12**; TF1 **ArkOS** | Stock **Android 12 V1.23**, locked/unrooted (verified) |
 | Target systems | **2 cards, swapped:** Android card + Linux card | eMMC Android + TF1 Linux + TF2 ROMs (simultaneous) | **Android only** (Linux unlikely on T618) |
 | Android goal | newest **feasible** Android (11 now → 12/13 research) | 12 stable (GammaOS); 13/14 experiment only | **GammaOS Next 13/14** + andr36oid layer |
 | Linux goal | shared **andr36oid Linux** core (port device) | **same core**, RK3566 patched | investigate only (no mainline T618 support) |
 | Use case | light, ultra-portable; streaming + retro | daily driver; PS2/GC/Wii-class + Android apps | most powerful; Android + high-end emulation |
-| Status | Android feature-complete; OS-card rebuild pending | Android optimized; ROCKNIX analyzed; Linux not flashed | stock 12, unrooted; full recon planned |
+| Status | Android feature-complete; OS-card rebuild pending | Android optimized; ROCKNIX analyzed; Linux not flashed | **recon complete** (Android 12 V1.23, T618, 116.5 GB eMMC, 128 GB ROM card); GammaOS Next plan ready |
 
 **Verified notes**
 
@@ -168,8 +168,10 @@ Only sysfs paths and package names change per SoC.
   tweaks at parity.
 
 ### Phase 3 — RG405V (powerhouse)
-- Full recon (partitions, bootloader, Treble, sysfs, input).
-- Install **GammaOS Next** (13/14) with a verified rollback.
+- ✅ Full read-only recon: build V1.23 / Android 12, 77 A/B partitions,
+  T618 sysfs, panel/input, 128 GB ROM card (`rg405v-internals/02-recon-results.md`).
+- Back up internal `/sdcard` (~4.8 GB), verify the RG405V unbricker, then
+  unlock + flash **GammaOS Next v1.1 Lite (Android 14)**.
 - Port andr36oid L3: perf floors, zram, debloat, launcher, ADB/Wi-Fi,
   Tailscale/Moonlight, input remaps.
 - Acceptance: stable daily Android, measurably faster than stock, streaming +

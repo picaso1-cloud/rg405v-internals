@@ -130,3 +130,23 @@ RG353V both boot the shared Linux core and the Android layer is portable.
 
 **Consequences:** Phase 4, not Phase 1; but the build scripts are written
 reproducibly from the start.
+
+---
+
+## ADR-008 — RG405V target: GammaOS Next Lite (Android 14)
+
+**Status:** accepted in principle; **go-ahead pending** · 2026-11-08
+
+**Context:** Live recon shows stock Android 12 V1.23 with full GApps (38 Google
+packages), bootloader locked, no usable root. GammaOS Next v1.1 for T618 offers
+Android 14, debloated, with performance/remap tooling; Lite has no GApps.
+
+**Decision:** target **GammaOS Next v1.1 RG405V Lite (Android 14)**, fresh
+install. Hard gates before flashing: (1) internal `/sdcard` backup (~4.8 GB),
+(2) **verified RG405V unbricker** and a working rollback path, (3) microSD ROM
+card removed, (4) battery ≥ 50 %.
+
+**Consequences:** internal storage is wiped; the 103 GB ROM library on the
+microSD is preserved. The stock image is not recoverable from userspace (no
+root), so the unbricker is the rollback. Post-install, port the andr36oid L3
+layer only after the device is stable.
