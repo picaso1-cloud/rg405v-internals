@@ -240,6 +240,12 @@ Full profile: `rg405v-internals/02-recon-results.md`.
   **Shizuku-Next 14.0.33** (running, shell UID, transport adb).
 - **Prepared updates:** Cromite, Fennec, PPSSPP 1.20.4, RetroArch 1.22.2,
   Flycast 2.7, Azahar 2126.2; details in `rg405v-internals/04-apps-and-launcher.md`.
+- **Kernel/DT deep dive (2026-11-08):** kernel **5.4.161** BSP, `/proc/config.gz`
+  readable, full running DTS recovered via sysfs, 152 modules / 282 loaded.
+  Hardware: SC2730 PMIC, **AW32257 charger**, SC2730 FGU/Type-C/vibrator,
+  generic MIPI **480×640** panel, **Goodix GT9xx** touch, `retrogame_joypad`
+  (singleadc), **SC2355 SDIO** WiFi/BT/GNSS, **Mali-G52 Gondul** 384–850 MHz.
+  Artifacts: `rg405v-internals/recon/20261108/`, doc `05-kernel-drivers-deep-dive.md`.
 - **Status:** **recon complete; decision 2026-11-08: STAY STOCK for now** —
   no unlock, no flash, no device changes. GammaOS Next Lite plan remains ready;
   the user has a Windows PC/VM for the unbricker when the flash is eventually
@@ -336,6 +342,11 @@ opened #2 manually).
   14.0.33** (running, UID 2000/shell). Prepared official APKs for Cromite,
   Fennec, PPSSPP 1.20.4, RetroArch 1.22.2, Flycast 2.7, Azahar 2126.2.
   Chrome left untouched (no Google account; Play/Aurora needed).
+- **Deep kernel/DT probe:** pulled `/proc/config.gz`, reconstructed the full
+  running DTS from `/sys/firmware/devicetree/base`, captured `dmesg`, lsmod,
+  module params, firmware and sysfs power/thermal/display/input. Documented
+  SC2730 PMIC, AW32257 charger, SC2730 FGU/Type-C, Goodix GT9xx, SC2355 WiFi,
+  Mali-G52. Shizuku = shell UID, no extra privilege over ADB.
 - **Next:** Daijishō ROM paths + default home, install FOSS apps from Droidify,
   safe performance tweaks; Max 2 waits for an A2 card.
 

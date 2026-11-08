@@ -1,0 +1,160 @@
+Module                  Size  Used by
+mipi_driver            49152  0 
+sprd_mipi              24576  1 mipi_driver
+sprd_net_helper        28672  0 
+cpufreq_userspace      28672  0 
+sprd_compr_2stage_dma    53248  1 
+sprd_dmaengine_pcm     45056  1 
+snd_soc_sprd_vbc_fe    40960  1 [permanent]
+snd_soc_sprd_vbc_v4   389120  2 snd_soc_sprd_vbc_fe,[permanent]
+sprd_platform_pcm_routing   118784  1 
+snd_soc_sprd_dummy_codec    24576  0 
+snd_soc_sprd_codec_sc2730_power_dev    36864  0 [permanent]
+snd_soc_sprd_codec_sc2730_power    45056  30 
+snd_soc_sprd_codec_sc2730   217088  1 [permanent]
+snd_soc_sprd_card      77824  6 sprd_compr_2stage_dma,sprd_dmaengine_pcm,snd_soc_sprd_vbc_v4,snd_soc_sprd_codec_sc2730_power,snd_soc_sprd_codec_sc2730,[permanent]
+sprd_audcp_boot        24576  0 
+sprd_audcp_dvfs        40960  0 
+mcdt_hw                36864  2 sprd_compr_2stage_dma,snd_soc_sprd_vbc_fe
+audio_pipe             40960  1 
+sprd_apipe             40960  3 
+ax88179_178a           45056  0 
+asix                   94208  0 
+audio_dsp_dump         49152  8 
+audio_sipc             53248  6 sprd_compr_2stage_dma,snd_soc_sprd_vbc_v4,sprd_audcp_boot,sprd_audcp_dvfs,audio_pipe,audio_dsp_dump
+audio_mem              36864  5 sprd_compr_2stage_dma,sprd_dmaengine_pcm,sprd_audcp_boot,audio_dsp_dump,audio_sipc
+agdsp_access           40960  7 sprd_compr_2stage_dma,sprd_dmaengine_pcm,snd_soc_sprd_vbc_fe,snd_soc_sprd_vbc_v4,snd_soc_sprd_codec_sc2730,audio_dsp_dump,audio_sipc
+sprd_wdf               28672  0 [permanent]
+sprd_pmic_wdt          24576  0 
+sc2355_sdio_wlan      274432  0 
+sprd_wlan             110592  1 sc2355_sdio_wlan
+musb_sprd              40960  0 
+musb_hdrc             196608  1 musb_sprd
+gnss_pmnotify_ctl      24576  0 
+gnss_dbg               32768  0 
+gnss_common_ctl_all    28672  1 gnss_pmnotify_ctl
+sprd_fm                77824  0 
+sprdbt_tty             45056  0 
+wcn_bsp               516096  8 sc2355_sdio_wlan,sprd_wlan,gnss_common_ctl_all,sprd_fm,sprdbt_tty
+sprd_vdsp             319488  0 
+sprd_usb_f_rndis       57344  0 
+sprd_u_ether           45056  1 sprd_usb_f_rndis
+misc_sprd_uid          24576  0 
+seth                   36864  0 
+ims_bridge             90112  0 
+sprd_map               36864  0 
+sprd_ddr_dvfs          49152  0 
+sprd_cp_dvfs           36864  0 
+aw32257_charger        49152  1 
+sc27xx_fuel_gauge      69632  0 
+charger_manager        98304  2 aw32257_charger,sc27xx_fuel_gauge
+sprd_battery_info      28672  2 sc27xx_fuel_gauge,charger_manager
+sprd_vote              28672  1 charger_manager
+spi_sprd               36864  0 
+sensorhub              69632  3 
+kfifo_buf              24576  1 sensorhub
+sc27xx_typec           24576  0 
+phy_sprd_sharkl5Pro    28672  3 
+thermal_generic_adc    24576  0 
+sprd_thermal           24576  0 
+sc27xx_tsensor_thermal    24576  0 
+sc27xx_poweroff        24576  0 
+sc27xx_adc             32768  0 
+rtc_sc27xx             24576  1 
+pwm_sprd               24576  2 
+pinctrl_sprd_sharkl5Pro    49152  0 
+pinctrl_sprd           32768  1 pinctrl_sprd_sharkl5Pro
+zram                   61440  1 
+zsmalloc               49152  1 zram
+ledtrig_pattern        24576  0 
+jpg                    69632  0 
+vsp                    90112  0 
+pinctrl                28672  0 
+gpio                   28672  0 
+core                   24576  2 pinctrl,gpio
+extcon_usb_gpio        24576  0 
+sprd_soc_thm           24576  0 
+mali_gondul          1069056  36 
+sc27xx_vibra           24576  0 
+leds_sc27xx_bltc       24576  0 
+sprd_gpu_cooling       28672  1 mali_gondul
+sprd_cpu_cooling       40960  0 
+sprd_top_dvfs          24576  0 [permanent]
+sprd_drm              507904  2 
+apsys_dvfs            126976  3 sprd_vdsp,vsp,sprd_drm
+sprd_gsp              286720  1 sprd_drm
+twofish_generic        28672  0 
+twofish_common         32768  1 twofish_generic
+arc4                   24576  0 
+aes_neon_blk           45056  0 
+aes_ce_ccm             24576  0 
+ghash_ce               36864  0 
+sha1_ce                24576  0 
+sprd_cpp              102400  0 
+sprd_vsp_pw_domain     28672  0 
+sprd_camera          1605632  0 
+sprd_sensor           200704  1 sprd_camera
+unisoc_iommu           86016  6 jpg,vsp,sprd_drm,sprd_gsp,sprd_cpp,sprd_camera
+sprd_ion               36864  3 sprd_cpp,sprd_camera
+sprd_flash_drv         24576  1 sprd_camera
+ams495qa04_lcd         40960  0 
+sprd_dma               36864  0 
+virt_dma               28672  1 sprd_dma
+exfat                 196608  0 
+ntfs                  389120  0 
+singleadcjoy           94208  0 
+gt9xx_ts              126976  0 
+sblock_bridge          28672  0 
+sbuf_bridge            28672  0 
+slog_bridge            32768  0 
+sprd_iq                28672  0 
+usb_f_vser             53248  4 slog_bridge,sprd_iq
+sprd_modem_loader      40960  0 
+sipx                   49152  1 seth
+spool                  32768  0 
+spipe                  28672  3 
+sipc_core             172032  16 agdsp_access,sprd_pmic_wdt,wcn_bsp,seth,ims_bridge,sprd_ddr_dvfs,sprd_cp_dvfs,sensorhub,sblock_bridge,sbuf_bridge,slog_bridge,sprd_iq,sprd_modem_loader,sipx,spool,spipe
+sprd_sipc_virt_bus     24576  0 
+unisoc_mailbox         40960  4 [permanent]
+sprd_debugstat_sharkl5pro    24576  0 
+sprd_debugstat_core    28672  1 sprd_debugstat_sharkl5pro,[permanent]
+sprd_power_manager     40960  3 sbuf_bridge,sprd_modem_loader,sipc_core
+sprd_pmic_syscon       24576  0 
+sfp_core              143360  0 
+sdhci_sprd             81920  0 
+mmc_hsq                24576  1 sdhci_sprd
+mmc_swcq               53248  1 sdhci_sprd
+gpio_pmic_eic_sprd     24576  10 
+gpio_sprd              24576  43 
+gpio_eic_sprd          32768  2 
+mmdvfs                188416  0 
+sprd_camsys_pw_domain    45056  1 mmdvfs
+sprd_shm               28672  0 
+trusty_virtio          36864  0 
+trusty_ipc             49152  21 wcn_bsp,sprd_vdsp,sprd_drm,sprd_gsp,sprd_camera
+trusty_irq             36864  0 
+trusty_log             28672  0 
+trusty_pm              24576  0 
+trusty                 40960  5 sprd_shm,trusty_virtio,trusty_irq,trusty_log,trusty_pm
+sprd_manufacturer_model    24576  0 
+sprd_7sreset           24576  0 
+sprd_cpufreq_public    28672  0 
+sprd_hwdvfs_policy     40960  0 
+sprd_hwdvfs_ums512_arch    61440  0 
+i2c_sprd_hw            32768  0 
+i2c_sprd               36864  0 
+nvmem_sprd_efuse       24576  0 
+nvmem_sprd_cache_efuse    28672  0 
+nvmem_sc27xx_efuse     24576  0 
+sprd_hwspinlock        24576  3 
+sprd_soc_id            28672  0 
+sc2730_regulator       32768  11 
+sprd_sc27xx_spi        24576  0 
+spi_sprd_adi           24576  0 
+ums512_clk            163840  120 
+clk_sprd               32768  1 ums512_clk
+sprd_time_sync_cp      24576  0 
+sprd_time_sync         28672  2 sprd_time_sync_cp
+sprd_systimer          24576  3 sprd_vdsp,sensorhub,sprd_time_sync,[permanent]
+sprd_sip_svc           24576  1 sprd_debugstat_sharkl5pro,[permanent]
+sprd_wdt_fiq           32768  1 sprd_wdf

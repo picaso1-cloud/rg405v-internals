@@ -1,0 +1,1080 @@
+[ 9021.598160] c2[ T1663] ion_system_heap_allocate,tid:1663 , size:   12288, time:          3us, pool:12288, bud: 0, ord 8:0, 4:0, 0:0
+[ 9021.730659] c2[ T1663] ion_system_heap_allocate,tid:1663 , size:   16384, time:          6us, pool:16384, bud: 0, ord 8:0, 4:0, 0:0
+[ 9022.299420] c0[ T1663] ion_system_heap_allocate,tid:1663 , size:   16384, time:          4us, pool:16384, bud: 0, ord 8:0, 4:0, 0:0
+[ 9022.450133] c5[ T1663] ion_system_heap_allocate,tid:1663 , size:   16384, time:          4us, pool:16384, bud: 0, ord 8:0, 4:0, 0:0
+[ 9022.861287] c0[ T1663] ion_system_heap_allocate,tid:1663 , size:   16384, time:          4us, pool:16384, bud: 0, ord 8:0, 4:0, 0:0
+[ 9023.116077] c1[ T1663] ion_system_heap_allocate,tid:1663 , size:   16384, time:          3us, pool:16384, bud: 0, ord 8:0, 4:0, 0:0
+[ 9023.268733] c1[ T1663] ion_system_heap_allocate,tid:1663 , size:   16384, time:          4us, pool:16384, bud: 0, ord 8:0, 4:0, 0:0
+[ 9023.733198] c2[ T1663] ion_system_heap_allocate,tid:1663 , size:   16384, time:          6us, pool:16384, bud: 0, ord 8:0, 4:0, 0:0
+[ 9023.759577] c0[T12016] sc27xx-fgu 32100000.spi:pmic@0:fgu@c00: not satisfy power on start condition.
+[ 9023.759592] c0[T12016] sc27xx-fgu 32100000.spi:pmic@0:fgu@c00: init_cap = 991, init_mah = 0, init_clbcnt = 49732344, cur_clbcnt = 45193218, normal_cap = 901, data->cc_mah = -452, Tbat = 319, uusoc_vbat = 0, uusoc_mah = 0, cur_1000ma_adc = 1394, track_sts = 1
+[ 9023.833997] c2[  T545] ieee80211 phy0: channel num 1
+[ 9023.835455] c0[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -52 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9024.106021] c4[  T942] systemserver cmd2 , get para: ( 50)
+[ 9024.220903] c0[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9024.222335] c0[    C0] WCN SLP_MGR: irq_cnt7707!!
+[ 9024.222626] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9024.222665] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9024.917157] c0[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9025.352040] c1[ T1663] ion_system_heap_allocate,tid:1663 , size:   16384, time:          5us, pool:16384, bud: 0, ord 8:0, 4:0, 0:0
+[ 9025.614362] c7[  T384] ap watchdog sprd_wdt_fiq start: timeout = 40, pretimeout = 20
+[ 9025.614366] c7[  T384] sprd_wdt: sprd wdt load value timeout =40, pretimeout =20
+[ 9025.986906] c0[ T1663] ion_system_heap_allocate,tid:1663 , size:   16384, time:          3us, pool:16384, bud: 0, ord 8:0, 4:0, 0:0
+[ 9026.208914] c4[ T1663] ion_system_heap_allocate,tid:1663 , size:   16384, time:          5us, pool:16384, bud: 0, ord 8:0, 4:0, 0:0
+[ 9026.820027] c1[ T1663] ion_system_heap_allocate,tid:1663 , size:   16384, time:          4us, pool:16384, bud: 0, ord 8:0, 4:0, 0:0
+[ 9026.837263] c0[T11704] WCN BASE: tx:at+loopcheck=4664775,13728
+[ 9026.837263] c0[T11704] 
+[ 9026.837423] c0[T11704] WCN BASE: mdbg_tx_cb, chn:0
+[ 9026.837509] c1[  T373] WCN BASE: rx:loopcheck_ack:ap_send=4664775,cp2_bootup=13728,cp2_send=9026862
+[ 9026.837509] c1[  T373] 
+[ 9026.841234] c2[  T545] ieee80211 phy0: channel num 1
+[ 9026.842348] c0[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -52 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9027.643455] c4[ T1663] ion_system_heap_allocate,tid:1663 , size:   16384, time:          4us, pool:16384, bud: 0, ord 8:0, 4:0, 0:0
+[ 9028.389781] c0[  T687] wlan sprd-marlin3:wlan wlan0: sc2355_scan n_channels 37
+[ 9028.389792] c0[  T687] ieee80211 phy0: random mac feature disabled
+[ 9028.436612] c1[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  2, signal -4100, freq 2417
+[ 9028.472532] c1[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9028.492204] c1[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -3500, freq 2417
+[ 9028.512382] c1[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -4000, freq 2417
+[ 9028.521728] c1[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -3500, freq 2417
+[ 9028.574477] c1[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9028.632294] c3[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  4, signal -8300, freq 2427
+[ 9028.890441] c3[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9028.985564] c3[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9029.034849] c0[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9029.055466] c0[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9029.086639] c0[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9029.197911] c1[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9029.300420] c1[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9029.394221] c1[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9029.411658] c1[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 60, signal -7100, freq 5300
+[ 9029.423148] c1[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 60, signal -7000, freq 5300
+[ 9029.427601] c1[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 60, signal -7100, freq 5300
+[ 9029.432444] c1[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 60, signal -7100, freq 5300
+[ 9029.496770] c0[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9029.600539] c0[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9029.615839] c5[  T721] uniber: CPUs balance changed
+[ 9029.616618] c5[  T721] uniber: ACTION_RESET triggered
+[ 9029.709657] c0[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9029.812630] c2[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9029.849144] c2[  T545] ieee80211 phy0: channel num 1
+[ 9029.850409] c0[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -52 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9029.905746] c5[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9030.008823] c5[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9030.015801] c0[ T1663] ion_system_heap_allocate,tid:1663 , size:   16384, time:          4us, pool:16384, bud: 0, ord 8:0, 4:0, 0:0
+[ 9030.112446] c0[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9030.221445] c0[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9030.324680] c3[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9030.417610] c4[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9030.529371] c4[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9030.572417] c4[T12320] wlan sprd-marlin3:wlan wlan0: sprd_report_scan_done scan is Done
+[ 9030.572462] c4[T12320] wlan sprd-marlin3:wlan wlan0: cmdevt_report_scan_done_evt got 30 BSSes
+[ 9030.574255] c0[ T1220] wlan sprd-marlin3:wlan wlan0: sc2355_dump_survey, idx 0
+[ 9030.574260] c0[ T1220] wlan sprd-marlin3:wlan wlan0: sc2355_dump_survey, survey_cnt 0
+[ 9030.582112] c2[  T545] ieee80211 phy0: channel num 1
+[ 9030.584900] c0[ T1663] ion_system_heap_allocate,tid:1663 , size:   16384, time:          3us, pool:16384, bud: 0, ord 8:0, 4:0, 0:0
+[ 9031.589212] c2[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9031.590630] c0[    C0] WCN SLP_MGR: irq_cnt7708!!
+[ 9031.590746] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9031.590815] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9031.958132] c4[T11508] WCN BASE: tx:at+loopcheck=4669896,13728
+[ 9031.958132] c4[T11508] 
+[ 9031.969167] c4[T11508] WCN BASE: mdbg_tx_cb, chn:0
+[ 9031.969727] c2[  T373] WCN BASE: rx:loopcheck_ack:ap_send=4669896,cp2_bootup=13728,cp2_send=9031993
+[ 9031.969727] c2[  T373] 
+[ 9031.970291] c2[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9032.597193] c2[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9032.599202] c0[    C0] WCN SLP_MGR: irq_cnt7709!!
+[ 9032.600354] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9032.600950] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9032.762868] c0[  T599] [drm] sprd_dpu_enable_vblank()
+[ 9032.856526] c2[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9032.871210] c2[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9032.871826] c2[  T545] ieee80211 phy0: channel num 1
+[ 9032.873142] c2[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9032.874070] c3[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -52 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:8 rxflags:0x:4a
+[ 9032.976442] c0[T11704] charger-manager charger-manager: cant not get input_cur.
+[ 9032.979397] c4[T11704] charger-manager charger-manager: vbat: 3872000, vbat_avg: 3867000, OCV: 3940136, ibat: -501000, ibat_avg: -543000, ibus: 0, vbus: 0, msoc: 924, chg_sts: 2, frce_full: 0, chg_lmt_cur: 0, inpt_lmt_cur: 0, chgr_type: 0, Tboard: 378, Tbatt: 319, thm_cur: -22, thm_pwr: 0, is_fchg: 0, fchg_en: 0, tflush: 286, tperiod: 15
+[ 9032.979405] c4[T11704] charger-manager charger-manager: new_uisoc = 924, old_uisoc = 925
+[ 9032.979431] c4[T11704] sc27xx-fgu 32100000.spi:pmic@0:fgu@c00: eddyhua sc27xx_fgu_set_property 2506 last_cap=924, normal_cap=900
+[ 9032.984373] c3[  T532] healthd: battery l=92 v=3872 t=31.9 h=2 st=3 c=-501000 fc=5000000 cc=0 chg=
+[ 9033.614613] c7[  T384] ap watchdog sprd_wdt_fiq start: timeout = 40, pretimeout = 20
+[ 9033.614616] c7[  T384] sprd_wdt: sprd wdt load value timeout =40, pretimeout =20
+[ 9033.671736] c2[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9034.382717] c2[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9034.383564] c2[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9035.503510] c4[ T1663] ion_system_heap_allocate,tid:1663 , size:   16384, time:          3us, pool:16384, bud: 0, ord 8:0, 4:0, 0:0
+[ 9035.785241] c3[ T1663] ion_system_heap_allocate,tid:1663 , size:   16384, time:          3us, pool:16384, bud: 0, ord 8:0, 4:0, 0:0
+[ 9035.890351] c0[  T545] ieee80211 phy0: channel num 1
+[ 9035.891471] c3[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -52 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9036.070652] c3[ T1663] ion_system_heap_allocate,tid:1663 , size:   16384, time:          3us, pool:16384, bud: 0, ord 8:0, 4:0, 0:0
+[ 9036.094582] c4[ T1663] ion_system_heap_allocate,tid:1663 , size:   16384, time:          5us, pool:16384, bud: 0, ord 8:0, 4:0, 0:0
+[ 9036.515984] c5[ T1663] ion_system_heap_allocate,tid:1663 , size:   16384, time:          4us, pool:16384, bud: 0, ord 8:0, 4:0, 0:0
+[ 9036.611434] c2[ T1663] ion_system_heap_allocate,tid:1663 , size:   16384, time:          3us, pool:16384, bud: 0, ord 8:0, 4:0, 0:0
+[ 9036.695505] c2[ T1663] ion_system_heap_allocate,tid:1663 , size:   16384, time:          3us, pool:16384, bud: 0, ord 8:0, 4:0, 0:0
+[ 9036.755090] c3[ T1663] ion_system_heap_allocate,tid:1663 , size:   16384, time:          4us, pool:16384, bud: 0, ord 8:0, 4:0, 0:0
+[ 9036.928683] c5[ T1663] ion_system_heap_allocate,tid:1663 , size:   16384, time:          5us, pool:16384, bud: 0, ord 8:0, 4:0, 0:0
+[ 9038.010002] c0[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9038.011790] c0[    C0] WCN SLP_MGR: irq_cnt7710!!
+[ 9038.011878] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9038.011926] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9038.095186] c2[    C2] [drm] sprd_dpu_disable_vblank()
+[ 9038.095907] c0[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9038.108482] c0[    C0] WCN SLP_MGR: irq_cnt7711!!
+[ 9038.109146] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9038.109558] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9038.425821] c3[  T687] wlan sprd-marlin3:wlan wlan0: sc2355_scan n_channels 37
+[ 9038.425838] c3[  T687] ieee80211 phy0: random mac feature disabled
+[ 9038.455245] c2[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  1, signal -8200, freq 2412
+[ 9038.472593] c2[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  2, signal -3300, freq 2417
+[ 9038.489274] c2[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -3600, freq 2417
+[ 9038.508108] c2[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5600, freq 5180
+[ 9038.527574] c2[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -3200, freq 2417
+[ 9038.547434] c2[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -3200, freq 2417
+[ 9038.557681] c2[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -3600, freq 2417
+[ 9038.610558] c2[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5500, freq 5180
+[ 9038.658238] c2[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  4, signal -7500, freq 2427
+[ 9038.667707] c2[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  4, signal -8700, freq 2427
+[ 9038.701339] c2[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  5, signal -8600, freq 2432
+[ 9038.712834] c2[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4800, freq 5180
+[ 9038.744004] c2[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  5, signal -8600, freq 2432
+[ 9038.763709] c2[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  5, signal -8500, freq 2432
+[ 9038.815310] c2[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9038.863949] c0[T12016] sc27xx-fgu 32100000.spi:pmic@0:fgu@c00: not satisfy power on start condition.
+[ 9038.863969] c0[T12016] sc27xx-fgu 32100000.spi:pmic@0:fgu@c00: init_cap = 991, init_mah = 0, init_clbcnt = 49732344, cur_clbcnt = 45167249, normal_cap = 900, data->cc_mah = -455, Tbat = 319, uusoc_vbat = 0, uusoc_mah = 0, cur_1000ma_adc = 1394, track_sts = 1
+[ 9038.891490] c5[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -6400, freq 2452
+[ 9038.900804] c4[  T545] ieee80211 phy0: channel num 1
+[ 9038.904928] c1[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -53 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9038.917982] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9038.965826] c5[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -6600, freq 2452
+[ 9038.985581] c5[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -6700, freq 2452
+[ 9039.004480] c5[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7500, freq 2452
+[ 9039.020308] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9039.043025] c5[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -6500, freq 2452
+[ 9039.123337] c5[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9039.123781] c5[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 36, signal -8600, freq 5180
+[ 9039.124207] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9039.134921] c5[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9039.135862] c5[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 36, signal -8500, freq 5180
+[ 9039.153635] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -8600, freq 5180
+[ 9039.335322] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4800, freq 5180
+[ 9039.420112] c2[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 60, signal -7100, freq 5300
+[ 9039.431155] c2[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 60, signal -7100, freq 5300
+[ 9039.451523] c5[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 60, signal -7100, freq 5300
+[ 9039.459359] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 60, signal -7100, freq 5300
+[ 9039.463300] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 60, signal -7100, freq 5300
+[ 9039.634548] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4700, freq 5180
+[ 9039.942529] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9040.044050] c2[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9040.146390] c2[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5400, freq 5180
+[ 9040.249872] c2[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5600, freq 5180
+[ 9040.351604] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5700, freq 5180
+[ 9040.411972] c5[T12320] wlan sprd-marlin3:wlan wlan0: sprd_report_scan_done scan is Done
+[ 9040.412023] c5[T12320] wlan sprd-marlin3:wlan wlan0: cmdevt_report_scan_done_evt got 40 BSSes
+[ 9040.412736] c4[ T1220] wlan sprd-marlin3:wlan wlan0: sc2355_dump_survey, idx 0
+[ 9040.412747] c4[ T1220] wlan sprd-marlin3:wlan wlan0: sc2355_dump_survey, survey_cnt 0
+[ 9040.431662] c1[  T545] ieee80211 phy0: channel num 1
+[ 9040.455154] c0[  T599] [drm] sprd_dpu_enable_vblank()
+[ 9040.511775] c0[ T1663] ion_system_heap_allocate,tid:1663 , size:    4096, time:          3us, pool:4096, bud: 0, ord 8:0, 4:0, 0:0
+[ 9040.516669] c0[ T1663] ion_system_heap_allocate,tid:1663 , size:    4096, time:          3us, pool:4096, bud: 0, ord 8:0, 4:0, 0:0
+[ 9040.519295] c0[ T1663] ion_system_heap_allocate,tid:1663 , size:    4096, time:          2us, pool:4096, bud: 0, ord 8:0, 4:0, 0:0
+[ 9040.521881] c0[ T1663] ion_system_heap_allocate,tid:1663 , size:    4096, time:          2us, pool:4096, bud: 0, ord 8:0, 4:0, 0:0
+[ 9040.523790] c4[ T1663] ion_system_heap_allocate,tid:1663 , size:    4096, time:          3us, pool:4096, bud: 0, ord 8:0, 4:0, 0:0
+[ 9040.525483] c4[ T1663] ion_system_heap_allocate,tid:1663 , size:    4096, time:          3us, pool:4096, bud: 0, ord 8:0, 4:0, 0:0
+[ 9040.527549] c3[ T1663] ion_system_heap_allocate,tid:1663 , size:  126976, time:         14us, pool:110592, bud: 16384, ord 8:0, 4:0, 0:4
+[ 9040.555732] c4[ T1663] ion_system_heap_allocate,tid:1663 , size:  126976, time:         25us, pool:65536, bud: 61440, ord 8:0, 4:0, 0:15
+[ 9040.572236] c4[ T1663] ion_system_heap_allocate,tid:1663 , size:  126976, time:         18us, pool:110592, bud: 16384, ord 8:0, 4:0, 0:4
+[ 9041.139107] c3[  T919] sprd-sensor sprd-sensorhub: buf=77 0 66667 0
+[ 9041.139107] c3[  T919] 
+[ 9041.139119] c3[  T919] sprd-sensor sprd-sensorhub: handle = 77, rate = 66667, batch_latency = 0
+[ 9041.158546] c0[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9041.159953] c0[    C0] WCN SLP_MGR: irq_cnt7712!!
+[ 9041.160050] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9041.160089] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9041.187627] c4[ T1663] ion_system_heap_allocate,tid:1663 , size: 1249280, time:         18us, pool:1245184, bud: 4096, ord 8:0, 4:0, 0:1
+[ 9041.188480] c4[ T1663] ion_system_heap_allocate,tid:1663 , size: 1249280, time:         18us, pool:1245184, bud: 4096, ord 8:0, 4:0, 0:1
+[ 9041.189084] c4[ T1663] ion_system_heap_allocate,tid:1663 , size: 1249280, time:         19us, pool:1245184, bud: 4096, ord 8:0, 4:0, 0:1
+[ 9041.202558] c2[ T1663] ion_system_heap_allocate,tid:1663 , size: 1249280, time:         43us, pool:1048576, bud: 200704, ord 8:0, 4:3, 0:1
+[ 9041.220801] c5[ T1663] ion_system_heap_allocate,tid:1663 , size: 1228800, time:         31us, pool:1183744, bud: 45056, ord 8:0, 4:0, 0:11
+[ 9041.241162] c3[ T1663] ion_system_heap_allocate,tid:1663 , size: 1249280, time:         18us, pool:1249280, bud: 0, ord 8:0, 4:0, 0:0
+[ 9041.258412] c3[ T1663] ion_system_heap_allocate,tid:1663 , size: 1249280, time:         19us, pool:1249280, bud: 0, ord 8:0, 4:0, 0:0
+[ 9041.425111] c0[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9041.589490] c0[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9041.614559] c7[  T384] ap watchdog sprd_wdt_fiq start: timeout = 40, pretimeout = 20
+[ 9041.614561] c7[  T384] sprd_wdt: sprd wdt load value timeout =40, pretimeout =20
+[ 9041.921818] c2[  T545] ieee80211 phy0: channel num 1
+[ 9041.923234] c1[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -52 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9042.054729] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9042.056546] c0[    C0] WCN SLP_MGR: irq_cnt7713!!
+[ 9042.057231] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9042.057529] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9042.197761] c4[T11704] WCN BASE: tx:at+loopcheck=4680135,13728
+[ 9042.197761] c4[T11704] 
+[ 9042.210055] c4[T11704] WCN BASE: mdbg_tx_cb, chn:0
+[ 9042.210789] c1[  T373] WCN BASE: rx:loopcheck_ack:ap_send=4680135,cp2_bootup=13728,cp2_send=9042235
+[ 9042.210789] c1[  T373] 
+[ 9042.210879] c0[    C0] WCN SLP_MGR: irq_cnt7714!!
+[ 9042.211407] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9042.211702] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9042.613981] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9043.225918] c3[  T288] type=1400 audit(1794174080.885:1643): avc: denied { read } for comm="ndroid.systemui" name="temp" dev="sysfs" ino=14047 scontext=u:r:platform_app:s0:c512,c768 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1 app=com.android.systemui
+[ 9043.226128] c3[  T288] type=1400 audit(1794174080.885:1644): avc: denied { open } for comm="ndroid.systemui" path="/sys/devices/virtual/thermal/thermal_zone1/temp" dev="sysfs" ino=14047 scontext=u:r:platform_app:s0:c512,c768 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1 app=com.android.systemui
+[ 9043.226285] c3[  T288] type=1400 audit(1794174080.885:1645): avc: denied { getattr } for comm="ndroid.systemui" path="/sys/devices/virtual/thermal/thermal_zone1/temp" dev="sysfs" ino=14047 scontext=u:r:platform_app:s0:c512,c768 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1 app=com.android.systemui
+[ 9043.227962] c3[  T288] type=1400 audit(1794174080.889:1646): avc: denied { write } for comm="ndroid.systemui" name="pwm1" dev="sysfs" ino=44997 scontext=u:r:platform_app:s0:c512,c768 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1 app=com.android.systemui
+[ 9044.536842] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9044.538591] c0[    C0] WCN SLP_MGR: irq_cnt7715!!
+[ 9044.539272] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9044.539864] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9044.869148] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9044.943328] c1[  T545] ieee80211 phy0: channel num 1
+[ 9044.945760] c1[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -50 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9045.473976] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9045.476153] c0[    C0] WCN SLP_MGR: irq_cnt7716!!
+[ 9045.476837] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9045.477231] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9045.581648] c0[ T1663] ion_system_heap_allocate,tid:1663 , size:   45056, time:          8us, pool:45056, bud: 0, ord 8:0, 4:0, 0:0
+[ 9045.890427] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9046.028310] c1[  T545] ieee80211 phy0: channel num 1
+[ 9046.412324] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9046.414031] c0[    C0] WCN SLP_MGR: irq_cnt7717!!
+[ 9046.414182] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9046.414268] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9047.020265] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9047.318296] c0[T11702] WCN BASE: tx:at+loopcheck=4685255,13728
+[ 9047.318296] c0[T11702] 
+[ 9047.323384] c0[T11702] WCN BASE: mdbg_tx_cb, chn:0
+[ 9047.323825] c2[  T373] WCN BASE: rx:loopcheck_ack:ap_send=4685255,cp2_bootup=13728,cp2_send=9047348
+[ 9047.323825] c2[  T373] 
+[ 9047.334507] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9047.336480] c0[    C0] WCN SLP_MGR: irq_cnt7718!!
+[ 9047.337180] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9047.337579] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9047.953284] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9047.965987] c0[    C0] WCN SLP_MGR: irq_cnt7719!!
+[ 9047.967632] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9047.968221] c3[  T374] WCN SLP_MGR: forbid slp module-0x1
+[ 9047.971170] c0[    C0] WCN SLP_MGR: irq_cnt7720!!
+[ 9047.971532] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9047.972065] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9047.972644] c3[  T374] WCN SLP_MGR: forbid slp module-0x1
+[ 9047.975261] c1[  T545] ieee80211 phy0: channel num 1
+[ 9047.975519] c0[    C0] WCN SLP_MGR: irq_cnt7721!!
+[ 9047.976352] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9047.976459] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9047.976976] c3[  T374] WCN SLP_MGR: forbid slp module-0x1
+[ 9047.979876] c0[    C0] WCN SLP_MGR: irq_cnt7722!!
+[ 9047.980200] c1[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -49 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9047.980721] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9047.981287] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9048.080782] c0[T11702] charger-manager charger-manager: cant not get input_cur.
+[ 9048.083757] c0[T11702] charger-manager charger-manager: vbat: 3881000, vbat_avg: 3876000, OCV: 3938664, ibat: -424000, ibat_avg: -455000, ibus: 0, vbus: 0, msoc: 924, chg_sts: 2, frce_full: 0, chg_lmt_cur: 0, inpt_lmt_cur: 0, chgr_type: 0, Tboard: 374, Tbatt: 319, thm_cur: -22, thm_pwr: 0, is_fchg: 0, fchg_en: 0, tflush: 16, tperiod: 16
+[ 9048.083767] c0[T11702] charger-manager charger-manager: new_uisoc = 924, old_uisoc = 924
+[ 9048.445069] c1[  T687] wlan sprd-marlin3:wlan wlan0: sc2355_scan n_channels 37
+[ 9048.445081] c1[  T687] ieee80211 phy0: random mac feature disabled
+[ 9048.457905] c0[    C0] WCN SLP_MGR: irq_cnt7723!!
+[ 9048.459356] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9048.459491] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9048.460868] c0[    C0] WCN SLP_MGR: irq_cnt7724!!
+[ 9048.461548] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9048.462008] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9048.474931] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  1, signal -8500, freq 2412
+[ 9048.479246] c4[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  1, signal -8500, freq 2412
+[ 9048.508234] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  2, signal -3800, freq 2417
+[ 9048.514174] c4[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -3800, freq 2417
+[ 9048.543413] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9048.560646] c4[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -3200, freq 2417
+[ 9048.584467] c4[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -3100, freq 2417
+[ 9048.654817] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9048.742346] c4[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  4, signal -7700, freq 2427
+[ 9048.748130] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9048.859617] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9048.973918] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  9, signal -7700, freq 2452
+[ 9048.985795] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  9, signal -7300, freq 2452
+[ 9048.998543] c4[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7500, freq 2452
+[ 9049.022478] c4[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7600, freq 2452
+[ 9049.024907] c4[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7600, freq 2452
+[ 9049.039590] c4[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7600, freq 2452
+[ 9049.042440] c4[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7200, freq 2452
+[ 9049.044987] c4[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7500, freq 2452
+[ 9049.166601] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9049.172016] c4[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9049.192273] c4[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9049.211564] c4[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9049.474229] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9049.494539] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 60, signal -7200, freq 5300
+[ 9049.498407] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 60, signal -7200, freq 5300
+[ 9049.614586] c7[  T384] ap watchdog sprd_wdt_fiq start: timeout = 40, pretimeout = 20
+[ 9049.614589] c7[  T384] sprd_wdt: sprd wdt load value timeout =40, pretimeout =20
+[ 9049.781226] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9050.088393] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9050.334150] c4[T12028] wlan sprd-marlin3:wlan wlan0: sprd_report_scan_done scan is Done
+[ 9050.334206] c4[T12028] wlan sprd-marlin3:wlan wlan0: cmdevt_report_scan_done_evt got 28 BSSes
+[ 9050.334888] c0[ T1220] wlan sprd-marlin3:wlan wlan0: sc2355_dump_survey, idx 0
+[ 9050.334898] c0[ T1220] wlan sprd-marlin3:wlan wlan0: sc2355_dump_survey, survey_cnt 0
+[ 9050.335111] c1[  T581] tx_work_queue: 3 callbacks suppressed
+[ 9050.335115] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9050.337035] c0[    C0] WCN SLP_MGR: irq_cnt7725!!
+[ 9050.337214] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9050.337305] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9050.348464] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9050.352081] c0[    C0] WCN SLP_MGR: irq_cnt7726!!
+[ 9050.353026] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9050.353278] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9050.354527] c0[    C0] WCN SLP_MGR: irq_cnt7727!!
+[ 9050.354542] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9050.354679] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9050.355134] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9050.357122] c0[    C0] WCN SLP_MGR: irq_cnt7728!!
+[ 9050.357625] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9050.357641] c4[  T545] ieee80211 phy0: channel num 1
+[ 9050.357717] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9050.895186] c0[    C0] [drm] sprd_dpu_disable_vblank()
+[ 9050.987043] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9050.998494] c0[    C0] WCN SLP_MGR: irq_cnt7729!!
+[ 9051.000137] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9051.000528] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9051.003157] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9051.004508] c4[  T545] ieee80211 phy0: channel num 1
+[ 9051.005960] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9051.009252] c0[    C0] WCN SLP_MGR: irq_cnt7730!!
+[ 9051.009518] c3[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -49 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9051.009797] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9051.009972] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9052.437722] c0[T11702] WCN BASE: tx:at+loopcheck=4690375,13728
+[ 9052.437722] c0[T11702] 
+[ 9052.450309] c0[    C0] WCN SLP_MGR: irq_cnt7731!!
+[ 9052.450500] c0[T11702] WCN BASE: mdbg_tx_cb, chn:0
+[ 9052.450730] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9052.451143] c3[  T374] WCN SLP_MGR: forbid slp module-0x2
+[ 9052.451322] c2[  T373] WCN BASE: rx:loopcheck_ack:ap_send=4690375,cp2_bootup=13728,cp2_send=9052476
+[ 9052.451322] c2[  T373] 
+[ 9052.451340] c0[    C0] WCN SLP_MGR: irq_cnt7732!!
+[ 9052.452201] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9052.452767] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9052.644854] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9052.657352] c0[    C0] WCN SLP_MGR: irq_cnt7733!!
+[ 9052.658064] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9052.658460] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9052.842133] c0[  T599] [drm] sprd_dpu_enable_vblank()
+[ 9053.967796] c0[T12016] sc27xx-fgu 32100000.spi:pmic@0:fgu@c00: not satisfy power on start condition.
+[ 9053.967819] c0[T12016] sc27xx-fgu 32100000.spi:pmic@0:fgu@c00: init_cap = 991, init_mah = 0, init_clbcnt = 49732344, cur_clbcnt = 45144671, normal_cap = 900, data->cc_mah = -457, Tbat = 319, uusoc_vbat = 0, uusoc_mah = 0, cur_1000ma_adc = 1394, track_sts = 1
+[ 9054.031391] c0[  T545] ieee80211 phy0: channel num 1
+[ 9054.034447] c3[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -50 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9054.112750] c4[  T942] systemserver cmd2 , get para: ( 50)
+[ 9057.048860] c3[  T545] ieee80211 phy0: channel num 1
+[ 9057.052281] c3[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -50 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9057.557551] c3[T11508] WCN BASE: tx:at+loopcheck=4695495,13728
+[ 9057.557551] c3[T11508] 
+[ 9057.567293] c3[T11508] WCN BASE: mdbg_tx_cb, chn:0
+[ 9057.568320] c2[  T373] WCN BASE: rx:loopcheck_ack:ap_send=4695495,cp2_bootup=13728,cp2_send=9057592
+[ 9057.568320] c2[  T373] 
+[ 9057.568615] c3[T11508] WCN BASE: loopcheck(826) 2026-11-08_21:41:35.232852451
+[ 9057.614589] c7[  T384] ap watchdog sprd_wdt_fiq start: timeout = 40, pretimeout = 20
+[ 9057.614592] c7[  T384] sprd_wdt: sprd wdt load value timeout =40, pretimeout =20
+[ 9058.489927] c3[  T687] wlan sprd-marlin3:wlan wlan0: sc2355_scan n_channels 37
+[ 9058.489944] c3[  T687] ieee80211 phy0: random mac feature disabled
+[ 9058.510145] c2[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  1, signal -8400, freq 2412
+[ 9058.542713] c2[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  2, signal -3300, freq 2417
+[ 9058.553142] c2[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -3300, freq 2417
+[ 9058.578245] c2[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9058.597753] c2[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -3300, freq 2417
+[ 9058.618002] c2[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -3800, freq 2417
+[ 9058.623306] c2[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -3800, freq 2417
+[ 9058.680605] c2[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9058.756575] c2[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  2, signal -3400, freq 2417
+[ 9058.766456] c2[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  4, signal -7800, freq 2427
+[ 9058.783013] c2[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9058.805519] c2[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  4, signal -7900, freq 2427
+[ 9058.894584] c2[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9058.987309] c0[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9059.061329] c0[T11555] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7600, freq 2452
+[ 9059.072600] c0[T11555] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7500, freq 2452
+[ 9059.074863] c0[T11555] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7700, freq 2452
+[ 9059.077401] c0[T11555] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7400, freq 2452
+[ 9059.090425] c0[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9059.112883] c0[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7400, freq 2452
+[ 9059.122962] c0[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  9, signal -7500, freq 2452
+[ 9059.157022] c0[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7400, freq 2452
+[ 9059.192544] c0[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9059.245037] c0[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9059.265205] c0[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9059.295247] c0[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9059.406358] c0[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9059.508984] c0[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9059.611267] c0[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9059.918684] c0[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9060.072934] c4[  T545] ieee80211 phy0: channel num 1
+[ 9060.076058] c2[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -50 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9060.216918] c0[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9060.328201] c0[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9060.430573] c0[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9060.532942] c0[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9060.625732] c0[T11555] wlan sprd-marlin3:wlan wlan0: sprd_report_scan_done scan is Done
+[ 9060.625779] c0[T11555] wlan sprd-marlin3:wlan wlan0: cmdevt_report_scan_done_evt got 34 BSSes
+[ 9060.626403] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9060.626667] c3[ T1220] wlan sprd-marlin3:wlan wlan0: sc2355_dump_survey, idx 0
+[ 9060.626677] c3[ T1220] wlan sprd-marlin3:wlan wlan0: sc2355_dump_survey, survey_cnt 0
+[ 9060.631100] c0[    C0] WCN SLP_MGR: irq_cnt7734!!
+[ 9060.631342] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9060.631438] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9060.638838] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9060.642754] c0[    C0] WCN SLP_MGR: irq_cnt7735!!
+[ 9060.644277] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9060.644665] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9060.645807] c0[    C0] WCN SLP_MGR: irq_cnt7736!!
+[ 9060.646323] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9060.646412] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9060.646871] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9060.650525] c0[    C0] WCN SLP_MGR: irq_cnt7737!!
+[ 9060.651214] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9060.651606] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9060.653557] c0[    C0] WCN SLP_MGR: irq_cnt7738!!
+[ 9060.653688] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9060.653765] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9060.653818] c2[  T545] ieee80211 phy0: channel num 1
+[ 9061.370881] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9062.359749] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9062.371816] c0[    C0] WCN SLP_MGR: irq_cnt7739!!
+[ 9062.372698] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9062.373272] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9062.677725] c3[T11508] WCN BASE: tx:at+loopcheck=4700615,13728
+[ 9062.677725] c3[T11508] 
+[ 9062.688726] c3[T11508] WCN BASE: mdbg_tx_cb, chn:0
+[ 9062.690128] c1[  T373] WCN BASE: rx:loopcheck_ack:ap_send=4700615,cp2_bootup=13728,cp2_send=9062713
+[ 9062.690128] c1[  T373] 
+[ 9062.690681] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9063.087785] c4[  T545] ieee80211 phy0: channel num 1
+[ 9063.091881] c3[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -49 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9063.183826] c3[T11508] charger-manager charger-manager: cant not get input_cur.
+[ 9063.187053] c3[T11508] charger-manager charger-manager: vbat: 3878000, vbat_avg: 3876000, OCV: 3940560, ibat: -460000, ibat_avg: -469000, ibus: 0, vbus: 0, msoc: 923, chg_sts: 2, frce_full: 0, chg_lmt_cur: 0, inpt_lmt_cur: 0, chgr_type: 0, Tboard: 369, Tbatt: 319, thm_cur: -22, thm_pwr: 0, is_fchg: 0, fchg_en: 0, tflush: 31, tperiod: 15
+[ 9063.187064] c3[T11508] charger-manager charger-manager: new_uisoc = 923, old_uisoc = 924
+[ 9063.187080] c3[T11508] sc27xx-fgu 32100000.spi:pmic@0:fgu@c00: eddyhua sc27xx_fgu_set_property 2506 last_cap=923, normal_cap=899
+[ 9065.117971] c5[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9065.120023] c0[    C0] WCN SLP_MGR: irq_cnt7740!!
+[ 9065.121271] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9065.121852] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9065.466247] c0[    C0] WCN SLP_MGR: irq_cnt7741!!
+[ 9065.467133] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9065.467718] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9065.614614] c7[  T384] ap watchdog sprd_wdt_fiq start: timeout = 40, pretimeout = 20
+[ 9065.614616] c7[  T384] sprd_wdt: sprd wdt load value timeout =40, pretimeout =20
+[ 9065.808100] c5[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9066.105236] c3[  T545] ieee80211 phy0: channel num 1
+[ 9066.108599] c3[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -49 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9067.287542] c5[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9067.289465] c0[    C0] WCN SLP_MGR: irq_cnt7742!!
+[ 9067.290711] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9067.291283] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9067.608265] c5[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9067.798550] c0[T11702] WCN BASE: tx:at+loopcheck=4705736,13728
+[ 9067.798550] c0[T11702] 
+[ 9067.807996] c0[T11702] WCN BASE: mdbg_tx_cb, chn:0
+[ 9067.808745] c1[  T373] WCN BASE: rx:loopcheck_ack:ap_send=4705736,cp2_bootup=13728,cp2_send=9067833
+[ 9067.808745] c1[  T373] 
+[ 9068.231415] c5[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9068.233472] c0[    C0] WCN SLP_MGR: irq_cnt7743!!
+[ 9068.234721] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9068.235293] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9068.534066] c3[  T687] wlan sprd-marlin3:wlan wlan0: sc2355_scan n_channels 37
+[ 9068.534083] c3[  T687] ieee80211 phy0: random mac feature disabled
+[ 9068.534456] c5[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9068.547169] c0[    C0] WCN SLP_MGR: irq_cnt7744!!
+[ 9068.548638] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9068.549036] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9068.550841] c0[    C0] WCN SLP_MGR: irq_cnt7745!!
+[ 9068.551116] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9068.551243] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9068.551526] c5[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9068.554936] c0[    C0] WCN SLP_MGR: irq_cnt7746!!
+[ 9068.556827] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9068.557409] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9068.578053] c2[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  2, signal -3600, freq 2417
+[ 9068.589913] c2[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  1, signal -8400, freq 2412
+[ 9068.613427] c2[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9068.630238] c2[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -3700, freq 2417
+[ 9068.650309] c2[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -3700, freq 2417
+[ 9068.815579] c0[    C0] [drm] sprd_dpu_disable_vblank()
+[ 9068.827587] c2[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9069.016711] c5[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7500, freq 2452
+[ 9069.072095] c0[T12016] sc27xx-fgu 32100000.spi:pmic@0:fgu@c00: not satisfy power on start condition.
+[ 9069.072114] c0[T12016] sc27xx-fgu 32100000.spi:pmic@0:fgu@c00: init_cap = 991, init_mah = 0, init_clbcnt = 49732344, cur_clbcnt = 45125137, normal_cap = 899, data->cc_mah = -459, Tbat = 319, uusoc_vbat = 0, uusoc_mah = 0, cur_1000ma_adc = 1394, track_sts = 1
+[ 9069.115045] c5[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9069.117840] c5[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9069.119692] c4[  T545] ieee80211 phy0: channel num 1
+[ 9069.120929] c5[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9069.122813] c5[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -49 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9069.125190] c5[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9069.126983] c5[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9069.158204] c5[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  9, signal -7900, freq 2452
+[ 9069.166002] c5[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9069.186444] c5[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9069.227424] c5[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9069.339076] c5[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9069.432235] c5[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9069.544099] c5[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4800, freq 5180
+[ 9069.564646] c5[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 60, signal -7100, freq 5300
+[ 9069.568277] c5[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 60, signal -7100, freq 5300
+[ 9069.641622] c5[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9069.740919] c2[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4800, freq 5180
+[ 9069.841787] c5[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4800, freq 5180
+[ 9069.946362] c5[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9070.047022] c5[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9070.158347] c5[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9070.253378] c5[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9070.355126] c2[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9070.456413] c2[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9070.558970] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9070.574530] c1[  T599] [drm] sprd_dpu_enable_vblank()
+[ 9070.661301] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9070.711584] c5[T12320] wlan sprd-marlin3:wlan wlan0: sprd_report_scan_done scan is Done
+[ 9070.711629] c5[T12320] wlan sprd-marlin3:wlan wlan0: cmdevt_report_scan_done_evt got 28 BSSes
+[ 9070.712519] c3[ T1220] wlan sprd-marlin3:wlan wlan0: sc2355_dump_survey, idx 0
+[ 9070.712529] c3[ T1220] wlan sprd-marlin3:wlan wlan0: sc2355_dump_survey, survey_cnt 0
+[ 9070.728985] c5[  T545] ieee80211 phy0: channel num 1
+[ 9072.142752] c5[  T545] ieee80211 phy0: channel num 1
+[ 9072.145578] c5[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -50 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9072.918145] c0[T11702] WCN BASE: tx:at+loopcheck=4710855,13728
+[ 9072.918145] c0[T11702] 
+[ 9072.927509] c0[T11702] WCN BASE: mdbg_tx_cb, chn:0
+[ 9072.928312] c1[  T373] WCN BASE: rx:loopcheck_ack:ap_send=4710855,cp2_bootup=13728,cp2_send=9072952
+[ 9072.928312] c1[  T373] 
+[ 9073.614612] c7[  T384] ap watchdog sprd_wdt_fiq start: timeout = 40, pretimeout = 20
+[ 9073.614615] c7[  T384] sprd_wdt: sprd wdt load value timeout =40, pretimeout =20
+[ 9075.168124] c5[  T545] ieee80211 phy0: channel num 1
+[ 9075.171759] c5[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -50 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9076.359780] c4[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9076.361819] c0[    C0] WCN SLP_MGR: irq_cnt7747!!
+[ 9076.362503] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9076.362606] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9076.818775] c4[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9077.141890] c4[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9077.143893] c0[    C0] WCN SLP_MGR: irq_cnt7748!!
+[ 9077.144603] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9077.145005] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9078.037298] c0[T11702] WCN BASE: tx:at+loopcheck=4715975,13728
+[ 9078.037298] c0[T11702] 
+[ 9078.045996] c0[T11702] WCN BASE: mdbg_tx_cb, chn:0
+[ 9078.046632] c1[  T373] WCN BASE: rx:loopcheck_ack:ap_send=4715975,cp2_bootup=13728,cp2_send=9078071
+[ 9078.046632] c1[  T373] 
+[ 9078.048065] c4[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9078.191194] c5[  T545] ieee80211 phy0: channel num 1
+[ 9078.193429] c5[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -50 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9078.288383] c0[T11702] charger-manager charger-manager: cant not get input_cur.
+[ 9078.289960] c0[T11702] charger-manager charger-manager: vbat: 3894000, vbat_avg: 3888000, OCV: 3934120, ibat: -295000, ibat_avg: -349000, ibus: 0, vbus: 0, msoc: 923, chg_sts: 2, frce_full: 0, chg_lmt_cur: 0, inpt_lmt_cur: 0, chgr_type: 0, Tboard: 368, Tbatt: 319, thm_cur: -22, thm_pwr: 0, is_fchg: 0, fchg_en: 0, tflush: 46, tperiod: 15
+[ 9078.289970] c0[T11702] charger-manager charger-manager: new_uisoc = 923, old_uisoc = 923
+[ 9078.577759] c4[  T687] wlan sprd-marlin3:wlan wlan0: sc2355_scan n_channels 37
+[ 9078.577775] c4[  T687] ieee80211 phy0: random mac feature disabled
+[ 9078.588848] c3[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  1, signal -8300, freq 2412
+[ 9078.608713] c3[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  1, signal -8400, freq 2412
+[ 9078.612334] c3[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  2, signal -4900, freq 2417
+[ 9078.630929] c3[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -4900, freq 2417
+[ 9078.647832] c3[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9078.686952] c3[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -3300, freq 2417
+[ 9078.759504] c3[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9078.792553] c3[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  4, signal -7700, freq 2427
+[ 9078.852743] c3[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9078.880605] c3[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  5, signal -8600, freq 2432
+[ 9078.964730] c3[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9078.988755] c3[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  9, signal -7700, freq 2452
+[ 9079.036728] c3[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7500, freq 2452
+[ 9079.055594] c0[    C0] [drm] sprd_dpu_disable_vblank()
+[ 9079.058049] c3[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9079.102484] c3[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7700, freq 2452
+[ 9079.121967] c3[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7400, freq 2452
+[ 9079.124479] c3[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7600, freq 2452
+[ 9079.127377] c3[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7500, freq 2452
+[ 9079.160423] c3[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9079.262854] c3[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9079.278773] c3[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9079.299210] c3[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9079.374050] c3[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9079.476726] c3[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9079.570046] c3[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9079.681263] c3[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9079.701905] c3[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 60, signal -7100, freq 5300
+[ 9079.705852] c3[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 60, signal -7100, freq 5300
+[ 9079.783892] c3[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9079.886183] c3[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9079.979263] c3[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4800, freq 5180
+[ 9080.082053] c3[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4800, freq 5180
+[ 9080.193597] c3[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4700, freq 5180
+[ 9080.389056] c0[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9080.493043] c0[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9080.593904] c0[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9080.705390] c0[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4900, freq 5180
+[ 9080.788209] c0[T12320] wlan sprd-marlin3:wlan wlan0: sprd_report_scan_done scan is Done
+[ 9080.788257] c0[T12320] wlan sprd-marlin3:wlan wlan0: cmdevt_report_scan_done_evt got 37 BSSes
+[ 9080.788946] c0[ T1220] wlan sprd-marlin3:wlan wlan0: sc2355_dump_survey, idx 0
+[ 9080.788956] c0[ T1220] wlan sprd-marlin3:wlan wlan0: sc2355_dump_survey, survey_cnt 0
+[ 9080.813482] c5[  T545] ieee80211 phy0: channel num 1
+[ 9081.030857] c1[  T599] [drm] sprd_dpu_enable_vblank()
+[ 9081.205312] c5[  T545] ieee80211 phy0: channel num 1
+[ 9081.208445] c4[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -50 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9081.614588] c7[  T384] ap watchdog sprd_wdt_fiq start: timeout = 40, pretimeout = 20
+[ 9081.614591] c7[  T384] sprd_wdt: sprd wdt load value timeout =40, pretimeout =20
+[ 9083.157306] c0[T11702] WCN BASE: tx:at+loopcheck=4721095,13728
+[ 9083.157306] c0[T11702] 
+[ 9083.157511] c0[T11702] WCN BASE: mdbg_tx_cb, chn:0
+[ 9083.158312] c3[  T373] WCN BASE: rx:loopcheck_ack:ap_send=4721095,cp2_bootup=13728,cp2_send=9083182
+[ 9083.158312] c3[  T373] 
+[ 9084.118973] c4[  T942] systemserver cmd2 , get para: ( 50)
+[ 9084.175956] c0[T12016] sc27xx-fgu 32100000.spi:pmic@0:fgu@c00: not satisfy power on start condition.
+[ 9084.175978] c0[T12016] sc27xx-fgu 32100000.spi:pmic@0:fgu@c00: init_cap = 991, init_mah = 0, init_clbcnt = 49732344, cur_clbcnt = 45106266, normal_cap = 899, data->cc_mah = -461, Tbat = 319, uusoc_vbat = 0, uusoc_mah = 0, cur_1000ma_adc = 1394, track_sts = 1
+[ 9084.221939] c4[  T545] ieee80211 phy0: channel num 1
+[ 9084.224819] c4[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -51 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9087.142574] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9087.144143] c0[    C0] WCN SLP_MGR: irq_cnt7749!!
+[ 9087.144983] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9087.145411] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9087.234039] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9087.246468] c0[    C0] WCN SLP_MGR: irq_cnt7750!!
+[ 9087.247920] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9087.248420] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9087.249942] c0[    C0] WCN SLP_MGR: irq_cnt7751!!
+[ 9087.250604] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9087.250828] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9087.251016] c3[  T374] WCN SLP_MGR: forbid slp module-0x1
+[ 9087.253466] c0[    C0] WCN SLP_MGR: irq_cnt7752!!
+[ 9087.253953] c4[  T545] ieee80211 phy0: channel num 1
+[ 9087.254123] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9087.254505] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9087.255420] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9087.258821] c0[    C0] WCN SLP_MGR: irq_cnt7753!!
+[ 9087.260261] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9087.260648] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9087.262146] c0[    C0] WCN SLP_MGR: irq_cnt7754!!
+[ 9087.262268] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9087.262347] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9087.262682] c4[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -51 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9088.277880] c0[T11702] WCN BASE: tx:at+loopcheck=4726215,13728
+[ 9088.277880] c0[T11702] 
+[ 9088.290482] c0[    C0] WCN SLP_MGR: irq_cnt7755!!
+[ 9088.290599] c0[T11702] WCN BASE: mdbg_tx_cb, chn:0
+[ 9088.290899] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9088.291009] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9088.292728] c0[    C0] WCN SLP_MGR: irq_cnt7756!!
+[ 9088.293139] c1[  T373] WCN BASE: rx:loopcheck_ack:ap_send=4726215,cp2_bootup=13728,cp2_send=9088316
+[ 9088.293139] c1[  T373] 
+[ 9088.293227] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9088.293317] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9088.593470] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9088.618929] c4[  T687] wlan sprd-marlin3:wlan wlan0: sc2355_scan n_channels 37
+[ 9088.618944] c4[  T687] ieee80211 phy0: random mac feature disabled
+[ 9088.683585] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9088.728784] c0[T11555] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -4100, freq 2417
+[ 9088.749057] c0[T11555] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -4200, freq 2417
+[ 9088.750775] c0[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  2, signal -4200, freq 2417
+[ 9088.785585] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9088.861896] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  2, signal -3400, freq 2417
+[ 9088.888159] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9088.992111] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9089.102127] c0[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9089.195610] c0[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9089.299402] c0[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9089.400119] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9089.415524] c5[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9089.435932] c5[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9089.502684] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9089.614207] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9089.614583] c7[  T384] ap watchdog sprd_wdt_fiq start: timeout = 40, pretimeout = 20
+[ 9089.614585] c7[  T384] sprd_wdt: sprd wdt load value timeout =40, pretimeout =20
+[ 9089.716516] c0[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9089.810612] c0[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9089.838573] c5[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 60, signal -7100, freq 5300
+[ 9089.842586] c5[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 60, signal -7200, freq 5300
+[ 9089.915887] c5[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9090.014469] c5[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9090.117143] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9090.221403] c5[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9090.272514] c5[  T545] ieee80211 phy0: channel num 1
+[ 9090.275864] c4[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -52 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9090.321835] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9090.433131] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9090.526566] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5000, freq 5180
+[ 9090.637871] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9090.884346] c5[T12320] wlan sprd-marlin3:wlan wlan0: sprd_report_scan_done scan is Done
+[ 9090.884394] c5[T12320] wlan sprd-marlin3:wlan wlan0: cmdevt_report_scan_done_evt got 28 BSSes
+[ 9090.885271] c4[ T1220] wlan sprd-marlin3:wlan wlan0: sc2355_dump_survey, idx 0
+[ 9090.885282] c4[ T1220] wlan sprd-marlin3:wlan wlan0: sc2355_dump_survey, survey_cnt 0
+[ 9090.902541] c4[  T545] ieee80211 phy0: channel num 1
+[ 9093.289634] c0[  T545] ieee80211 phy0: channel num 1
+[ 9093.293422] c0[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -52 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9093.392425] c4[T11702] charger-manager charger-manager: cant not get input_cur.
+[ 9093.395636] c3[T11508] WCN BASE: tx:at+loopcheck=4731335,13728
+[ 9093.395636] c3[T11508] 
+[ 9093.396345] c3[T11508] WCN BASE: mdbg_tx_cb, chn:0
+[ 9093.396529] c4[T11702] charger-manager charger-manager: vbat: 3888000, vbat_avg: 3888000, OCV: 3936552, ibat: -357000, ibat_avg: -354000, ibus: 0, vbus: 0, msoc: 923, chg_sts: 2, frce_full: 0, chg_lmt_cur: 0, inpt_lmt_cur: 0, chgr_type: 0, Tboard: 361, Tbatt: 321, thm_cur: -22, thm_pwr: 0, is_fchg: 0, fchg_en: 0, tflush: 61, tperiod: 15
+[ 9093.396543] c4[T11702] charger-manager charger-manager: new_uisoc = 923, old_uisoc = 923
+[ 9093.396970] c1[  T373] WCN BASE: rx:loopcheck_ack:ap_send=4731335,cp2_bootup=13728,cp2_send=9093421
+[ 9093.396970] c1[  T373] 
+[ 9096.316779] c0[  T545] ieee80211 phy0: channel num 1
+[ 9096.320069] c0[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -52 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9096.610503] c3[  T288] type=1400 audit(1794174134.269:1647): avc: denied { read } for comm="cat" name="name" dev="sysfs" ino=30190 scontext=u:r:shell:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
+[ 9096.610612] c3[  T288] type=1400 audit(1794174134.269:1648): avc: denied { open } for comm="cat" path="/sys/devices/platform/soc/soc:apb@70000000/70600000.i2c/i2c-3/3-0014/name" dev="sysfs" ino=30190 scontext=u:r:shell:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
+[ 9096.628853] c3[  T288] type=1400 audit(1794174134.289:1649): avc: denied { getattr } for comm="ls" path="/sys/firmware/fdt" dev="sysfs" ino=26611 scontext=u:r:shell:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
+[ 9096.686494] c3[  T288] type=1400 audit(1794174134.337:1650): avc: denied { syslog_read } for comm="dmesg" scontext=u:r:shell:s0 tcontext=u:r:kernel:s0 tclass=system permissive=1
+[ 9097.321213] c0[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9097.322873] c0[    C0] WCN SLP_MGR: irq_cnt7757!!
+[ 9097.323618] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9097.324211] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9097.614592] c7[  T384] ap watchdog sprd_wdt_fiq start: timeout = 40, pretimeout = 20
+[ 9097.614597] c7[  T384] sprd_wdt: sprd wdt load value timeout =40, pretimeout =20
+[ 9097.711990] c0[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9097.973820] c0[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9098.518318] c5[T11508] WCN BASE: tx:at+loopcheck=4736455,13728
+[ 9098.518318] c5[T11508] 
+[ 9098.528172] c5[T11508] WCN BASE: mdbg_tx_cb, chn:0
+[ 9098.528792] c1[  T373] WCN BASE: rx:loopcheck_ack:ap_send=4736455,cp2_bootup=13728,cp2_send=9098552
+[ 9098.528792] c1[  T373] 
+[ 9098.665693] c0[  T687] wlan sprd-marlin3:wlan wlan0: sc2355_scan n_channels 37
+[ 9098.665710] c0[  T687] ieee80211 phy0: random mac feature disabled
+[ 9098.718726] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9098.752628] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  1, signal -8300, freq 2412
+[ 9098.782076] c4[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -3300, freq 2417
+[ 9098.785378] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  2, signal -3100, freq 2417
+[ 9098.821046] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9098.844158] c4[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  4, signal -7700, freq 2427
+[ 9098.877630] c4[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  4, signal -7700, freq 2427
+[ 9098.923239] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9099.034864] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9099.123783] c4[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7900, freq 2452
+[ 9099.128170] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9099.208257] c4[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7700, freq 2452
+[ 9099.210752] c4[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -8100, freq 2452
+[ 9099.230575] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9099.279981] c0[T12016] sc27xx-fgu 32100000.spi:pmic@0:fgu@c00: not satisfy power on start condition.
+[ 9099.280003] c0[T12016] sc27xx-fgu 32100000.spi:pmic@0:fgu@c00: init_cap = 991, init_mah = 0, init_clbcnt = 49732344, cur_clbcnt = 45091531, normal_cap = 899, data->cc_mah = -462, Tbat = 321, uusoc_vbat = 0, uusoc_mah = 0, cur_1000ma_adc = 1394, track_sts = 1
+[ 9099.334383] c2[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9099.337708] c2[  T545] ieee80211 phy0: channel num 1
+[ 9099.340091] c5[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -52 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9099.375924] c2[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9099.396250] c2[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9099.435343] c2[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9099.539385] c2[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9099.649126] c0[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9099.741867] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9099.772262] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 60, signal -7100, freq 5300
+[ 9099.853545] c3[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9099.946887] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9100.051272] c4[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9100.151745] c3[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9100.253993] c0[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9100.357712] c0[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9100.459412] c2[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9100.563044] c2[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9100.672614] c3[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9100.765915] c3[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9100.872398] c3[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9100.969732] c3[T11555] wlan sprd-marlin3:wlan wlan0: sprd_report_scan_done scan is Done
+[ 9100.969777] c3[T11555] wlan sprd-marlin3:wlan wlan0: cmdevt_report_scan_done_evt got 33 BSSes
+[ 9100.970957] c2[ T1220] wlan sprd-marlin3:wlan wlan0: sc2355_dump_survey, idx 0
+[ 9100.970970] c2[ T1220] wlan sprd-marlin3:wlan wlan0: sc2355_dump_survey, survey_cnt 0
+[ 9100.989580] c2[  T545] ieee80211 phy0: channel num 1
+[ 9102.351256] c3[  T545] ieee80211 phy0: channel num 1
+[ 9102.354722] c5[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -51 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9103.637535] c2[T11702] WCN BASE: tx:at+loopcheck=4741575,13728
+[ 9103.637535] c2[T11702] 
+[ 9103.637972] c2[T11702] WCN BASE: mdbg_tx_cb, chn:0
+[ 9103.638540] c3[  T373] WCN BASE: rx:loopcheck_ack:ap_send=4741575,cp2_bootup=13728,cp2_send=9103663
+[ 9103.638540] c3[  T373] 
+[ 9104.935543] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9104.937350] c0[    C0] WCN SLP_MGR: irq_cnt7758!!
+[ 9104.937801] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9104.938387] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9105.332804] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9105.366452] c1[  T545] ieee80211 phy0: channel num 1
+[ 9105.369671] c5[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -51 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9105.614586] c7[  T384] ap watchdog sprd_wdt_fiq start: timeout = 40, pretimeout = 20
+[ 9105.614590] c7[  T384] sprd_wdt: sprd wdt load value timeout =40, pretimeout =20
+[ 9105.674960] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9105.686366] c0[    C0] WCN SLP_MGR: irq_cnt7759!!
+[ 9105.687241] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9105.687824] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9106.116625] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9107.832087] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9107.836995] c0[    C0] WCN SLP_MGR: irq_cnt7760!!
+[ 9107.837682] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9107.838082] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9108.378951] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9108.391961] c0[    C0] WCN SLP_MGR: irq_cnt7761!!
+[ 9108.393199] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9108.393787] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9108.394760] c0[    C0] WCN SLP_MGR: irq_cnt7762!!
+[ 9108.394969] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9108.395045] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9108.395670] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9108.399084] c0[    C0] WCN SLP_MGR: irq_cnt7763!!
+[ 9108.399609] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9108.399708] c3[  T374] WCN SLP_MGR: forbid slp module-0x1
+[ 9108.402741] c5[  T545] ieee80211 phy0: channel num 1
+[ 9108.402752] c0[    C0] WCN SLP_MGR: irq_cnt7764!!
+[ 9108.402902] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9108.402992] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9108.404275] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9108.410039] c5[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -52 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9108.410300] c0[    C0] WCN SLP_MGR: irq_cnt7765!!
+[ 9108.410426] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9108.410503] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9108.495185] c0[    C0] [drm] sprd_dpu_disable_vblank()
+[ 9108.496764] c5[T11508] charger-manager charger-manager: cant not get input_cur.
+[ 9108.500298] c5[T11508] charger-manager charger-manager: vbat: 3891000, vbat_avg: 3890000, OCV: 3936152, ibat: -332000, ibat_avg: -341000, ibus: 0, vbus: 0, msoc: 922, chg_sts: 2, frce_full: 0, chg_lmt_cur: 0, inpt_lmt_cur: 0, chgr_type: 0, Tboard: 360, Tbatt: 322, thm_cur: -22, thm_pwr: 0, is_fchg: 0, fchg_en: 0, tflush: 76, tperiod: 15
+[ 9108.500312] c5[T11508] charger-manager charger-manager: new_uisoc = 922, old_uisoc = 923
+[ 9108.500328] c5[T11508] sc27xx-fgu 32100000.spi:pmic@0:fgu@c00: eddyhua sc27xx_fgu_set_property 2506 last_cap=922, normal_cap=898
+[ 9108.707923] c5[  T687] wlan sprd-marlin3:wlan wlan0: sc2355_scan n_channels 37
+[ 9108.707941] c5[  T687] ieee80211 phy0: random mac feature disabled
+[ 9108.708316] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9108.721303] c0[    C0] WCN SLP_MGR: irq_cnt7766!!
+[ 9108.722433] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9108.722531] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9108.724760] c0[    C0] WCN SLP_MGR: irq_cnt7767!!
+[ 9108.725802] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9108.725889] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9108.725894] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9108.729560] c0[    C0] WCN SLP_MGR: irq_cnt7768!!
+[ 9108.730261] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9108.730339] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9108.753944] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9108.774626] c3[T11555] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  1, signal -8600, freq 2412
+[ 9108.787506] c3[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  1, signal -8500, freq 2412
+[ 9108.816473] c3[T11555] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -3700, freq 2417
+[ 9108.820245] c3[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  2, signal -3700, freq 2417
+[ 9108.836190] c3[T11555] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -3200, freq 2417
+[ 9108.856021] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9108.876856] c5[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -3200, freq 2417
+[ 9108.967590] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9108.981220] c5[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  4, signal -7800, freq 2427
+[ 9109.000299] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  4, signal -7800, freq 2427
+[ 9109.060634] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9109.172232] c3[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9109.251924] c3[T11555] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -8100, freq 2452
+[ 9109.254425] c3[T11555] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -8000, freq 2452
+[ 9109.265327] c3[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9109.298415] c3[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  9, signal -7700, freq 2452
+[ 9109.376781] c3[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9109.430237] c3[T11555] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9109.450021] c3[T11555] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9109.469982] c3[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9109.684165] c3[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9109.991489] c3[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9110.196349] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9110.289628] c3[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9110.394423] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9110.487230] c3[  T288] type=1400 audit(1794174148.145:1651): avc: denied { getattr } for comm=73796E6320737663203335 path="/sys/firmware/fdt" dev="sysfs" ino=26611 scontext=u:r:adbd:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
+[ 9110.493433] c5[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9110.596628] c3[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9110.698966] c3[T11555] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5100, freq 5180
+[ 9110.792173] c3[T11555] wlan sprd-marlin3:wlan wlan0: sprd_report_scan_done scan is Done
+[ 9110.792220] c3[T11555] wlan sprd-marlin3:wlan wlan0: cmdevt_report_scan_done_evt got 29 BSSes
+[ 9110.793123] c5[ T1220] wlan sprd-marlin3:wlan wlan0: sc2355_dump_survey, idx 0
+[ 9110.793133] c5[ T1220] wlan sprd-marlin3:wlan wlan0: sc2355_dump_survey, survey_cnt 0
+[ 9110.809735] c2[  T545] ieee80211 phy0: channel num 1
+[ 9111.323567] c4[  T581] tx_work_queue: 1 callbacks suppressed
+[ 9111.323572] c4[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9111.416564] c4[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9111.427402] c4[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9111.429773] c2[  T545] ieee80211 phy0: channel num 1
+[ 9111.431527] c4[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9111.433518] c0[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -52 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9111.637398] c0[    C0] WCN SLP_MGR: irq_cnt7769!!
+[ 9111.638282] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9111.638867] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9112.151338] c4[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9112.474600] c4[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9112.476131] c0[    C0] WCN SLP_MGR: irq_cnt7770!!
+[ 9112.477368] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9112.477943] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9113.375307] c4[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9113.614587] c7[  T384] ap watchdog sprd_wdt_fiq start: timeout = 40, pretimeout = 20
+[ 9113.614589] c7[  T384] sprd_wdt: sprd wdt load value timeout =40, pretimeout =20
+[ 9113.689045] c5[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9113.690934] c0[    C0] WCN SLP_MGR: irq_cnt7771!!
+[ 9113.691358] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9113.691744] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9113.877822] c5[T11508] WCN BASE: tx:at+loopcheck=4751815,13728
+[ 9113.877822] c5[T11508] 
+[ 9113.890691] c0[    C0] WCN SLP_MGR: irq_cnt7772!!
+[ 9113.891590] c5[T11508] WCN BASE: mdbg_tx_cb, chn:0
+[ 9113.892197] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9113.892790] c3[  T374] WCN SLP_MGR: forbid slp module-0x2
+[ 9113.893212] c0[    C0] WCN SLP_MGR: irq_cnt7773!!
+[ 9113.893431] c2[  T373] WCN BASE: rx:loopcheck_ack:ap_send=4751815,cp2_bootup=13728,cp2_send=9113916
+[ 9113.893431] c2[  T373] 
+[ 9113.893877] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9113.894268] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9114.125570] c4[  T942] systemserver cmd2 , get para: ( 50)
+[ 9114.383941] c0[T12016] sc27xx-fgu 32100000.spi:pmic@0:fgu@c00: not satisfy power on start condition.
+[ 9114.383964] c0[T12016] sc27xx-fgu 32100000.spi:pmic@0:fgu@c00: init_cap = 991, init_mah = 0, init_clbcnt = 49732344, cur_clbcnt = 45076090, normal_cap = 898, data->cc_mah = -464, Tbat = 322, uusoc_vbat = 0, uusoc_mah = 0, cur_1000ma_adc = 1394, track_sts = 1
+[ 9114.442926] c5[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9114.455983] c0[    C0] WCN SLP_MGR: irq_cnt7774!!
+[ 9114.457067] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9114.457150] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9114.458987] c0[    C0] WCN SLP_MGR: irq_cnt7775!!
+[ 9114.459352] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9114.459748] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9114.459844] c5[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9114.464524] c0[    C0] WCN SLP_MGR: irq_cnt7776!!
+[ 9114.465419] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9114.465498] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9114.467159] c0[  T545] ieee80211 phy0: channel num 1
+[ 9114.467345] c0[    C0] WCN SLP_MGR: irq_cnt7777!!
+[ 9114.467478] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9114.467560] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9114.474581] c0[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -52 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9114.475095] c0[    C0] WCN SLP_MGR: irq_cnt7778!!
+[ 9114.475255] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9114.475368] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9117.150429] c5[  T581] tx_work_queue: 2 callbacks suppressed
+[ 9117.150433] c5[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9117.154998] c0[    C0] WCN SLP_MGR: irq_cnt7779!!
+[ 9117.155875] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9117.156454] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9117.483987] c5[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9117.496521] c0[    C0] WCN SLP_MGR: irq_cnt7780!!
+[ 9117.497652] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9117.497953] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9117.499317] c5[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9117.499320] c0[    C0] WCN SLP_MGR: irq_cnt7781!!
+[ 9117.499413] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9117.499703] c3[  T374] WCN SLP_MGR: forbid slp module-0x1
+[ 9117.502088] c4[  T545] ieee80211 phy0: channel num 1
+[ 9117.502326] c0[    C0] WCN SLP_MGR: irq_cnt7782!!
+[ 9117.502588] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9117.502650] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9117.502834] c5[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9117.508573] c5[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -52 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9117.508803] c0[    C0] WCN SLP_MGR: irq_cnt7783!!
+[ 9117.509331] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9117.509630] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9118.390199] c5[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9118.713714] c5[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9118.715083] c0[    C0] WCN SLP_MGR: irq_cnt7784!!
+[ 9118.715785] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9118.716375] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9118.752394] c2[  T687] wlan sprd-marlin3:wlan wlan0: sc2355_scan n_channels 37
+[ 9118.752411] c2[  T687] ieee80211 phy0: random mac feature disabled
+[ 9118.752787] c5[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9118.756753] c0[    C0] WCN SLP_MGR: irq_cnt7785!!
+[ 9118.758571] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9118.759228] c3[  T374] WCN SLP_MGR: forbid slp module-0x2
+[ 9118.759604] c0[    C0] WCN SLP_MGR: irq_cnt7786!!
+[ 9118.760443] c5[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9118.760453] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9118.761052] c3[  T374] WCN SLP_MGR: forbid slp module-0x1
+[ 9118.775233] c1[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  1, signal -8300, freq 2412
+[ 9118.813492] c1[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -3400, freq 2417
+[ 9118.832919] c1[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  2, signal -3100, freq 2417
+[ 9118.998152] c2[T11702] WCN BASE: tx:at+loopcheck=4756936,13728
+[ 9118.998152] c2[T11702] 
+[ 9119.001883] c1[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9119.001902] c2[T11702] WCN BASE: mdbg_tx_cb, chn:0
+[ 9119.002585] c3[  T373] WCN BASE: rx:loopcheck_ack:ap_send=4756936,cp2_bootup=13728,cp2_send=9119027
+[ 9119.002585] c3[  T373] 
+[ 9119.119055] c1[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel  9, signal -7600, freq 2452
+[ 9119.163124] c1[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -6500, freq 2452
+[ 9119.180099] c1[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7100, freq 2452
+[ 9119.182329] c1[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7200, freq 2452
+[ 9119.185708] c1[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7200, freq 2452
+[ 9119.198466] c1[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4700, freq 5180
+[ 9119.220565] c5[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -6900, freq 2452
+[ 9119.222730] c5[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7000, freq 2452
+[ 9119.225462] c5[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7100, freq 2452
+[ 9119.241533] c5[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -7000, freq 2452
+[ 9119.246508] c5[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -6800, freq 2452
+[ 9119.281990] c5[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel  9, signal -6700, freq 2452
+[ 9119.300283] c5[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4200, freq 5180
+[ 9119.394881] c5[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 36, signal -5500, freq 5180
+[ 9119.402734] c1[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5600, freq 5180
+[ 9119.403760] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9119.418472] c5[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 36, signal -5300, freq 5180
+[ 9119.438752] c5[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 36, signal -5300, freq 5180
+[ 9119.445788] c5[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 36, signal -5400, freq 5180
+[ 9119.504491] c1[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5400, freq 5180
+[ 9119.616774] c1[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4700, freq 5180
+[ 9119.719112] c1[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5200, freq 5180
+[ 9119.748486] c1[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 56, signal -7200, freq 5280
+[ 9119.772623] c1[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 60, signal -7100, freq 5300
+[ 9119.792808] c1[T12320] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 60, signal -7100, freq 5300
+[ 9119.812309] c1[T12320] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4800, freq 5180
+[ 9119.830556] c5[T12028] wlan sprd-marlin3:wlan wlan0:    proberesp, <mac-redacted>, channel 60, signal -7100, freq 5300
+[ 9119.842250] c5[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 60, signal -7100, freq 5300
+[ 9119.845829] c5[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 60, signal -7100, freq 5300
+[ 9120.128958] c5[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -4600, freq 5180
+[ 9120.436142] c5[T12028] wlan sprd-marlin3:wlan wlan0:    beacon   , <mac-redacted>, channel 36, signal -5400, freq 5180
+[ 9120.526414] c5[  T545] ieee80211 phy0: channel num 1
+[ 9120.530063] c3[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -51 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:6 rxflags:0x:a
+[ 9120.682876] c5[T12028] wlan sprd-marlin3:wlan wlan0: sprd_report_scan_done scan is Done
+[ 9120.682926] c5[T12028] wlan sprd-marlin3:wlan wlan0: cmdevt_report_scan_done_evt got 34 BSSes
+[ 9120.683259] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9120.683648] c2[ T1220] wlan sprd-marlin3:wlan wlan0: sc2355_dump_survey, idx 0
+[ 9120.683658] c2[ T1220] wlan sprd-marlin3:wlan wlan0: sc2355_dump_survey, survey_cnt 0
+[ 9120.685078] c0[    C0] WCN SLP_MGR: irq_cnt7787!!
+[ 9120.685838] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9120.685965] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9120.700677] c0[    C0] WCN SLP_MGR: irq_cnt7788!!
+[ 9120.701811] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9120.701908] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9120.703767] c0[    C0] WCN SLP_MGR: irq_cnt7789!!
+[ 9120.704458] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9120.704689] c3[  T374] WCN SLP_MGR: forbid slp module-0x1
+[ 9120.707495] c0[    C0] WCN SLP_MGR: irq_cnt7790!!
+[ 9120.708002] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9120.708131] c0[  T545] ieee80211 phy0: channel num 1
+[ 9120.708135] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9121.049003] c0[  T599] [drm] sprd_dpu_enable_vblank()
+[ 9121.067747] c0[    C0] WCN SLP_MGR: irq_cnt7791!!
+[ 9121.068637] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9121.068735] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9121.614617] c7[  T384] ap watchdog sprd_wdt_fiq start: timeout = 40, pretimeout = 20
+[ 9121.614621] c7[  T384] sprd_wdt: sprd wdt load value timeout =40, pretimeout =20
+[ 9121.675758] c0[    C0] WCN SLP_MGR: irq_cnt7792!!
+[ 9121.676674] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9121.677255] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9122.304550] c1[  T581] tx_work_queue: 5 callbacks suppressed
+[ 9122.304555] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9122.306258] c0[    C0] WCN SLP_MGR: irq_cnt7793!!
+[ 9122.306975] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9122.307367] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9122.909511] c0[    C0] WCN SLP_MGR: irq_cnt7794!!
+[ 9122.919344] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9122.919940] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9123.204451] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9123.549101] c0[  T545] ieee80211 phy0: channel num 1
+[ 9123.552673] c3[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -48 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9123.600867] c2[T11702] charger-manager charger-manager: cant not get input_cur.
+[ 9123.604311] c2[T11702] charger-manager charger-manager: vbat: 3890000, vbat_avg: 3889000, OCV: 3936512, ibat: -342000, ibat_avg: -347000, ibus: 0, vbus: 0, msoc: 922, chg_sts: 2, frce_full: 0, chg_lmt_cur: 0, inpt_lmt_cur: 0, chgr_type: 0, Tboard: 357, Tbatt: 323, thm_cur: -22, thm_pwr: 0, is_fchg: 0, fchg_en: 0, tflush: 91, tperiod: 15
+[ 9123.604322] c2[T11702] charger-manager charger-manager: new_uisoc = 922, old_uisoc = 922
+[ 9123.808972] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9123.810947] c0[    C0] WCN SLP_MGR: irq_cnt7795!!
+[ 9123.811838] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9123.812416] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9124.118330] c5[T11508] WCN BASE: tx:at+loopcheck=4762055,13728
+[ 9124.118330] c5[T11508] 
+[ 9124.130957] c0[    C0] WCN SLP_MGR: irq_cnt7796!!
+[ 9124.131088] c5[T11508] WCN BASE: mdbg_tx_cb, chn:0
+[ 9124.131387] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9124.131799] c3[  T374] WCN SLP_MGR: forbid slp module-0x2
+[ 9124.132457] c1[  T373] WCN BASE: rx:loopcheck_ack:ap_send=4762055,cp2_bootup=13728,cp2_send=9124156
+[ 9124.132457] c1[  T373] 
+[ 9124.132529] c0[    C0] WCN SLP_MGR: irq_cnt7797!!
+[ 9124.133390] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9124.133779] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9124.433210] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9124.747464] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9124.749494] c0[    C0] WCN SLP_MGR: irq_cnt7798!!
+[ 9124.750739] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9124.751315] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9125.415385] c5[ T1663] ion_system_heap_allocate,tid:1663 , size: 1249280, time:          6us, pool:1249280, bud: 0, ord 8:0, 4:0, 0:0
+[ 9125.449747] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9126.563076] c3[  T545] ieee80211 phy0: channel num 1
+[ 9126.565380] c3[  T687] wlan sprd-marlin3:wlan wlan0: sprd_cfg80211_get_station signal -48 noise=0, txlegacy 0 txmcs:9 txflags:0x:4a, rxlegacy 0 rxmcs:9 rxflags:0x:4a
+[ 9126.870363] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9126.882770] c0[    C0] WCN SLP_MGR: irq_cnt7799!!
+[ 9126.883456] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9126.883908] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9127.818792] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9128.141708] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9128.143417] c0[    C0] WCN SLP_MGR: irq_cnt7800!!
+[ 9128.144241] c3[  T374] WCN SLP_MGR: PUB_INT_STS0-0x4
+[ 9128.144748] c3[  T374] WCN SLP_MGR: allow sleep
+[ 9128.426690] c1[  T581] sc2355, tx_work_queue, fw_awake = 0
+[ 9128.427342] c1[  T581] sc2355, tx_work_queue, fw_awake = 0

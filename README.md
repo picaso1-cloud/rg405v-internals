@@ -58,6 +58,8 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 - [x] **Daijishō 1.5.0 installed**, 32 platforms imported (paths pending).
 - [x] **Droidify 0.7.8 installed** (F-Droid client for FOSS apps).
 - [x] **Shizuku-Next 14.0.33 installed and running** (shell UID, transport adb).
+- [x] **Kernel/DT/driver deep dive** captured: kernel config, full running DTS,
+  PMIC/charger/panel/touch/WiFi/GPU topology (`recon/20261108/`).
 - [ ] andr36oid layer ported.
 - [ ] Emulation/perf baseline recorded.
 
@@ -69,7 +71,8 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 | [02-recon-results.md](02-recon-results.md) | **Live read-only profile**: build, partitions, CPU/GPU, panel, input, battery, Wi-Fi, ROM library |
 | [03-gammaos-next-plan.md](03-gammaos-next-plan.md) | GammaOS Next Lite install, unlock, backup, rollback and post-install validation |
 | [04-apps-and-launcher.md](04-apps-and-launcher.md) | Installed apps (Daijishō, Droidify, Shizuku-Next), prepared updates, Chrome/browser notes |
-| `05-optimization.md` | (to write) andr36oid layer port |
+| [05-kernel-drivers-deep-dive.md](05-kernel-drivers-deep-dive.md) | Kernel 5.4.161 config, full running DTS, PMIC/charger/display/touch/WiFi/GPU topology |
+| `06-optimization.md` | (to write) andr36oid layer port |
 
 ## First contact checklist
 

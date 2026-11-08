@@ -71,6 +71,10 @@ Evidence legend: **[seen]** observed here · **[inferred]** reasoned/public ·
 | A19 | RG405V Wi-Fi: Unisoc **SC2355 SDIO** (`sc2355_sdio_wlan`/`sprd_wlan`), BT combo (`sprdbt_tty`); 5 GHz 390/433 Mbps at probe | RG405V | [seen] | same |
 | A20 | RG405V stock is a **Full/GApps** build (38 Google packages); ROM library (103 GB: PS2/PSP/PSX/Wii-GC/…) is on the **microSD**, internal `/sdcard` has emulator data (~4.8 GB) | RG405V | [seen] | same |
 | A21 | **GammaOS Next RG405V** = v1.1 T618, **Android 14**, Lite (no GApps) ~2.3 GB split 7z; fresh install only, unlock via `unisoc-unlock`/subut-rehost, flash in fastbootd, mandatory userdata erase; rollback via RG405V unbricker | RG405V | [inferred] | GammaOS Next wiki/release |
+| A22 | RG405V kernel **5.4.161** (clang 12, 2023-08-11); `/proc/config.gz` readable; **152** `=m` modules, 282 loaded; `KALLSYMS_ALL` (names visible, addresses hidden); **MODULE_SIG_FORCE** | RG405V | [seen] | `rg405v-internals/05-kernel-drivers-deep-dive.md` |
+| A23 | RG405V power: **SC2730 PMIC** (SPI4) + **AW32257 charger** (I2C4 0x6a) + SC2730 FGU/Type-C/vibrator; charger-manager JEITA; battery **5000 mAh design, 4.2 V** | RG405V | [seen] | running DTS |
+| A24 | RG405V display/input/WiFi/GPU: generic MIPI panel **480×640**; Goodix **GT9xx** touch; `singleadc-joypad` (`retrogame_joypad`); **SC2355 SDIO** WiFi (marlin3lite) + BT/GNSS/FM; **Mali-Gondul G52** 384–850 MHz | RG405V | [seen] | running DTS |
+| A25 | RG405V security: bootloader locked, verity enforcing, SELinux **Permissive**; no root. **Shizuku-Next = shell UID 2000 (same as ADB)** — no extra kernel/debugfs access | RG405V | [seen] | live probe |
 
 **Porting the L3 layer:** the *logic* (sysctl values, floors, janitor loop,
 service keep-alives) is portable; the *paths* (`/sys/devices/system/cpu/...`,
