@@ -22,7 +22,7 @@ Evidence legend: **[seen]** observed here · **[inferred]** reasoned/public ·
 | Input | adc-joystick + gpio keys, amux remap [seen] | retrogame_joypad + touch_joypad [seen] | probe [unknown] |
 | Wi-Fi | SDIO, physical switch [seen] | Realtek SDIO [seen] | 2.4/5 GHz [inferred] |
 | Storage | single microSD [seen] | eMMC + TF1 + TF2 [seen] | 128 GB eMMC + microSD [inferred] |
-| OS | Android 11 (andr36oid) [seen] | GammaOS 12 (eMMC) + ArkOS (TF1) [seen] | Android 12 stock [inferred] |
+| OS | Android 11 (andr36oid) [seen] | GammaOS 12 (eMMC) + ArkOS (TF1) [seen] | GammaOS Next v1.1 Lite / Android 14 [seen] |
 
 ---
 

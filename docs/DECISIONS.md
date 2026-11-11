@@ -135,8 +135,9 @@ reproducibly from the start.
 
 ## ADR-008 — RG405V target: GammaOS Next Lite (Android 14)
 
-**Status:** **bootloader unlocked 2026-11-11** · flashing GammaOS Next still
-gated on the unbricker · 2026-11-11
+**Status:** **GammaOS Next v1.1 Lite installed 2026-11-11** — Android 14 /
+LineageOS 21, bootloader unlocked, Magisk 29.0, no GApps · rollback proof
+(unbricker) still pending
 
 **Context:** Live recon shows stock Android 12 V1.23 with full GApps (38 Google
 packages), bootloader locked, no usable root. GammaOS Next v1.1 for T618 offers
@@ -160,6 +161,13 @@ reports `LIBUSB_ERROR_TIMEOUT` **but the unlock is still applied**. A retry
 returns `FAIL: Bootloader can not been unlocked repeatly.` — that means already
 unlocked. The "OEM unlocking" developer toggle is **not** required. Full runbook:
 [`07-bootloader-unlock-lock-unbrick.md`](../07-bootloader-unlock-lock-unbrick.md).
+
+**Flash executed 2026-11-11:** archive verified (`7z t` OK, 2,425,892,864
+bytes, 86 files), `FlashPartitions.sh` exit 0 with 0 failures (both slots +
+logical `system`/`vendor`; system sparse transfer 175 s), `EraseUserData.sh`
+ok. First boot to ADB 40 s, `sys.boot_completed` ~2 min. Result: Android 14
+(`lineage_arm64_bvN-userdebug AP2A.240905.003`), model `TrebleDroid vanilla`,
+SELinux Permissive, Magisk 29.0, **no GMS/Play Store**, 110 GB `/data`.
 
 **Consequences:** internal storage is wiped; the 103 GB ROM library on the
 microSD is preserved. The stock image is not recoverable from userspace (no

@@ -135,23 +135,53 @@ e70d48dd31d62a88b3c4f774072c93a04aecb4a0255bf55fe00458406172212b
 4. Integrity pre-check before flashing:
    `7z t RG405V_GammaOSNext_Lite_v1.1.7z.001 -p<password>`.
 
-> Status 2026-11-11: download in progress on a slow link (~1.1 MB/s); flash
-> deferred until complete and integrity-tested.
+> Status 2026-11-11: **downloaded and verified.** 2,425,892,864 bytes across 5
+> parts; `7z t` → `Everything is Ok` (86 files, 15 folders, 4.5 GB unpacked).
 
 ---
 
-## 6. Flash (fastbootd)
+## 6. Flash (fastbootd) — ✅ DONE 2026-11-11
+
+`adb reboot fastboot` goes **straight to fastbootd** on this build — no need for
+`fastboot reboot fastboot`. Confirm before writing:
 
 ```sh
-# device must show fastbootd
-fastboot devices
-cd /path/to/RG405V_GammaOSNext_Lite_v1.1
-sh FlashPartitions.sh          # up to ~10 min; do not disconnect
-sh EraseUserData.sh            # mandatory factory reset/metadata erase
+fastboot devices            # 79783730379533  fastbootd
+fastboot getvar is-userspace # is-userspace: yes
+fastboot getvar current-slot # a
 ```
 
-Then power-cycle once. First boot takes 1–3 minutes (may sit at the Anbernic
-logo); provisioning installs Daijisho/RetroArch and lands on the home screen.
+```sh
+cd RG405V_GammaOSNext_Lite_v1.1
+bash FlashPartitions.sh     # exit 0, 0 failures, ~6 min
+bash EraseUserData.sh       # ~60 s, ends with "Factory reset complete"
+fastboot reboot
+```
+
+What `FlashPartitions.sh` writes (both slots where applicable):
+
+| Step | Image | Notes |
+|---|---|---|
+| `vbmeta_a/b` | `vbmeta_custom.img` (1 MB) | disables verity for the custom build |
+| `boot_a/b` | `boot_custom.img` (64 MB) | kernel/ramdisk |
+| `dtbo_a/b` | `dtbo_custom.img` (8 MB) | device tree overlay |
+| `vendor_boot_a/b` | `vendor_boot_custom.img` (100 MB) | |
+| `vendor` (logical) | `vendor_custom.img` (763 MB) | 3 sparse chunks |
+| `system` (logical) | `system_custom.img` (3.3 GB) | 13 sparse chunks, ~175 s |
+
+Observed timing [seen]: `system` sparse transfer 175 s; full flash ≈ 6 min;
+`EraseUserData` 59.9 s. `set -e` in the script means it aborts on the first
+error — a clean `exit 0` is a meaningful pass.
+
+First boot: ADB back after **40 s**, `sys.boot_completed=1` at ~2 min, one
+internal reboot during provisioning.
+
+Post-flash state [seen]: Android **14** / LineageOS 21
+(`lineage_arm64_bvN-userdebug AP2A.240905.003`, build date 2025-11-21),
+`ro.product.model=TrebleDroid vanilla`, `ro.boot.flash.locked=0`,
+`verifiedbootstate=orange`, SELinux Permissive, **Magisk 29.0** installed,
+**no GMS/Play Store** (`pm list packages | grep com.google` → only the vendor
+camera `...googlecamera.fishfood`), 110 GB /data with 1.1 GB used.
 
 ---
 
@@ -184,16 +214,23 @@ Full procedure, download-mode notes and troubleshooting:
 
 ## 8. Post-install validation
 
-- [ ] Repeat `02-recon-results.md` (build/partitions/SELinux/root/CPU/GPU).
-- [ ] Panel 640×480 landscape, touch, brightness.
-- [ ] All buttons/sticks (`retrogame_joypad`/`touch_joypad`), L2/R2, stick
-      calibration.
-- [ ] Wi-Fi 5 GHz + BT; 192.168.1.x connectivity.
+- [x] Build/SELinux/root present: Android 14, LineageOS 21, SELinux
+      Permissive, **Magisk 29.0** installed (`com.topjohnwu.magisk`).
+- [x] Panel geometry: `wm size` → **640×480**.
+- [x] Storage: `/data` 110 GB, 1.1 GB used after first boot.
+- [x] **No GApps**: no `com.google.android.gms`, no Play Store. The single
+      `com.google.*` hit is the vendor camera stub
+      (`com.google.android.apps.googlecamera.fishfood`).
+- [ ] **Magisk finish-install** — `adb shell id -u` = 2000 and no `su` until the
+      Magisk app completes its setup/reboot.
+- [ ] Buttons/sticks (`gammapad` is running), L2/R2, stick calibration
+      (GammaOS analog calibrator app is present).
+- [ ] Wi-Fi 5 GHz + BT.
 - [ ] Audio speaker/headphones, vibration.
-- [ ] Charging + battery; sleep/wake; thermals.
-- [ ] microSD ROM library mounts; emulators see `/storage/<uuid>/...`.
-- [ ] GammaOS Next Lite has no GApps; verify no `com.google.*` packages.
-- [ ] Root (Magisk) status — needed for the full andr36oid layer.
+- [ ] Charging, sleep/wake, thermals.
+- [ ] microSD ROM library with a **new** card; emulators see
+      `/storage/<uuid>/...`.
+- [ ] Repeat the `02-recon-results.md` probes (partitions, CPU/GPU, kernel).
 
 ---
 

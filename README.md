@@ -1,9 +1,9 @@
 # Anbernic RG405V — Internals (Android)
 
-Knowledge base for the **Anbernic RG405V** (Unisoc T618). **Bootloader unlocked
-2026-11-11**; stock Android 12 V1.23 on the device, GammaOS Next Lite pending.
-Part of the three-device plan in `../MASTER-PLAN.md`; shared techniques in
-`../SHARED-KNOWLEDGE.md`.
+Knowledge base for the **Anbernic RG405V** (Unisoc T618). **GammaOS Next v1.1
+Lite (Android 14 / LineageOS 21) installed 2026-11-11**; bootloader unlocked,
+Magisk 29.0, no GApps. Part of the three-device plan in `../MASTER-PLAN.md`;
+shared techniques in `../SHARED-KNOWLEDGE.md`.
 
 Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning ·
 **[unknown]** not probed.
@@ -19,9 +19,9 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 | Display | 4″ IPS touch, **480×640 portrait** panel; UI runs 640×480 landscape (rotation 1) | [seen] |
 | Battery | 5500 mAh; 100 % = 3.935 V, health Good | [seen] |
 | Connectivity | Wi-Fi 5 GHz (Unisoc **SC2355** SDIO), BT combo, 390/433 Mbps at probe | [seen] |
-| Stock OS | **Android 12**, build **V1.23**, security patch 2022-07-05, full GApps | [seen] |
-| Bootloader / root | **UNLOCKED** (`flash.locked=0`, `verifiedbootstate=orange`, since 2026-11-11); no usable root; SELinux **Permissive** | [seen] |
-| Custom OS | **GammaOS Next v1.1 (T618)** — Android 14, `v.1.1.0-ANBERNICT618` | [inferred] official repo/wiki |
+| Stock OS (replaced) | **Android 12**, build **V1.23**, security patch 2022-07-05, full GApps | [seen] |
+| Bootloader / root | **UNLOCKED** (`flash.locked=0`, `verifiedbootstate=orange`, since 2026-11-11); **Magisk 29.0**, SELinux **Permissive** | [seen] |
+| Custom OS (running) | **GammaOS Next v1.1 Lite** — Android **14** / LineageOS 21, `lineage_arm64_bvN-userdebug AP2A.240905.003`, no GApps | [seen] |
 | Linux | No community/mainline T618 handheld port known | [inferred] |
 
 > ⚠️ Anbernic's own product page warns that installing a third-party OS may make
@@ -40,35 +40,38 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 
 ## Status
 
-> **2026-11-11: bootloader UNLOCKED, device wiped.** Unlock done on Linux with
-> `unisoc-unlock` (`ro.boot.flash.locked` 1 → 0, `verifiedbootstate` green →
-> orange). GammaOS Next Lite **not flashed yet** — waiting on the 2.31 GB
-> archive and, for a full safety net, the RG405V unbricker. Full runbook:
-> [07-bootloader-unlock-lock-unbrick.md](07-bootloader-unlock-lock-unbrick.md).
+> **2026-11-11: GammaOS Next v1.1 Lite is installed and booting.** Sequence:
+> unlock (Linux `unisoc-unlock`) → `adb reboot fastboot` (fastbootd) →
+> `FlashPartitions.sh` (exit 0, 0 failures) → `EraseUserData.sh` → first boot in
+> ~2 min. Android **14**, no GApps, **Magisk 29.0**. The unbricker is still
+> **not** downloaded (see below). Runbooks:
+> [07-bootloader-unlock-lock-unbrick.md](07-bootloader-unlock-lock-unbrick.md) ·
+> [03-gammaos-next-plan.md](03-gammaos-next-plan.md).
 
 - [seen] Public specs collected (this file).
-- [seen] Device state: **stock Android 12 V1.23, bootloader unlocked, not
-  rooted, ADB available** (user re-enabled USB debugging after the unlock wipe).
-- [seen] **Live recon complete** (read-only): identity/build V1.23, 77 A/B
+- [seen] Device state: **GammaOS Next v1.1 Lite (Android 14), bootloader
+  unlocked, Magisk 29.0, no GApps, ADB over USB**.
+- [seen] **Live recon complete** (stock era): identity/build V1.23, 77 A/B
   partitions, 116.5 GB eMMC, 128 GB microSD ROM library, T618 sysfs, panel
   480×640 portrait (UI 640×480), input devices, battery/thermals, SC2355 Wi-Fi.
   Full data: [02-recon-results.md](02-recon-results.md).
 - [x] **Bootloader unlocked** (2026-11-11) — procedure, traps and verification
   in [07-bootloader-unlock-lock-unbrick.md](07-bootloader-unlock-lock-unbrick.md).
   Internal storage was wiped; user waived the `/sdcard` backup.
+- [x] **GammaOS Next Lite v1.1 flashed** (2026-11-11): archive `7z t` OK → 7
+  images (4.2 GB) → both slots + logical `system`/`vendor` → erase userdata.
+  Results in [03-gammaos-next-plan.md](03-gammaos-next-plan.md).
+- [x] **Kernel/DT/driver deep dive** (stock era): kernel 5.4.161 config, full
+  running DTS, PMIC/charger/panel/touch/WiFi/GPU topology (`recon/20261108/`).
+  Kernel may differ on GammaOS Next — re-verify.
+- [x] **Performance tuning** applied on stock (`06-optimization.md`); **void
+  after the wipe**, kept as a checklist to re-apply on GammaOS Next.
 - [ ] Unbricker downloaded/verified (rollback gate) — **still open**; 2.55 GB
   from Google Drive, Windows SPD tool.
-- [ ] GammaOS Next Lite (Android 14) installed — plan:
-  [03-gammaos-next-plan.md](03-gammaos-next-plan.md) (archive downloading).
-- [ ] **Daijishō 1.5.0 + 32 platforms** — was configured on stock, **lost in the
-  unlock wipe**; to be redone on GammaOS Next.
-- [ ] **Droidify 0.7.8**, **Shizuku-Next 14.0.33** — lost in the wipe; reinstall
-  after the flash.
-- [x] **Kernel/DT/driver deep dive** captured: kernel config, full running DTS,
-  PMIC/charger/panel/touch/WiFi/GPU topology (`recon/20261108/`).
-- [x] **Performance tuning applied** on stock (Daijishō default home, 0.5×
-  animations, Doze exemptions, AOT compile of 17 apps, safe debloat —
-  `06-optimization.md`). **Void after the wipe**; re-apply on GammaOS Next.
+- [ ] Device setup wizard + **Magisk finish-install** (root not yet active in
+  the shell: `id -u` = 2000, no `su`).
+- [ ] **Daijishō / RetroArch / emulators** — not bundled in Lite; reinstall and
+  re-point to the ROM library on a new microSD.
 - [ ] andr36oid layer ported.
 - [ ] Emulation/perf baseline recorded.
 
@@ -93,7 +96,8 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 4. [x] Model/firmware confirmed (`ums512_1h10`, V1.23).
 5. [x] Bootloader state + T618 tools confirmed
    (`07-bootloader-unlock-lock-unbrick.md`).
-6. [ ] GammaOS Next flash + rollback proof — **next**.
+6. [x] GammaOS Next flash — **done 2026-11-11**; rollback proof still pending
+   (unbricker not downloaded).
 
 ## Useful references
 

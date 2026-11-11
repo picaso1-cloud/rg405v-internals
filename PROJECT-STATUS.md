@@ -211,14 +211,16 @@ Full plan: `13-archr-rk3566-plan.md` · analysis: `14-rocknix-image-analysis.md`
 
 ---
 
-## Project 5 — RG405V: newest Android + andr36oid layer  🔓 unlocked, flash pending
+## Project 5 — RG405V: newest Android + andr36oid layer  ✅ GammaOS Next v1.1 Lite running
 
 **Device (verified live 2026-11-08 → 2026-11-11):** Unisoc T618, 4 GB,
 **116.5 GB eMMC**, 4″ **480×640 portrait** panel (UI 640×480 landscape),
-**128 GB microSD ROM library** (103 GB used). Stock **Android 12 V1.23**,
-security patch 2022-07-05; **bootloader UNLOCKED 2026-11-11**
-(`flash.locked=0`, `verifiedbootstate=orange`); no usable root; SELinux
-**Permissive**. Full profile: `rg405v-internals/02-recon-results.md`.
+**128 GB microSD ROM library** (103 GB used). Running **GammaOS Next v1.1 Lite**
+= Android **14 / LineageOS 21** (`lineage_arm64_bvN-userdebug
+AP2A.240905.003`), model `TrebleDroid vanilla`, **no GApps**, **Magisk 29.0**,
+SELinux Permissive, bootloader **unlocked** (`flash.locked=0`,
+`verifiedbootstate=orange`). Stock was Android 12 V1.23. Full stock profile:
+`rg405v-internals/02-recon-results.md`.
 
 - **Access:** USB ADB serial `79783730379533` (wireless ADB available but the
   port changes after reboot). Fastboot: `fastboot devices`.
@@ -239,11 +241,17 @@ security patch 2022-07-05; **bootloader UNLOCKED 2026-11-11**
 - **Wiped by the unlock:** Daijishō + 32 platforms, Droidify, Shizuku-Next,
   emulator settings and saves, and the 2026-11-08 performance tuning — all to be
   redone on GammaOS Next. MicroSD ROM library untouched.
-- **Firmware:** `RG405V_GammaOSNext_Lite_v1.1.7z.001–.005` (2.31 GB) downloading;
-  public archive password documented in
-  `rg405v-internals/03-gammaos-next-plan.md` §5.
-- **Next steps:** verify archive (`7z t`) → `flashbootd` → `FlashPartitions.sh`
-  → `EraseUserData.sh` → post-install validation → port L3 layer.
+- **Flash (2026-11-11, done):** archive 2,425,892,864 B, `7z t` → OK (86 files);
+  `adb reboot fastboot` → fastbootd (`is-userspace: yes`); `FlashPartitions.sh`
+  exit 0, **0 failures** (both slots + logical `system`/`vendor`; system sparse
+  transfer 175 s, ~6 min total); `EraseUserData.sh` 59.9 s. First boot: ADB in
+  40 s, `boot_completed` ~2 min. Details: `03-gammaos-next-plan.md` §6.
+- **Post-flash validated:** `/data` 110 GB (1.1 GB used), `wm size` 640×480,
+  no `com.google.android.gms`/Play Store, Magisk 29.0 present, GammaOS apps
+  (`gammapad` running, shader control, analog calibrator, joystick LED).
+- **Next steps:** device setup wizard → Magisk finish-install (adb shell still
+  uid 2000, no `su`) → new microSD + ROM library → reinstall Daijishō/emulators
+  → port andr36oid L3 layer.
 - **Rollback:** GammaOS RG405V unbricker
   (`RG405V_UNBRICKER_SPD_Upgrade_Tool_R26.21.2801.7z`, 2.55 GB, Windows
   `UpgradeDownload.exe`) — **not downloaded yet**; no root = no full eMMC dump.
