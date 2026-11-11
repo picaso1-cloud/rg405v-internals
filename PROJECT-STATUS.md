@@ -297,9 +297,10 @@ SELinux Permissive, bootloader **unlocked** (`flash.locked=0`,
 - **Packages:** correct `RG405V_GammaOSNext_Lite_v1.1` (5 parts, 2.42 GB) is
   already local and was the one flashed; no re-download needed. The missing
   rollback gate is the RG405V unbricker (2.55 GB), downloading 2026-11-12.
-- **GPU/PS2:** Mali-G52 MP2; MaliSX2 does not support G52, so stock Mali only.
-  ARMSX2 2.9.3 session: valid memcards, auto-tune on, GTA VCS 30 fps cap;
-  light 2D/3D titles only. OSD FPS was off, so no FPS numbers yet.
+- **GPU/PS2:** Mali-G52 MP2. MaliSX2 does not support G52, **but FristOneRR
+  PanVK 3.7.0 explicitly lists G52 MC2 / T618 and marks PS2 recommended**;
+  the 6 MB zip is on the device at `/sdcard/Download/` for testing. ARMSX2
+  2.9.3 session: valid memcards, auto-tune on, GTA VCS 30 fps cap; OSD FPS off.
 - **Customisation backup:** `/home/souhail/rg405v-backup/custom-2026-11-12/`
   (service.d, mousemode/hidpad/dpadkeys/usbmode/perfmode scripts, Panel APK,
   Daijishō appdata, settings dumps, `MANIFEST.sha256`, restore README).
