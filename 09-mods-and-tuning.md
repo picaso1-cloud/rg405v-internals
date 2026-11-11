@@ -130,7 +130,46 @@ hid-generic ... USB HID v1.01 Gamepad
 
 ---
 
-## 5. Tuning applied
+## 5. D-pad in Android UI (Tab bridge)
+
+**Problem:** `gammapad` forwards the D-pad only as **`ABS_HAT0X/Y`**. Games read
+that fine, but AOSP *phone* Settings navigates with **Tab / Enter**, not arrows.
+Verified on this build: a native `input keyevent 20` (DPAD_DOWN) focuses only
+`com.android.settings:id/homepage_container`; the individual rows are reachable
+with **Tab**.
+
+**Fix:** [`tools/dpadkeys/dpadkeys.c`](tools/dpadkeys/dpadkeys.c) injects a
+virtual keyboard:
+
+| Input | Injected |
+|---|---|
+| D-pad Down | `TAB` |
+| D-pad Up | `SHIFT+TAB` |
+| D-pad Left / Right | `KEY_LEFT` / `KEY_RIGHT` |
+| A | `ENTER` |
+| B | `BACK` |
+
+Hold for 350 ms repeats the vertical movement. The original hat events are still
+delivered, so emulators keep their normal D-pad.
+
+`/data/local/tmp/dpadkeys.conf`:
+
+```ini
+mode=tab          # tab (Android UI) or arrows
+enter_on_a=1
+back_on_b=1
+a_east=1          # this unit's A label is the EAST face button
+```
+
+Autostart: [`tools/scripts/52-dpadkeys.sh`](tools/scripts/52-dpadkeys.sh) in
+`/data/adb/service.d/`.
+
+Result [seen]: in Settings the D-pad now steps **one row per press** through the
+search bar, the category rows and the controls; A opens, B goes back.
+
+---
+
+## 6. Tuning applied
 
 | Change | Value | Reversible |
 |---|---|---|
@@ -146,7 +185,7 @@ would only burn CPU. Measure before changing.
 
 ---
 
-## 6. microSD card: full validation
+## 7. microSD card: full validation
 
 The card previously produced corrupt files on the phone. Full destructive test
 on the laptop card reader:
@@ -177,9 +216,32 @@ Keep checksums on future bulk copies.
 Layout on the card: `ROMs/<system>/…`, `ROMs/bios/` (scph5500/5501/5502,
 scph7001, psxonpsp660, neogeo.zip). Manifest: `ROMs/_TEST-SET.tsv`.
 
+
 ---
 
-## 7. Next steps
+## 8. Touchscreen: stuck controller and the cold-boot fix
+
+During the USB/HID experiments the Goodix panel stopped reporting touches.
+
+What the evidence showed:
+
+- `/proc/interrupts` for `gt9xx` **incremented while tapping** (72 → 196).
+- `dmesg` logged fresh coordinates (`goodix-ts ... [0][x y n]`).
+- `getevent` / `cat /dev/input/event0` returned **0 bytes**.
+- Driver unbind/rebind re-initialised cleanly (`Input report thread enabled!`)
+  but still did not report.
+- A normal **reboot did not fix it**; a **full power-off (`reboot -p`) + power
+  button** did.
+
+Also learned: while the screen sleeps, Android grabs the touch node for wake
+gestures, so `getevent` shows nothing and taps look dead. For remote testing use
+`svc power stayon true` and wake the screen first (`input keyevent 224`).
+
+If it happens again: power off completely (do not just reboot), then boot.
+
+---
+
+## 9. Next steps
 
 1. Insert the card into the phone; confirm `public:…` mounts and
    `/storage/<uuid>/ROMs` is readable.
