@@ -41,7 +41,7 @@
     ((array)[(bit) / BITS_PER_LONG] & (1UL << ((bit) % BITS_PER_LONG)))
 
 #define TICK_MS     8
-#define REPEAT_MS   350
+#define REPEAT_MS   700
 
 static volatile sig_atomic_t running = 1;
 static void on_signal(int s) { (void)s; running = 0; }
@@ -187,11 +187,12 @@ int main(int argc, char **argv) {
 
     int kb = create_keyboard();
     if (kb < 0) { perror("/dev/uinput"); return 1; }
-    fprintf(stderr, "dpadkeys: virtual keyboard ready (mode=%s enter_a=%d back_b=%d)\n",
-            cfg_tab_mode ? "tab" : "arrows", cfg_enter_a, cfg_back_b);
+    fprintf(stderr, "dpadkeys: virtual keyboard ready (mode=%s enter_a=%d back_b=%d a_east=%d)\n",
+            cfg_tab_mode ? "tab" : "arrows", cfg_enter_a, cfg_back_b, cfg_a_east);
 
     int hx = 0, hy = 0;
     long long last_move = 0;
+    long long last_tab = 0;
 
     while (running) {
         fd_set fds;
@@ -208,24 +209,39 @@ int main(int argc, char **argv) {
                     if (ev.value == 1) {
                         int enter_btn = cfg_a_east ? BTN_EAST : BTN_SOUTH;
                         int back_btn  = cfg_a_east ? BTN_SOUTH : BTN_EAST;
-                        if (ev.code == enter_btn && cfg_enter_a) tap_key(kb, KEY_ENTER);
-                        if (ev.code == back_btn  && cfg_back_b)  tap_key(kb, KEY_BACK);
+                        if (ev.code == enter_btn && cfg_enter_a) {
+                            fprintf(stderr, "btn=%d -> ENTER\n", ev.code);
+                            tap_key(kb, KEY_ENTER);
+                        }
+                        if (ev.code == back_btn && cfg_back_b) {
+                            fprintf(stderr, "btn=%d -> BACK\n", ev.code);
+                            tap_key(kb, KEY_BACK);
+                        }
                     }
                     continue;
                 }
                 if (ev.type != EV_ABS) continue;
-                if (ev.code == ABS_HAT0X) hx = ev.value;
-                else if (ev.code == ABS_HAT0Y) hy = ev.value;
+                int nhx = hx, nhy = hy;
+                if (ev.code == ABS_HAT0X) nhx = ev.value;
+                else if (ev.code == ABS_HAT0Y) nhy = ev.value;
                 else continue;
+
+                /* gammapad re-sends the same hat value; only act on a change */
+                if (nhx == hx && nhy == hy) continue;
+                hx = nhx; hy = nhy;
 
                 struct timespec now;
                 clock_gettime(CLOCK_MONOTONIC, &now);
                 long long ms = now.tv_sec * 1000LL + now.tv_nsec / 1000000LL;
 
                 if (hy < 0) {
+                    if (ms - last_tab < 200) continue;
+                    last_tab = ms;
                     if (cfg_tab_mode) shift_tab(kb); else tap_key(kb, KEY_UP);
                     last_move = ms;
                 } else if (hy > 0) {
+                    if (ms - last_tab < 200) continue;
+                    last_tab = ms;
                     if (cfg_tab_mode) tap_key(kb, KEY_TAB); else tap_key(kb, KEY_DOWN);
                     last_move = ms;
                 } else if (hx < 0) {

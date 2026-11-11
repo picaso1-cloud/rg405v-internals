@@ -55,6 +55,8 @@ public class MainActivity extends Activity {
     private TextView deadzoneLabel;
     private CheckBox invertCheck;
     private CheckBox abLeftCheck;
+    private Switch dpadSwitch;
+    private CheckBox dpadSwap;
 
     private int dp(float v) {
         return Math.round(v * getResources().getDisplayMetrics().density);
@@ -162,6 +164,30 @@ public class MainActivity extends Activity {
         mouseButtons.addView(action("Apply & restart", this::applyAndRestart),
                 new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
         root.addView(mouseButtons);
+
+        // ---------------- D-pad ----------------
+        root.addView(heading("D-pad in Android UI"));
+        root.addView(note("Maps the D-pad to Tab (Settings/list navigation) and "
+                + "A/B to Enter/Back. Games keep the normal D-pad."));
+
+        dpadSwitch = new Switch(this);
+        dpadSwitch.setText("Enable D-pad bridge");
+        dpadSwitch.setChecked(prefs.getBoolean("dpad_on", true));
+        dpadSwitch.setOnCheckedChangeListener((v, checked) -> {
+            prefs.edit().putBoolean("dpad_on", checked).apply();
+            if (checked) startDpad(); else stopDpad();
+        });
+        root.addView(dpadSwitch);
+
+        dpadSwap = new CheckBox(this);
+        dpadSwap.setText("Swap A/B (toggle if Enter/Back are inverted)");
+        dpadSwap.setChecked(prefs.getBoolean("dpad_swap", false));
+        dpadSwap.setOnCheckedChangeListener((v, c) -> {
+            prefs.edit().putBoolean("dpad_swap", c).apply();
+            writeDpadConf();
+            if (dpadSwitch.isChecked()) startDpad();
+        });
+        root.addView(dpadSwap);
 
         // ---------------- USB ----------------
         root.addView(heading("USB mode"));
@@ -272,6 +298,22 @@ public class MainActivity extends Activity {
         writeConf();
         if (mouseSwitch.isChecked()) startMouse();
         toast("Mouse settings applied");
+    }
+
+    private void startDpad() {
+        writeDpadConf();
+        runRoot("pkill -x dpadkeys; sleep 1; nohup /data/local/tmp/dpadkeys "
+                + ">> /data/local/tmp/dpadkeys.log 2>&1 &", "D-pad bridge on");
+    }
+
+    private void stopDpad() {
+        runRoot("pkill -x dpadkeys", "D-pad bridge off");
+    }
+
+    private void writeDpadConf() {
+        int aEast = dpadSwap.isChecked() ? 0 : 1;
+        runRoot("printf 'mode=tab\\nenter_on_a=1\\nback_on_b=1\\na_east=%d\\n' " + aEast
+                + " > /data/local/tmp/dpadkeys.conf; chmod 666 /data/local/tmp/dpadkeys.conf", null);
     }
 
     private void writeConf() {
