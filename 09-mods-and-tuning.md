@@ -413,7 +413,8 @@ The RG405V uses **Mali-G52 MP2** (GLES r34p0, kernel 5.4.161, vendor
 |---|---|---|---|
 | ARMSX2 **MaliSX2** | **No** — G57/G68/G77/G78 only | APK driver list | Not applicable |
 | `libadrenotools` | No — Adreno only | — | Not applicable |
-| **Panfrost / PanVK** (Mesa) | Yes (Bifrost) | Experimental; needs custom Mesa + Vulkan loader/WSI + gralloc | Research project, not a drop-in |
+| **FristOneRR PanVK 3.7.0** | **Yes — G52 MC2 listed** | **Yes**: install the zip in ARMSX2's custom GPU driver | **Test this** (Mesa 27, Vulkan 1.4) |
+| zenithblue PanVK | Yes (Bifrost) | `EMULATOR.zip` / adrenotools packages | Alternative test |
 | Newer ARM Mali blob | Likely | Replaces `/vendor/lib*/libmali.so`; must match kernel `kbase` ABI | Risky (GPU hang) |
 | ARMSX2 **GLES backend** | Yes | App setting | Try this first |
 
@@ -425,10 +426,22 @@ Documentation:
 - libadrenotools (Adreno): <https://github.com/bylaws/libadrenotools>
 - ARM Mali user-space drivers: <https://developer.arm.com/downloads/-/mali-drivers>
 
-Practical plan: no custom driver for G52 today. Tune ARMSX2 (GLES vs Vulkan,
-1x native, 30 fps cap, auto-tune) and revisit PanVK only if a packaged Android
-driver appears. The native 640x480 panel means PS2 renders at native
-resolution; there is no upscale cost to recover.
+**FristOneRR PanVK 3.7.0** (2026-11-02) explicitly lists
+**RGVITA · Unisoc T618 · Mali-G52 MC2 ✅** — the RG405V's SoC/GPU — and marks
+**PS2 ✅ recommended**. The zip is only 6 MB and contains `meta.json` +
+`libvulkan_panfrost.so` (the same schema ARMSX2 uses for custom drivers).
+
+Test plan:
+1. ARMSX2 → Settings → custom GPU driver → install from file →
+   `Download/PanVK-FristOneRR-V.3.7.0.zip`.
+2. Select it, clear the shader cache, test CvS2 / Metal Slug / Grandia II.
+3. If it fails to start on G52, try `PANVK_ATOM_STRIDE=56`; on 4 GB,
+   `PANVK_HEAP_MB=2048` if textures are missing/broken.
+4. G52 has no tessellation/geometry shaders (irrelevant for PS2); Vulkan 1.4.
+
+It is open source (Mesa PanVK). The native 640x480 panel means PS2 renders at
+native resolution; there is no upscale cost to recover. If PanVK works, it is
+the best performance lever available on this device.
 
 ---
 
