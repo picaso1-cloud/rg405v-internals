@@ -149,7 +149,8 @@ virtual keyboard:
 | A | `ENTER` |
 | B | `BACK` |
 
-Hold for 350 ms repeats the vertical movement. The original hat events are still
+**One press = one move** in Tab mode (repeat is disabled; a held press used to
+fire twice). Arrow mode keeps hold-to-repeat. The original hat events are still
 delivered, so emulators keep their normal D-pad.
 
 `/data/local/tmp/dpadkeys.conf`:
@@ -158,7 +159,7 @@ delivered, so emulators keep their normal D-pad.
 mode=tab          # tab (Android UI) or arrows
 enter_on_a=1
 back_on_b=1
-a_east=1          # this unit's A label is the EAST face button
+a_east=0          # 0: A (BTN_SOUTH) = Enter, B (BTN_EAST) = Back
 ```
 
 Autostart: [`tools/scripts/52-dpadkeys.sh`](tools/scripts/52-dpadkeys.sh) in

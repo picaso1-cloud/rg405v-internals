@@ -237,12 +237,14 @@ int main(int argc, char **argv) {
                 if (hy < 0) {
                     if (ms - last_tab < 200) continue;
                     last_tab = ms;
-                    if (cfg_tab_mode) shift_tab(kb); else tap_key(kb, KEY_UP);
+                    if (cfg_tab_mode) { fprintf(stderr, "TAB back\n"); shift_tab(kb); }
+                    else tap_key(kb, KEY_UP);
                     last_move = ms;
                 } else if (hy > 0) {
                     if (ms - last_tab < 200) continue;
                     last_tab = ms;
-                    if (cfg_tab_mode) tap_key(kb, KEY_TAB); else tap_key(kb, KEY_DOWN);
+                    if (cfg_tab_mode) { fprintf(stderr, "TAB move\n"); tap_key(kb, KEY_TAB); }
+                    else tap_key(kb, KEY_DOWN);
                     last_move = ms;
                 } else if (hx < 0) {
                     tap_key(kb, KEY_LEFT); last_move = ms;
@@ -252,8 +254,8 @@ int main(int argc, char **argv) {
             }
         }
 
-        /* hold-to-repeat on the vertical axis */
-        if (hy != 0) {
+        /* hold-to-repeat only in raw-arrow mode; Tab mode is one move per press */
+        if (!cfg_tab_mode && hy != 0) {
             struct timespec now;
             clock_gettime(CLOCK_MONOTONIC, &now);
             long long ms = now.tv_sec * 1000LL + now.tv_nsec / 1000000LL;

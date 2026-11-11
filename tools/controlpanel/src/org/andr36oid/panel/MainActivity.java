@@ -180,7 +180,7 @@ public class MainActivity extends Activity {
         root.addView(dpadSwitch);
 
         dpadSwap = new CheckBox(this);
-        dpadSwap.setText("Swap A/B (toggle if Enter/Back are inverted)");
+        dpadSwap.setText("Swap A/B (A=Enter is the default)");
         dpadSwap.setChecked(prefs.getBoolean("dpad_swap", false));
         dpadSwap.setOnCheckedChangeListener((v, c) -> {
             prefs.edit().putBoolean("dpad_swap", c).apply();
@@ -311,7 +311,7 @@ public class MainActivity extends Activity {
     }
 
     private void writeDpadConf() {
-        int aEast = dpadSwap.isChecked() ? 0 : 1;
+        int aEast = dpadSwap.isChecked() ? 1 : 0;  /* 0 = A(SOUTH)=Enter, the working default */
         runRoot("printf 'mode=tab\\nenter_on_a=1\\nback_on_b=1\\na_east=%d\\n' " + aEast
                 + " > /data/local/tmp/dpadkeys.conf; chmod 666 /data/local/tmp/dpadkeys.conf", null);
     }
