@@ -225,7 +225,60 @@ If it happens again: power off completely (do not just reboot), then boot.
 
 ---
 
-## 9. Next steps
+## 9. Wi-Fi: the Settings dialog dismisses on Connect (this is normal)
+
+**Seen 2026-11-12** on GammaOS Next v1.1 (TrebleDroid GSI, Android 14,
+`lineage_arm64_bvN-userdebug 14 AP2A.240905.003`).
+
+Symptom reported: in **Settings → Network & internet → Wi-Fi**, enter the
+passphrase, tap Connect, and the dialog closes and returns to the Wi-Fi list.
+It looks like the join failed.
+
+What the logs actually show:
+
+```
+WifiService: connect uid=1000 packageNameToUse=com.android.settings
+WifiConfigManager: Cannot find network with networkId -1 ... (normal for a new network)
+WifiConfigManager: Credential changed for netId=2
+wpa_supplicant: Trying to associate with SSID 'Tenda_ED9470'
+wpa_supplicant: CTRL-EVENT-CONNECTED ... completed
+ConnectivityService: ... WIFI CONNECTED ... IS_VALIDATED
+```
+
+The network was saved (`netId 2`), associated, got `192.168.1.192`, and passed
+internet validation. The dialog **submits and finishes immediately by design**;
+the association runs in the background. The Wi-Fi list shows
+`Connecting… → Obtaining IP address… → Connected` within ~2 s.
+
+Cosmetic bug to ignore: when the dialog is opened from the **status
+bar/Quick Settings**, logcat shows
+
+```
+WifiDialogActivity: Failed to get the calling package, don't return the result.
+```
+
+The dialog was launched by `com.android.systemui` (uid 10140) without a calling
+package, so it skips its result callback. The connect request is still issued.
+Both entry points work; the Settings app one simply returns to the list.
+
+Practical notes:
+
+- After tapping Connect, wait 2–3 s and watch the list; it should go to
+  **Connected**. If it stays on **Saved** or shows **Authentication problem**,
+  the passphrase or security type is wrong.
+- Check state from adb without the UI:
+  `cmd wifi status`, `cmd wifi list-networks`.
+- Do **not** "Reset Wi-Fi, mobile & Bluetooth" as a first step; it only deletes
+  the saved networks.
+- The same dialog result issue does **not** affect the saved-network reconnects.
+
+Separate observation (not Wi-Fi): this GSI reports **640x480** from `wm size`,
+not the RG405V panel's 960x1280. That is a display-config/overlay issue in the
+GSI, worth investigating separately from the network stack.
+
+---
+
+## 10. Next steps
 
 1. Insert the card into the phone; confirm `public:…` mounts and
    `/storage/<uuid>/ROMs` is readable.
