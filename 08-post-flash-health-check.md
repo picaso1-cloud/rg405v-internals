@@ -109,9 +109,11 @@ After `svc bluetooth enable`, BT comes up fine (`state: ON`, address
 `40:45:DA:AB:7F:85`) and stays up. The failure is only at cold boot, before an
 address is available.
 
-**Open:** whether the address is persisted (and therefore whether the crash
-recurs every boot). `/data/misc/bluetooth/` is not readable as `shell`; re-check
-as root and after a reboot.
+**Resolved on reboot (see §5):** the crash is **first-boot only**. On the second
+boot there were **no new tombstones**, the crash buffer was empty, the HAL
+service was running, and BT came up with the **same address**
+`40:45:DA:AB:7F:85` — so it is persisted. The `bt_remote_dev_info.conf` messages
+are normal first-boot noise (file created later).
 
 ---
 
@@ -137,11 +139,35 @@ adb shell 'ls -lt /data/tombstones/ | grep -v "\.pb" | head'
 
 ---
 
-## 4. Still open after this check
+## 4. Reboot verification (2026-11-11, second boot)
 
-1. **Reboot test**: confirm `performance_mode=stock` survives, whether the BT
-   HAL crash repeats, and whether the BT address persists.
-2. **New microSD** and ROM library mount (slot currently empty).
-3. `Magisk` finish-install/reboot (root already works via `su` request).
-4. Emulator sanity runs against real ROMs (previous crashes were ROM-driven).
-5. Unbricker download — rollback still unproven.
+| Check | Result |
+|---|---|
+| `persist.gammaos.performance_mode` | **`stock`** (persisted) |
+| CPU governors | `schedutil` both clusters; idle `policy0` 614 MHz, `policy6` 1.48 GHz |
+| GPU | `simple_ondemand`, idle 384 MHz |
+| SoC temperature | **37.7 °C** (was 45.0 °C under `max`) |
+| Real CPU idle (`/proc/stat`, 5 s) | **96.7 %** (boot still settling) |
+| Bluetooth HAL | service **running**, **no abort**, no new tombstone |
+| Bluetooth | **ON**, same MAC `40:45:DA:AB:7F:85` |
+| Crash buffer | **empty** (0 lines) |
+| Tombstones | unchanged — latest still `12:46` (first boot) |
+| Wi-Fi | connected, `CPE-C391` |
+| Setup wizard | **not running** |
+| Memory | 2.46 GB available |
+| Foreground app | Daijishō |
+
+Conclusion: F1 and F4 are resolved, F3 persists correctly, and the only
+remaining oddity is the cosmetic D-state load average (F2), which converges to
+its ~6 baseline after boot.
+
+---
+
+## 5. Still open after this check
+
+1. **New microSD** and ROM library mount (slot currently empty).
+2. `Magisk` finish-install/reboot (root already works via `su` request).
+3. Emulator sanity runs against real ROMs (previous crashes were ROM-driven).
+4. Unbricker download — rollback still unproven.
+5. Re-apply the andr36oid tuning layer on GammaOS Next (`06-optimization.md`
+   was stock-era: Doze exemptions, AOT compile, debloat, Daijishō default home).
