@@ -15,7 +15,7 @@ be compacted and work resumed from this file alone. Mirrored in the device repos
 |---|---|---|---|
 | **Powkiddy RGB10 Max 2** | RK3326, 1 GB | andr36oid (Android 11) on SD | `adb connect <ip>:5555` (192.168.0.99 / 192.168.31.190); root daemon via `/data/local/tmp/cmd.in`; **currently: new SD card pending** |
 | **Anbernic RG353V** | RK3566, 2 GB | **GammaOS_Lite_v1.5** (Android 12, eMMC) + **ArkOS** (TF1) + ROMs (TF2) | Android: wireless adb `192.168.1.148:5555` (Magisk). ArkOS: `ssh ark@192.168.1.148`, password `ark`. Both currently offline |
-| **Anbernic RG405V** | Unisoc T618, 4 GB | Stock **Android 12 V1.23** (116.5 GB eMMC + 128 GB microSD ROMs) | **online**: wireless ADB `192.168.1.189:43815` (paired 2026-11-08; port changes after reboot). Recon complete (`rg405v-internals/02-recon-results.md`); target = GammaOS Next Lite (Android 14) + andr36oid layer |
+| **Anbernic RG405V** | Unisoc T618, 4 GB | Stock **Android 12 V1.23**, **bootloader UNLOCKED** (2026-11-11), internal storage wiped (116.5 GB eMMC + 128 GB microSD ROMs) | **USB ADB** `79783730379533` (`adb -s 79783730379533`); wireless ADB port changes after reboot. Recon complete (`rg405v-internals/02-recon-results.md`); target = GammaOS Next Lite (Android 14) + andr36oid layer |
 
 Host: `/home/souhail/Andr36oid` workspace. Devices are on `192.168.x` networks
 that change between sessions — re-scan if connect fails.
@@ -211,16 +211,17 @@ Full plan: `13-archr-rk3566-plan.md` · analysis: `14-rocknix-image-analysis.md`
 
 ---
 
-## Project 5 — RG405V: newest Android + andr36oid layer  🔎 recon complete
+## Project 5 — RG405V: newest Android + andr36oid layer  🔓 unlocked, flash pending
 
-**Device (verified live 2026-11-08):** Unisoc T618, 4 GB, **116.5 GB eMMC**,
-4″ **480×640 portrait** panel (UI 640×480 landscape), **128 GB microSD ROM
-library** (103 GB used). Stock **Android 12 V1.23**, security patch 2022-07-05,
-38 Google packages, bootloader **locked**, no usable root, SELinux **Permissive**.
-Full profile: `rg405v-internals/02-recon-results.md`.
+**Device (verified live 2026-11-08 → 2026-11-11):** Unisoc T618, 4 GB,
+**116.5 GB eMMC**, 4″ **480×640 portrait** panel (UI 640×480 landscape),
+**128 GB microSD ROM library** (103 GB used). Stock **Android 12 V1.23**,
+security patch 2022-07-05; **bootloader UNLOCKED 2026-11-11**
+(`flash.locked=0`, `verifiedbootstate=orange`); no usable root; SELinux
+**Permissive**. Full profile: `rg405v-internals/02-recon-results.md`.
 
-- **Access:** wireless ADB `192.168.1.189:43815` (paired; port changes after
-  reboot).
+- **Access:** USB ADB serial `79783730379533` (wireless ADB available but the
+  port changes after reboot). Fastboot: `fastboot devices`.
 - **Target OS:** **GammaOS Next v1.1 (T618) — RG405V Lite, Android 14**
   (fresh install, wipes internal storage) + andr36oid layer.
 - **Linux:** not planned (no mainline T618 support) — investigation only.
@@ -229,21 +230,28 @@ Full profile: `rg405v-internals/02-recon-results.md`.
   `retrogame_joypad` + `touch_joypad` + Goodix touch; SC2355 SDIO Wi-Fi (5 GHz);
   zram 2.14 GB; emulators preinstalled (AetherSX2, Dolphin, PPSSPP,
   DuckStation, RetroArch, Citra, …).
-- **Plan:** `rg405v-internals/03-gammaos-next-plan.md` — backup `/sdcard`
-  (~4.8 GB), enable OEM unlock, unlock (wipes), fastbootd flash Lite, erase
-  userdata, validate, port L3 layer.
-- **Rollback:** GammaOS RG405V unbricker (Google Drive; Windows
-  `UpgradeDownload.exe`) — **must be verified before flashing**; no root =
-  no full eMMC dump.
-- **Installed (2026-11-08, no root):** **Daijishō 1.5.0** (32 platforms
-  imported; ROM paths pending), **Droidify 0.7.8** (F-Droid client),
-  **Shizuku-Next 14.0.33** (running, shell UID, transport adb).
-- **Performance tuning (2026-11-08, no root):** Daijishō default home, 0.5×
-  animations, Doze exemptions for 17 apps, **AOT compile** of 17 apps (all
-  Success), safe 6-package Google debloat. Reversible commands in
-  `rg405v-internals/06-optimization.md`.
-- **Prepared updates:** Cromite, Fennec, PPSSPP 1.20.4, RetroArch 1.22.2,
-  Flycast 2.7, Azahar 2126.2; details in `rg405v-internals/04-apps-and-launcher.md`.
+- **Bootloader (2026-11-11):** unlocked on Linux with `unisoc-unlock`
+  (token + RSA signature → `flashing unlock_bootloader`). Traps: hard-coded 60 s
+  confirmation window, timeout still applies the unlock, retry says
+  `can not been unlocked repeatly`, OEM-unlock toggle not required, post-wipe
+  USB debugging off / MTP `1782:4001`. Runbook:
+  `rg405v-internals/07-bootloader-unlock-lock-unbrick.md`.
+- **Wiped by the unlock:** Daijishō + 32 platforms, Droidify, Shizuku-Next,
+  emulator settings and saves, and the 2026-11-08 performance tuning — all to be
+  redone on GammaOS Next. MicroSD ROM library untouched.
+- **Firmware:** `RG405V_GammaOSNext_Lite_v1.1.7z.001–.005` (2.31 GB) downloading;
+  public archive password documented in
+  `rg405v-internals/03-gammaos-next-plan.md` §5.
+- **Next steps:** verify archive (`7z t`) → `flashbootd` → `FlashPartitions.sh`
+  → `EraseUserData.sh` → post-install validation → port L3 layer.
+- **Rollback:** GammaOS RG405V unbricker
+  (`RG405V_UNBRICKER_SPD_Upgrade_Tool_R26.21.2801.7z`, 2.55 GB, Windows
+  `UpgradeDownload.exe`) — **not downloaded yet**; no root = no full eMMC dump.
+  Until it is fetched and proven, the first partition write is one-way.
+- **Stock-era installs (2026-11-08, lost in the wipe):** Daijishō 1.5.0
+  (32 platforms), Droidify 0.7.8, Shizuku-Next 14.0.33; performance tuning
+  (default home, 0.5× animations, Doze exemptions, AOT compile, Google debloat).
+  Reversible commands kept in `rg405v-internals/06-optimization.md`.
 - **Kernel/DT deep dive (2026-11-08):** kernel **5.4.161** BSP, `/proc/config.gz`
   readable, full running DTS recovered via sysfs, 152 modules / 282 loaded.
   Hardware: SC2730 PMIC, **AW32257 charger**, SC2730 FGU/Type-C/vibrator,

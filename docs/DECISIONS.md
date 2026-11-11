@@ -135,8 +135,8 @@ reproducibly from the start.
 
 ## ADR-008 — RG405V target: GammaOS Next Lite (Android 14)
 
-**Status:** **deferred by user decision (2026-11-08): stay stock for now** ·
-2026-11-08
+**Status:** **bootloader unlocked 2026-11-11** · flashing GammaOS Next still
+gated on the unbricker · 2026-11-11
 
 **Context:** Live recon shows stock Android 12 V1.23 with full GApps (38 Google
 packages), bootloader locked, no usable root. GammaOS Next v1.1 for T618 offers
@@ -146,6 +146,20 @@ Android 14, debloated, with performance/remap tooling; Lite has no GApps.
 install. Hard gates before flashing: (1) internal `/sdcard` backup (~4.8 GB),
 (2) **verified RG405V unbricker** and a working rollback path, (3) microSD ROM
 card removed, (4) battery ≥ 50 %.
+
+**Progress 2026-11-11:** gates 3 and 4 met (card out, 100 % battery). Gate 1
+waived by user. Gate 2 **not yet met** — the RG405V unbricker
+(`RG405V_UNBRICKER_SPD_Upgrade_Tool_R26.21.2801.7z`, 2.55 GB, Google Drive) was
+not downloaded because of slow link; user will fetch it later.
+
+**Bootloader unlocked (verified):** `ro.boot.flash.locked` 1 → **0**,
+`ro.boot.verifiedbootstate` green → **orange**. Unlock performed on Linux with
+`unisoc-unlock` (`adb reboot bootloader` → `python -m unisoc_unlock` → confirm
+with Home/Back). The tool hard-codes a 60 s confirmation window; on timeout it
+reports `LIBUSB_ERROR_TIMEOUT` **but the unlock is still applied**. A retry
+returns `FAIL: Bootloader can not been unlocked repeatly.` — that means already
+unlocked. The "OEM unlocking" developer toggle is **not** required. Full runbook:
+[`07-bootloader-unlock-lock-unbrick.md`](../07-bootloader-unlock-lock-unbrick.md).
 
 **Consequences:** internal storage is wiped; the 103 GB ROM library on the
 microSD is preserved. The stock image is not recoverable from userspace (no

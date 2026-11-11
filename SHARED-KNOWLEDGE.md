@@ -180,6 +180,10 @@ keep a command log; record the exact model/firmware/SoC revision.
 | T7 | Old distro stack (weston 5 / fbdev) silently blocks Qt6 apps | check compositor protocols before debugging the app |
 | T8 | Battery icon "charging" while latched is cosmetic, not a charger bug | check the gauge separately |
 | T9 | Flashing a vendor Android image over a modified bootloader can be irreversible | back up + verify rollback before flashing |
+| T10 | `unisoc-unlock` ACK timeout (`LIBUSB_ERROR_TIMEOUT`) ≠ failed unlock — the flag is often already applied | verify with `ro.boot.flash.locked` before retrying |
+| T11 | `FAIL: Bootloader can not been unlocked repeatly.` reads like an error | it means **already unlocked** |
+| T12 | After the unlock wipe, USB debugging is off and the device is MTP (`1782:4001`) | finish setup, re-enable USB debugging |
+| T13 | A microSD left in the slot can reset the device out of fastboot | remove the card before unlock/flash |
 
 ---
 
@@ -187,8 +191,7 @@ keep a command log; record the exact model/firmware/SoC revision.
 
 ```sh
 # --- Android (RGB10 Max 2 / GammaOS) ---
-adb connect <ip>:5555
-adb shell 'cat > /data/local/tmp/cmd.in << "EOF"\n{ id; getprop ro.build.version.release; } > /data/local/tmp/cmd.out 2>&1\nchmod 666 /data/local/tmp/cmd.out\nEOF'
+adb connect <ip>:5555adb shell 'cat > /data/local/tmp/cmd.in << "EOF"\n{ id; getprop ro.build.version.release; } > /data/local/tmp/cmd.out 2>&1\nchmod 666 /data/local/tmp/cmd.out\nEOF'
 
 # performance probes
 cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors
@@ -210,6 +213,15 @@ jadx -d out app.apk
 unzip -l image.zip | head
 strings -a -n 6 bin | head -400
 rg -uu -o '.{0,200}NEEDLE.{0,200}' extracted/ | head
+
+# --- Unisoc T618 bootloader (RG405V) ---
+adb reboot bootloader
+fastboot devices
+python3 -m venv ~/.venvs/unisoc && ~/.venvs/unisoc/bin/pip install unisoc-unlock
+~/.venvs/unisoc/bin/python -m unisoc_unlock unlock   # press Home/Back on device
+adb shell getprop ro.boot.flash.locked               # 0 = unlocked
+adb shell getprop ro.boot.verifiedbootstate          # orange = unlocked
+fastboot reboot fastboot                             # fastbootd for flashing
 ```
 
 ---

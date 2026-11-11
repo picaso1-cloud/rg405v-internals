@@ -1,6 +1,7 @@
 # Anbernic RG405V — Internals (Android)
 
-Knowledge base for the **Anbernic RG405V** (Unisoc T618, Android 12 stock).
+Knowledge base for the **Anbernic RG405V** (Unisoc T618). **Bootloader unlocked
+2026-11-11**; stock Android 12 V1.23 on the device, GammaOS Next Lite pending.
 Part of the three-device plan in `../MASTER-PLAN.md`; shared techniques in
 `../SHARED-KNOWLEDGE.md`.
 
@@ -19,7 +20,7 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 | Battery | 5500 mAh; 100 % = 3.935 V, health Good | [seen] |
 | Connectivity | Wi-Fi 5 GHz (Unisoc **SC2355** SDIO), BT combo, 390/433 Mbps at probe | [seen] |
 | Stock OS | **Android 12**, build **V1.23**, security patch 2022-07-05, full GApps | [seen] |
-| Bootloader / root | **locked** (`flash.locked=1`), no usable root (`su` setgid blocked), SELinux **Permissive** | [seen] |
+| Bootloader / root | **UNLOCKED** (`flash.locked=0`, `verifiedbootstate=orange`, since 2026-11-11); no usable root; SELinux **Permissive** | [seen] |
 | Custom OS | **GammaOS Next v1.1 (T618)** — Android 14, `v.1.1.0-ANBERNICT618` | [inferred] official repo/wiki |
 | Linux | No community/mainline T618 handheld port known | [inferred] |
 
@@ -39,30 +40,35 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 
 ## Status
 
-> **Decision (2026-11-08): stay on stock Android 12 for now.** No unlock, no
-> flash, no device changes. The GammaOS Next Lite plan
-> ([03-gammaos-next-plan.md](03-gammaos-next-plan.md)) remains ready; the user
-> has a Windows PC/VM for the unbricker when needed.
+> **2026-11-11: bootloader UNLOCKED, device wiped.** Unlock done on Linux with
+> `unisoc-unlock` (`ro.boot.flash.locked` 1 → 0, `verifiedbootstate` green →
+> orange). GammaOS Next Lite **not flashed yet** — waiting on the 2.31 GB
+> archive and, for a full safety net, the RG405V unbricker. Full runbook:
+> [07-bootloader-unlock-lock-unbrick.md](07-bootloader-unlock-lock-unbrick.md).
 
 - [seen] Public specs collected (this file).
-- [seen] Device state: **stock Android 12, not rooted, ADB available**
-  (user-confirmed 2026-11-08).
+- [seen] Device state: **stock Android 12 V1.23, bootloader unlocked, not
+  rooted, ADB available** (user re-enabled USB debugging after the unlock wipe).
 - [seen] **Live recon complete** (read-only): identity/build V1.23, 77 A/B
   partitions, 116.5 GB eMMC, 128 GB microSD ROM library, T618 sysfs, panel
   480×640 portrait (UI 640×480), input devices, battery/thermals, SC2355 Wi-Fi.
   Full data: [02-recon-results.md](02-recon-results.md).
-- [ ] Internal `/sdcard` backup (~4.8 GB) before any flash.
-- [ ] Unbricker downloaded/verified (rollback gate).
+- [x] **Bootloader unlocked** (2026-11-11) — procedure, traps and verification
+  in [07-bootloader-unlock-lock-unbrick.md](07-bootloader-unlock-lock-unbrick.md).
+  Internal storage was wiped; user waived the `/sdcard` backup.
+- [ ] Unbricker downloaded/verified (rollback gate) — **still open**; 2.55 GB
+  from Google Drive, Windows SPD tool.
 - [ ] GammaOS Next Lite (Android 14) installed — plan:
-  [03-gammaos-next-plan.md](03-gammaos-next-plan.md).
-- [x] **Daijishō 1.5.0 installed**, 32 platforms imported (paths pending).
-- [x] **Droidify 0.7.8 installed** (F-Droid client for FOSS apps).
-- [x] **Shizuku-Next 14.0.33 installed and running** (shell UID, transport adb).
+  [03-gammaos-next-plan.md](03-gammaos-next-plan.md) (archive downloading).
+- [ ] **Daijishō 1.5.0 + 32 platforms** — was configured on stock, **lost in the
+  unlock wipe**; to be redone on GammaOS Next.
+- [ ] **Droidify 0.7.8**, **Shizuku-Next 14.0.33** — lost in the wipe; reinstall
+  after the flash.
 - [x] **Kernel/DT/driver deep dive** captured: kernel config, full running DTS,
   PMIC/charger/panel/touch/WiFi/GPU topology (`recon/20261108/`).
-- [x] **Performance tuning applied** (no root): Daijishō default home, 0.5×
-  animations, Doze exemptions, AOT compile of 17 apps, safe debloat
-  (`06-optimization.md`).
+- [x] **Performance tuning applied** on stock (Daijishō default home, 0.5×
+  animations, Doze exemptions, AOT compile of 17 apps, safe debloat —
+  `06-optimization.md`). **Void after the wipe**; re-apply on GammaOS Next.
 - [ ] andr36oid layer ported.
 - [ ] Emulation/perf baseline recorded.
 
@@ -76,15 +82,18 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 | [04-apps-and-launcher.md](04-apps-and-launcher.md) | Installed apps (Daijishō, Droidify, Shizuku-Next), prepared updates, Chrome/browser notes |
 | [05-kernel-drivers-deep-dive.md](05-kernel-drivers-deep-dive.md) | Kernel 5.4.161 config, full running DTS, PMIC/charger/display/touch/WiFi/GPU topology |
 | [06-optimization.md](06-optimization.md) | Applied performance tuning: Daijishō default home, 0.5× animations, Doze exemptions, AOT compile, safe debloat + revert commands |
+| [07-bootloader-unlock-lock-unbrick.md](07-bootloader-unlock-lock-unbrick.md) | **Verified** unlock (Linux `unisoc-unlock`), state verification, lock, unbrick/rollback, mode matrix, troubleshooting |
+| [tools/unisoc_unlock_long.py](tools/unisoc_unlock_long.py) | Unlock helper with a configurable confirmation window (`UNLOCK_WAIT_MS`, default 240 s) instead of the tool's hard-coded 60 s |
 
-## First contact checklist
+## First contact checklist (completed 2026-11-08 → 2026-11-11)
 
-1. Do **not** flash anything yet.
-2. Enable developer options + USB debugging; record `getprop`.
-3. Dump partition table and every partition you can read.
-4. Verify the exact model/firmware (`ro.product.model`, `ro.build.display.id`).
-5. Confirm bootloader unlock state and the correct flash tool for T618.
-6. Then decide GammaOS Next and the rollback plan.
+1. ~~Do not flash anything yet.~~ → bootloader unlocked 2026-11-11.
+2. [x] Developer options + USB debugging; `getprop` recorded.
+3. [x] Partition table and readable partitions dumped (`02-recon-results.md`).
+4. [x] Model/firmware confirmed (`ums512_1h10`, V1.23).
+5. [x] Bootloader state + T618 tools confirmed
+   (`07-bootloader-unlock-lock-unbrick.md`).
+6. [ ] GammaOS Next flash + rollback proof — **next**.
 
 ## Useful references
 

@@ -8,10 +8,11 @@ Sources: GammaOS Next installation wiki (fetched 2026-11-08),
 [`v.1.1.0-ANBERNICT618` release](https://github.com/TheGammaSqueeze/GammaOSNext/releases/tag/v.1.1.0-ANBERNICT618),
 live recon in `02-recon-results.md`.
 
-> **Decision (2026-11-08): stay on stock Android 12 for now.** Nothing in this
-> plan has been executed. The device is stock, bootloader locked, no usable root.
-> Revisit when a newer Android is actually wanted; the Windows unbricker path is
-> available (user has a Windows PC/VM).
+> **Update 2026-11-11: §4 (unlock) is EXECUTED.** The bootloader is unlocked
+> (`flash.locked=0`, `verifiedbootstate=orange`) and internal storage is wiped.
+> §5 archive is downloading; §6 (flash) and §7 (rollback proof) are the remaining
+> steps. See [07-bootloader-unlock-lock-unbrick.md](07-bootloader-unlock-lock-unbrick.md)
+> for the verified unlock/lock/unbrick runbook.
 
 ---
 
@@ -73,40 +74,69 @@ The unlock/wipe destroys **internal** storage; the microSD is separate.
 
 ---
 
-## 4. Unlock the bootloader (factory reset)
+## 4. Unlock the bootloader — ✅ DONE 2026-11-11
 
-Current state: `ro.boot.flash.locked=1`, `verifiedbootstate=green`,
-`sys.oem_unlock_allowed=0` [seen]. Enable **OEM unlocking** in Developer
-options first.
+Before (stock): `ro.boot.flash.locked=1`, `verifiedbootstate=green`,
+`sys.oem_unlock_allowed=0`. After: `flash.locked=0`, `verifiedbootstate=orange`.
 
 ```sh
-adb reboot bootloader
-# verify fastboot sees it
-fastboot devices
+python3 -m venv ~/.venvs/unisoc
+~/.venvs/unisoc/bin/pip install unisoc-unlock
 
-# Linux/macOS path:
-pip3 install unisoc-unlock
-python3 -m unisoc_unlock
-# On the device: confirm with the Home/Back button — NOT Volume Down.
-# Wait for "Unlock bootloader success!".
-
-fastboot reboot fastboot     # enter fastbootd (large red "fastbootd" text)
+adb reboot bootloader                              # ~10–50 s to enumerate
+until fastboot devices | grep -q 79783730379533; do sleep 1; done
+~/.venvs/unisoc/bin/python -m unisoc_unlock unlock  # confirm with Home/Back, NOT Vol-
 ```
 
-Alternative: Chrome tool `https://thegammasqueeze.github.io/subut-rehost/`
-(Connect → Unlock → confirm on device with Home/Back).
+Traps found on the real device (details in `07-bootloader-unlock-lock-unbrick.md`):
 
-> Unlocking **factory-resets/wipes** the device.
+- The tool waits only **60 s** for the on-screen confirmation. On timeout it
+  raises `LIBUSB_ERROR_TIMEOUT` — **but the unlock is often already applied**.
+  Our first run unlocked and wiped the device despite the error.
+- Retrying then returns `FAIL: Bootloader can not been unlocked repeatly.` —
+  that means **already unlocked**.
+- The **"OEM unlocking" developer toggle is not required**: it stayed off
+  (`sys.oem_unlock_allowed=0`) and the token/signature path worked.
+- Right after the wipe **USB debugging is off** and the device enumerates as MTP
+  (`1782:4001`); re-enable it in Developer options.
+- Keep the **microSD out**: it was observed dropping the device out of fastboot.
+
+Next mode for flashing:
+
+```sh
+fastboot reboot fastboot     # large red "fastbootd" text on screen
+```
 
 ---
 
 ## 5. Download & prepare GammaOS Next
 
-1. Download **all five** `RG405V_GammaOSNext_Lite_v1.1.7z.00X` parts (~2.3 GB).
-2. Put them in one folder; extract `.001` with 7-Zip; enter the password if
-   prompted. 7-Zip combines the parts into a folder containing
-   `FlashPartitions.sh`, `EraseUserData.sh`, etc.
-3. Verify the folder contains the RG405V scripts (not RG405M/RG505).
+Lite build for this unit — 5 parts, **2.31 GB** total:
+
+| Part | Size |
+|---|---:|
+| `RG405V_GammaOSNext_Lite_v1.1.7z.001` | 500.0 MB |
+| `RG405V_GammaOSNext_Lite_v1.1.7z.002` | 500.0 MB |
+| `RG405V_GammaOSNext_Lite_v1.1.7z.003` | 500.0 MB |
+| `RG405V_GammaOSNext_Lite_v1.1.7z.004` | 500.0 MB |
+| `RG405V_GammaOSNext_Lite_v1.1.7z.005` | 313.5 MB |
+
+The T618 release is now **public** (unlocked 2026-01-22); archive password:
+
+```
+e70d48dd31d62a88b3c4f774072c93a04aecb4a0255bf55fe00458406172212b
+```
+
+1. Download all five parts into one folder.
+2. `7z x RG405V_GammaOSNext_Lite_v1.1.7z.001` (password above) — 7-Zip combines
+   the parts and produces the firmware folder.
+3. Verify the folder contains the RG405V scripts (`FlashPartitions.sh`,
+   `EraseUserData.sh`), not RG405M/RG505.
+4. Integrity pre-check before flashing:
+   `7z t RG405V_GammaOSNext_Lite_v1.1.7z.001 -p<password>`.
+
+> Status 2026-11-11: download in progress on a slow link (~1.1 MB/s); flash
+> deferred until complete and integrity-tested.
 
 ---
 
@@ -129,13 +159,26 @@ logo); provisioning installs Daijisho/RetroArch and lands on the home screen.
 
 Official GammaOS Next "Stock Firmware / Unbricking" for **RG405V**:
 
-- Unbricker: <https://drive.google.com/file/d/1idODOwE197mRHwMHDU_Y7bnAiWiackbN/view>
-- The unbricker is normally driven by `UpgradeDownload.exe` (Windows). A Linux
-  path must be verified before flashing (Windows VM or the Unisoc toolchain).
+| Item | Value |
+|---|---|
+| File | `RG405V_UNBRICKER_SPD_Upgrade_Tool_R26.21.2801.7z` |
+| Size | 2,549,946,021 bytes (~2.4 GiB) |
+| URL | <https://drive.google.com/file/d/1idODOwE197mRHwMHDU_Y7bnAiWiackbN/view> |
+| Tool | Unisoc SPD Upgrade Tool (`UpgradeDownload.exe`, Windows) [inferred] |
+
+- The unbricker is normally driven by `UpgradeDownload.exe`. No verified Linux
+  path exists; `spd_dump` is untested with this PAC. Use a Windows VM with USB
+  passthrough.
 - After a successful stock restore, repeat the unlock/flash from §4.
+- **Status 2026-11-11: not downloaded yet** (slow link; user will fetch it on a
+  fast connection). Until then, §6 is one-way.
 
 > **Pre-flight gate:** download the unbricker and verify the tool can see the
-> device **before** unlocking. If this cannot be proven, do not flash.
+> device **before** the first partition write. The unlock itself is reversible
+> (stock still boots); a half-written flash is not.
+
+Full procedure, download-mode notes and troubleshooting:
+[07-bootloader-unlock-lock-unbrick.md](07-bootloader-unlock-lock-unbrick.md) §7.
 
 ---
 
