@@ -316,33 +316,33 @@ tools/rg405v-log.sh start      # ... tools/rg405v-log.sh stop
 
 ---
 
-## 11. Display: 640x480 is a panel/boot-image mismatch, not a `wm size` issue
+## 11. Display: 640x480 is the RG405V's native panel
 
-**2026-11-12.** `wm size` reports 640x480; `dumpsys display` exposes only one
-mode (640x480@60) and `/sys/class/drm/card0-DSI-1/modes` contains `480x640`.
+**Corrected 2026-11-12.** Anbernic's official RG405V spec is a **4-inch IPS
+touch screen, 640x480**, with **Mali-G52 MP2**. `wm size` = 640x480 is therefore
+**correct**, not a bug.
 
-Kernel cmdline:
+The kernel cmdline is confusing but consistent with that:
 
 ```
 lcd_id=IDffff
 lcd_name=lcd_d53e6ea8966_mipi_2lane_960X544
 lcd_size=640x480
-androidboot.dtbo_idx=1
 ```
 
-The RG405V panel is **960x1280**; `960X544` is the **RG505** panel. `lcd_id=IDffff`
-means the panel ID was not read and the bootloader fell back to 640x480.
-GammaOS Next v1.1.0 ships **separate RG405M / RG405V / RG505 packages**; this
-looks like an RG505 (or generic T618) boot image/DTBO on an RG405V.
+`lcd_name` is a shared panel-driver/timing name; the active `lcd_size` is
+640x480 and the DRM mode is 480x640 portrait (`ORIENTATION_90`), which is
+640x480 in landscape. The RG505 theory was wrong. `wm size`/`wm density` should
+be left alone.
 
-Do **not** use `wm size 960x1280`: the DRM mode is 480x640, so a logical size
-only scales the framebuffer, does not restore panel detail, and can cost
-performance.
+The RG405V GammaOS Next v1.1 Lite package was already downloaded and verified
+locally (`/home/souhail/rg405v-gammaos/`, 5 parts, 2.42 GB) and is the correct
+RG405V variant; the flash log shows the standard `FlashPartitions.sh` flow.
+No re-download/reflash is required for the screen.
 
-Fix path: back up `/data`, then clean-flash the **RG405V** package
-(`RG405V_GammaOSNext_Lite_v1.1.7z.00*`), and verify `wm size` and `lcd_name`.
-The release notes require a fresh install (no dirty flash). Rollback/unbricker
-is still unproven — do not start without a backup.
+The only genuinely missing rollback item is the **RG405V unbricker**
+(`RG405V_UNBRICKER_SPD_Upgrade_Tool_R26.21.2801.7z`, ~2.55 GB) — download it
+before any future reflash.
 
 ---
 
