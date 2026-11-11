@@ -249,9 +249,21 @@ SELinux Permissive, bootloader **unlocked** (`flash.locked=0`,
 - **Post-flash validated:** `/data` 110 GB (1.1 GB used), `wm size` 640×480,
   no `com.google.android.gms`/Play Store, Magisk 29.0 present, GammaOS apps
   (`gammapad` running, shader control, analog calibrator, joystick LED).
-- **Next steps:** device setup wizard → Magisk finish-install (adb shell still
-  uid 2000, no `su`) → new microSD + ROM library → reinstall Daijishō/emulators
-  → port andr36oid L3 layer.
+- **Mods (2026-11-11, built + tested):** **mouse mode** (L1+R1+Select; right
+  stick pointer, left scroll, A/B = left/right, configurable speed/deadzone) via
+  `tools/mousemode`; **USB mode switcher**; **USB HID gamepad** (kernel
+  `CONFIG_USB_CONFIGFS_F_HID=y`; needs `stop usb-hal-1-1` to avoid EBUSY;
+  self-restore watchdog); **andr36oid Panel** settings APK
+  (`org.andr36oid.panel`). Doc: `09-mods-and-tuning.md`.
+- **Tuning applied:** `performance_mode=stock`, 0.5× animations, 5 packages
+  disabled, 10 apps AOT-compiled, mouse + ADB-over-Wi-Fi in Magisk
+  `service.d`.
+- **microSD (SD16G) re-validated:** full-card `f3write` + `f3read` →
+  **0 errors**, 47 MB/s write / 84 MB/s read; formatted exFAT `ROMS`, 5.75 GiB
+  test set (neogeo/snes/nds/psx/psp/ps2/openbor + BIOS) copied and SHA-256
+  verified. One transient 1-bit copy error, recopied OK.
+- **Next steps:** insert card + confirm mount → Daijishō platform paths → run
+  one title per system → andr36oid L3 layer.
 - **Rollback:** GammaOS RG405V unbricker
   (`RG405V_UNBRICKER_SPD_Upgrade_Tool_R26.21.2801.7z`, 2.55 GB, Windows
   `UpgradeDownload.exe`) — **not downloaded yet**; no root = no full eMMC dump.

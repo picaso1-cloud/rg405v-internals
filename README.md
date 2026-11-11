@@ -70,6 +70,13 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
   force-stopped; `performance_mode` changed `max` → **`stock`** (idle 614 MHz /
   384 MHz GPU, SoC 45.0 → 39.3 °C); Wi-Fi + BT up, no GApps, no new crashes.
   Details: [08-post-flash-health-check.md](08-post-flash-health-check.md).
+- [x] **Mods built and tested (2026-11-11):** mouse mode with configurable
+  speed/deadzone/AB mapping (L1+R1+Select), USB mode switcher, **USB HID
+  gamepad** (kernel `F_HID`), and the **andr36oid Panel** settings APK.
+  Details: [09-mods-and-tuning.md](09-mods-and-tuning.md).
+- [x] **microSD validated:** `f3write` + `f3read` over the full 118 GB →
+  **0 errors**, 47/84 MB/s. 5.75 GiB test set (7 systems + BIOS) copied and
+  SHA-256 verified.
 - [ ] Unbricker downloaded/verified (rollback gate) — **still open**; 2.55 GB
   from Google Drive, Windows SPD tool.
 - [ ] Device setup wizard + **Magisk finish-install** (root not yet active in
@@ -91,6 +98,8 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 | [06-optimization.md](06-optimization.md) | Applied performance tuning: Daijishō default home, 0.5× animations, Doze exemptions, AOT compile, safe debloat + revert commands |
 | [07-bootloader-unlock-lock-unbrick.md](07-bootloader-unlock-lock-unbrick.md) | **Verified** unlock (Linux `unisoc-unlock`), state verification, lock, unbrick/rollback, mode matrix, troubleshooting |
 | [08-post-flash-health-check.md](08-post-flash-health-check.md) | Post-flash health check: subsystem matrix, setup-wizard spin, cosmetic D-state load, clock profiles (`max`→`stock`), Bluetooth HAL boot abort |
+| [09-mods-and-tuning.md](09-mods-and-tuning.md) | **Mouse mode** (L1+R1+Select), USB modes, **USB HID gamepad**, the **andr36oid Panel** settings app, tuning applied, and the full microSD validation |
+| [tools/](tools/) | Sources: `mousemode.c`, `hidpad.c` + `hid-gadget.sh`, `controlpanel/` (APK sources), `scripts/` (service.d, usbmode, perfmode) |
 | [tools/unisoc_unlock_long.py](tools/unisoc_unlock_long.py) | Unlock helper with a configurable confirmation window (`UNLOCK_WAIT_MS`, default 240 s) instead of the tool's hard-coded 60 s |
 
 ## First contact checklist (completed 2026-11-08 → 2026-11-11)
