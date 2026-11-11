@@ -66,6 +66,10 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
   Kernel may differ on GammaOS Next — re-verify.
 - [x] **Performance tuning** applied on stock (`06-optimization.md`); **void
   after the wipe**, kept as a checklist to re-apply on GammaOS Next.
+- [x] **Post-flash health check** (2026-11-11): all subsystems OK; setup wizard
+  force-stopped; `performance_mode` changed `max` → **`stock`** (idle 614 MHz /
+  384 MHz GPU, SoC 45.0 → 39.3 °C); Wi-Fi + BT up, no GApps, no new crashes.
+  Details: [08-post-flash-health-check.md](08-post-flash-health-check.md).
 - [ ] Unbricker downloaded/verified (rollback gate) — **still open**; 2.55 GB
   from Google Drive, Windows SPD tool.
 - [ ] Device setup wizard + **Magisk finish-install** (root not yet active in
@@ -86,6 +90,7 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 | [05-kernel-drivers-deep-dive.md](05-kernel-drivers-deep-dive.md) | Kernel 5.4.161 config, full running DTS, PMIC/charger/display/touch/WiFi/GPU topology |
 | [06-optimization.md](06-optimization.md) | Applied performance tuning: Daijishō default home, 0.5× animations, Doze exemptions, AOT compile, safe debloat + revert commands |
 | [07-bootloader-unlock-lock-unbrick.md](07-bootloader-unlock-lock-unbrick.md) | **Verified** unlock (Linux `unisoc-unlock`), state verification, lock, unbrick/rollback, mode matrix, troubleshooting |
+| [08-post-flash-health-check.md](08-post-flash-health-check.md) | Post-flash health check: subsystem matrix, setup-wizard spin, cosmetic D-state load, clock profiles (`max`→`stock`), Bluetooth HAL boot abort |
 | [tools/unisoc_unlock_long.py](tools/unisoc_unlock_long.py) | Unlock helper with a configurable confirmation window (`UNLOCK_WAIT_MS`, default 240 s) instead of the tool's hard-coded 60 s |
 
 ## First contact checklist (completed 2026-11-08 → 2026-11-11)
