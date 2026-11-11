@@ -375,7 +375,64 @@ GTA/Crash will be ~15–30 fps even at 1x native with auto-tune.
 
 ---
 
-## 13. Next steps
+## 13. Customisation backup (2026-11-12)
+
+Full local backup of the device customisations:
+
+`/home/souhail/rg405v-backup/custom-2026-11-12/` — 14 MB, 127 files,
+`MANIFEST.sha256`, `README.md` with restore commands.
+
+Contents:
+
+| Path | Contents |
+|---|---|
+| `service.d/` | `50-mousemode.sh`, `51-adb-wifi.sh`, `60-log-tuning.sh` |
+| `local-tmp/` | `mousemode` + conf, `hidpad` + HID descriptor + `hid-gadget.sh`, `dpadkeys` + conf (**retired**), `usbmode.sh`, `perfmode.sh`, logs |
+| `apks/` | `org.andr36oid.panel.apk` |
+| `appdata/` | Panel + Daijishō raw data (reference/selective restore) |
+| `settings/` | global/system/secure, packages, props, overlays, USB mode, Magisk, performance mode |
+
+Repo copies of the scripts: `tools/device-scripts/`.
+
+Restore notes: do **not** re-enable `52-dpadkeys.sh` — the D-pad is native.
+Settings dumps are reference; do not blindly restore `settings-secure.txt`
+(device identifiers). The Panel APK and Daijishō can be reinstalled/re-pointed
+more safely than raw app-data copy.
+
+State at backup: GammaOS Next v1.1 Lite (Android 14, `AP2A.240905.003`),
+Magisk 26.1/app 29.0, `performance_mode=stock`, USB `adb`, log buffers 4 MiB.
+
+---
+
+## 14. Custom GPU driver on Mali-G52 — feasibility (2026-11-12)
+
+The RG405V uses **Mali-G52 MP2** (GLES r34p0, kernel 5.4.161, vendor
+`mali_gondul`). Honest options:
+
+| Option | G52 support | Android drop-in | Verdict |
+|---|---|---|---|
+| ARMSX2 **MaliSX2** | **No** — G57/G68/G77/G78 only | APK driver list | Not applicable |
+| `libadrenotools` | No — Adreno only | — | Not applicable |
+| **Panfrost / PanVK** (Mesa) | Yes (Bifrost) | Experimental; needs custom Mesa + Vulkan loader/WSI + gralloc | Research project, not a drop-in |
+| Newer ARM Mali blob | Likely | Replaces `/vendor/lib*/libmali.so`; must match kernel `kbase` ABI | Risky (GPU hang) |
+| ARMSX2 **GLES backend** | Yes | App setting | Try this first |
+
+Documentation:
+
+- Panfrost: <https://docs.mesa3d.org/drivers/panfrost.html>
+- PanVK: <https://docs.mesa3d.org/drivers/panvk.html>
+- MaliSX2 (G57+): <https://github.com/bmdhacks/malisx2>
+- libadrenotools (Adreno): <https://github.com/bylaws/libadrenotools>
+- ARM Mali user-space drivers: <https://developer.arm.com/downloads/-/mali-drivers>
+
+Practical plan: no custom driver for G52 today. Tune ARMSX2 (GLES vs Vulkan,
+1x native, 30 fps cap, auto-tune) and revisit PanVK only if a packaged Android
+driver appears. The native 640x480 panel means PS2 renders at native
+resolution; there is no upscale cost to recover.
+
+---
+
+## 15. Next steps
 
 1. Insert the card into the phone; confirm `public:…` mounts and
    `/storage/<uuid>/ROMs` is readable.

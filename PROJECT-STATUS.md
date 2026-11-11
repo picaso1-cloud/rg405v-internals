@@ -15,7 +15,7 @@ be compacted and work resumed from this file alone. Mirrored in the device repos
 |---|---|---|---|
 | **Powkiddy RGB10 Max 2** | RK3326, 1 GB | andr36oid (Android 11) on SD | `adb connect <ip>:5555` (192.168.0.99 / 192.168.31.190); root daemon via `/data/local/tmp/cmd.in`; **currently: new SD card pending** |
 | **Anbernic RG353V** | RK3566, 2 GB | **GammaOS_Lite_v1.5** (Android 12, eMMC) + **ArkOS** (TF1) + ROMs (TF2) | Android: wireless adb `192.168.1.148:5555` (Magisk). ArkOS: `ssh ark@192.168.1.148`, password `ark`. Both currently offline |
-| **Anbernic RG405V** | Unisoc T618, 4 GB | Stock **Android 12 V1.23**, **bootloader UNLOCKED** (2026-11-11), internal storage wiped (116.5 GB eMMC + 128 GB microSD ROMs) | **USB ADB** `79783730379533` (`adb -s 79783730379533`); wireless ADB port changes after reboot. Recon complete (`rg405v-internals/02-recon-results.md`); target = GammaOS Next Lite (Android 14) + andr36oid layer |
+| **Anbernic RG405V** | Unisoc T618, Mali-G52 MP2, 4 GB | **GammaOS Next v1.1 Lite** (Android 14, no GApps), bootloader unlocked, Magisk 26.1/app 29.0; 4" IPS **640x480** (native); 116.5 GB eMMC | **USB ADB** `79783730379533`. Wi-Fi verified; customisations backed up (`/home/souhail/rg405v-backup/custom-2026-11-12/`). Unbricker download in progress. PS2: ARMSX2 2.9.3, stock Mali driver (no MaliSX2 on G52) |
 
 Host: `/home/souhail/Andr36oid` workspace. Devices are on `192.168.x` networks
 that change between sessions — re-scan if connect fails.
@@ -284,6 +284,25 @@ SELinux Permissive, bootloader **unlocked** (`flash.locked=0`,
   considered.
 
 ---
+
+### 2026-11-12 — RG405V state
+
+- **Wi-Fi:** Settings password dialog dismisses on Connect by design; the join
+  completes in the background. Verified on `Tenda_ED9470` with IP + internet.
+  Quick Settings path also works. `sprd-wlan` kernel log flood split into a
+  separate capture (`tools/rg405v-log.sh`, 4 MiB logd buffers).
+- **Display:** **640x480 is native** (4" IPS, official Anbernic spec). The
+  `lcd_name=...960X544` string is a shared panel-driver name; `lcd_size=640x480`
+  and the 480x640 DRM mode are correct. Do not change `wm size`.
+- **Packages:** correct `RG405V_GammaOSNext_Lite_v1.1` (5 parts, 2.42 GB) is
+  already local and was the one flashed; no re-download needed. The missing
+  rollback gate is the RG405V unbricker (2.55 GB), downloading 2026-11-12.
+- **GPU/PS2:** Mali-G52 MP2; MaliSX2 does not support G52, so stock Mali only.
+  ARMSX2 2.9.3 session: valid memcards, auto-tune on, GTA VCS 30 fps cap;
+  light 2D/3D titles only. OSD FPS was off, so no FPS numbers yet.
+- **Customisation backup:** `/home/souhail/rg405v-backup/custom-2026-11-12/`
+  (service.d, mousemode/hidpad/dpadkeys/usbmode/perfmode scripts, Panel APK,
+  Daijishō appdata, settings dumps, `MANIFEST.sha256`, restore README).
 
 ## Repositories & upstream
 
