@@ -266,7 +266,7 @@ SELinux Permissive, bootloader **unlocked** (`flash.locked=0`,
   one title per system → andr36oid L3 layer.
 - **Rollback:** GammaOS RG405V unbricker
   (`RG405V_UNBRICKER_SPD_Upgrade_Tool_R26.21.2801.7z`, 2.55 GB, Windows
-  `UpgradeDownload.exe`) — **not downloaded yet**; no root = no full eMMC dump.
+  `UpgradeDownload.exe`) — **download started 2026-11-12**; verify size/SHA-256 before use.
   Until it is fetched and proven, the first partition write is one-way.
 - **Stock-era installs (2026-11-08, lost in the wipe):** Daijishō 1.5.0
   (32 platforms), Droidify 0.7.8, Shizuku-Next 14.0.33; performance tuning
@@ -384,7 +384,7 @@ opened #2 manually).
   Data: `rg405v-internals/02-recon-results.md`.
 - **GammaOS Next plan written** (`rg405v-internals/03-gammaos-next-plan.md`):
   Android 14 Lite, fresh install, unlock via `unisoc-unlock`/subut-rehost,
-  fastbootd flash, mandatory data erase, RG405V unbricker as rollback gate.
+  fastbootd flash, mandatory data erase, RG405V unbricker as rollback gate (download started 2026-11-12).
   **Nothing flashed.**
 - **User decision: RG405V stays stock for now** — no unlock, no backup, no
   device changes. Plan + Windows unbricker path recorded for later.

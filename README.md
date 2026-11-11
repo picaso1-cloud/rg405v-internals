@@ -43,7 +43,7 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 > **2026-11-11: GammaOS Next v1.1 Lite is installed and booting.** Sequence:
 > unlock (Linux `unisoc-unlock`) → `adb reboot fastboot` (fastbootd) →
 > `FlashPartitions.sh` (exit 0, 0 failures) → `EraseUserData.sh` → first boot in
-> ~2 min. Android **14**, no GApps, **Magisk 29.0**. The unbricker is still
+> ~2 min. Android **14**, no GApps, **Magisk 29.0**. The unbricker is downloading (2026-11-12); verify
 > **not** downloaded (see below). Runbooks:
 > [07-bootloader-unlock-lock-unbrick.md](07-bootloader-unlock-lock-unbrick.md) ·
 > [03-gammaos-next-plan.md](03-gammaos-next-plan.md).
@@ -83,7 +83,7 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
   removed. Source kept in `tools/dpadkeys/` for reference. §5.
 - [x] **Touchscreen recovery documented:** controller can latch after USB/HID
   work; a plain reboot does not clear it, a **full power-off** does. §8.
-- [ ] Unbricker downloaded/verified (rollback gate) — **still open**; 2.55 GB
+- [~] Unbricker download started 2026-11-12 (2.55 GB); verify SHA-256/size before any reflash
   from Google Drive, Windows SPD tool.
 - [ ] Device setup wizard + **Magisk finish-install** (root not yet active in
   the shell: `id -u` = 2000, no `su`).
@@ -117,7 +117,7 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 5. [x] Bootloader state + T618 tools confirmed
    (`07-bootloader-unlock-lock-unbrick.md`).
 6. [x] GammaOS Next flash — **done 2026-11-11**; rollback proof still pending
-   (unbricker not downloaded).
+   (unbricker download in progress, 2026-11-12).
 
 ## Useful references
 
