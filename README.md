@@ -77,10 +77,10 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 - [x] **microSD validated:** `f3write` + `f3read` over the full 118 GB →
   **0 errors**, 47/84 MB/s. 5.75 GiB test set (7 systems + BIOS) copied and
   SHA-256 verified.
-- [x] **D-pad usable in Android UI:** `gammapad` only emits `ABS_HAT0X/Y`, so
-  AOSP Settings ignores it. `tools/dpadkeys` injects **Tab / Shift+Tab**,
-  **Enter** on A and **Back** on B (Nintendo layout); autostart via
-  `service.d`. See [09-mods-and-tuning.md](09-mods-and-tuning.md) §5.
+- [x] **D-pad in Android UI: native, row-by-row** — A opens, B goes back.
+  The Tab bridge written during diagnosis was the cause of a 2-row jump (hat
+  already moved one row + injected Tab); it is retired and its autostart
+  removed. Source kept in `tools/dpadkeys/` for reference. §5.
 - [x] **Touchscreen recovery documented:** controller can latch after USB/HID
   work; a plain reboot does not clear it, a **full power-off** does. §8.
 - [ ] Unbricker downloaded/verified (rollback gate) — **still open**; 2.55 GB

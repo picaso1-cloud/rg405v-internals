@@ -130,43 +130,26 @@ hid-generic ... USB HID v1.01 Gamepad
 
 ---
 
-## 5. D-pad in Android UI (Tab bridge)
+## 5. D-pad in Android UI — native works (bridge retired)
 
-**Problem:** `gammapad` forwards the D-pad only as **`ABS_HAT0X/Y`**. Games read
-that fine, but AOSP *phone* Settings navigates with **Tab / Enter**, not arrows.
-Verified on this build: a native `input keyevent 20` (DPAD_DOWN) focuses only
-`com.android.settings:id/homepage_container`; the individual rows are reachable
-with **Tab**.
+**Final state [seen]:** the controller D-pad navigates Android Settings **natively**
+— one row per press, **A opens**, **B goes back**. No helper is needed.
 
-**Fix:** [`tools/dpadkeys/dpadkeys.c`](tools/dpadkeys/dpadkeys.c) injects a
-virtual keyboard:
+History / why the bridge exists:
 
-| Input | Injected |
-|---|---|
-| D-pad Down | `TAB` |
-| D-pad Up | `SHIFT+TAB` |
-| D-pad Left / Right | `KEY_LEFT` / `KEY_RIGHT` |
-| A | `ENTER` |
-| B | `BACK` |
+- Early on the D-pad appeared to move only between groups. A Tab bridge
+  (`tools/dpadkeys`) was written because a native `input keyevent 20` only
+  focused `homepage_container` while rows were reachable with Tab.
+- After the **touch controller was reset with a full power-off** (see §8), the
+  native D-pad behaviour started working row-by-row, including A/B.
+- With the bridge running, every press moved **two** rows: the pad already moved
+  one row and the injected Tab moved another. Logs showed exactly one Tab per
+  press, which is how the double source was identified.
 
-**One press = one move** in Tab mode (repeat is disabled; a held press used to
-fire twice). Arrow mode keeps hold-to-repeat. The original hat events are still
-delivered, so emulators keep their normal D-pad.
-
-`/data/local/tmp/dpadkeys.conf`:
-
-```ini
-mode=tab          # tab (Android UI) or arrows
-enter_on_a=1
-back_on_b=1
-a_east=0          # 0: A (BTN_SOUTH) = Enter, B (BTN_EAST) = Back
-```
-
-Autostart: [`tools/scripts/52-dpadkeys.sh`](tools/scripts/52-dpadkeys.sh) in
-`/data/adb/service.d/`.
-
-Result [seen]: in Settings the D-pad now steps **one row per press** through the
-search bar, the category rows and the controls; A opens, B goes back.
+The bridge is therefore **disabled**: daemon stopped and
+`/data/adb/service.d/52-dpadkeys.sh` removed. The source stays in
+`tools/dpadkeys/` for builds where the native mapping regresses; the Panel's
+"D-pad bridge" switch defaults to **off**.
 
 ---
 

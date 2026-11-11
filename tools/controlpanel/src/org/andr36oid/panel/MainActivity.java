@@ -172,7 +172,7 @@ public class MainActivity extends Activity {
 
         dpadSwitch = new Switch(this);
         dpadSwitch.setText("Enable D-pad bridge");
-        dpadSwitch.setChecked(prefs.getBoolean("dpad_on", true));
+        dpadSwitch.setChecked(prefs.getBoolean("dpad_on", false));
         dpadSwitch.setOnCheckedChangeListener((v, checked) -> {
             prefs.edit().putBoolean("dpad_on", checked).apply();
             if (checked) startDpad(); else stopDpad();
