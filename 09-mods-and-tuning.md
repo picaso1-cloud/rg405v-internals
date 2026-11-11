@@ -278,7 +278,104 @@ GSI, worth investigating separately from the network stack.
 
 ---
 
-## 10. Next steps
+## 10. Logging hygiene: the sprd-wlan kernel flood
+
+**2026-11-12.** The Unisoc Wi-Fi driver (`sprd-wlan`, kernel `kworker` threads)
+logs every management frame at `I`/`W` level into the **kernel** log buffer.
+During association it emitted ~30k lines in about a minute, rotating away the
+application logs and making PS2/emulator debugging impossible.
+
+Facts:
+
+- The tag is kernel-side, so `log.tag.sprd-wlan` does **not** silence it.
+- Default logd buffers are only **256 KiB** each.
+- `sprd_wlan` exposes no debug-level sysfs parameter; `sc2355_sdio_wlan` only
+  has `wfa_cap`.
+- One real driver error is visible in the flood:
+  `sc2355_rx_rsp_process ... CMD_RND_MAC ... SPRD_CMD_STATUS_EXEC_ERROR`
+  (the MAC-randomisation command fails; the radio keeps using the factory MAC).
+
+Applied:
+
+- logd buffers resized to **4 MiB** each (`logcat -b main/system/crash/kernel
+  -G 4M`) and persisted via `persist.logd.size* = 4M`.
+- `/data/adb/service.d/60-log-tuning.sh` re-applies this at boot.
+- `tools/rg405v-log.sh` splits the streams on the host:
+  - `app` → `main+system+crash` (no sprd-wlan)
+  - `wifi` → `kernel` filtered to `sprd-wlan`
+  - `start`/`stop` → separate `logs/rg405v/app-*.log` and `wifi-*.log`
+  - `snapshot` → timestamped files
+
+Use it instead of `logcat -b all`:
+
+```sh
+tools/rg405v-log.sh app 2000
+tools/rg405v-log.sh wifi 300
+tools/rg405v-log.sh start      # ... tools/rg405v-log.sh stop
+```
+
+---
+
+## 11. Display: 640x480 is a panel/boot-image mismatch, not a `wm size` issue
+
+**2026-11-12.** `wm size` reports 640x480; `dumpsys display` exposes only one
+mode (640x480@60) and `/sys/class/drm/card0-DSI-1/modes` contains `480x640`.
+
+Kernel cmdline:
+
+```
+lcd_id=IDffff
+lcd_name=lcd_d53e6ea8966_mipi_2lane_960X544
+lcd_size=640x480
+androidboot.dtbo_idx=1
+```
+
+The RG405V panel is **960x1280**; `960X544` is the **RG505** panel. `lcd_id=IDffff`
+means the panel ID was not read and the bootloader fell back to 640x480.
+GammaOS Next v1.1.0 ships **separate RG405M / RG405V / RG505 packages**; this
+looks like an RG505 (or generic T618) boot image/DTBO on an RG405V.
+
+Do **not** use `wm size 960x1280`: the DRM mode is 480x640, so a logical size
+only scales the framebuffer, does not restore panel detail, and can cost
+performance.
+
+Fix path: back up `/data`, then clean-flash the **RG405V** package
+(`RG405V_GammaOSNext_Lite_v1.1.7z.00*`), and verify `wm size` and `lcd_name`.
+The release notes require a fresh install (no dirty flash). Rollback/unbricker
+is still unproven — do not start without a backup.
+
+---
+
+## 12. PS2 session findings — ARMSX2 2.9.3 (2026-11-12)
+
+Session log: `/sdcard/Android/data/com.armsx2/files/logs/session.log`.
+
+- GPU is **Mali-G52 MP2** (`GLES: ARM, Mali-G52, OpenGL ES 3.2 v1.r34p0...`),
+  **not G57**. MaliSX2 does not cover G52, so ARMSX2 is on the stock driver;
+  no custom driver is available for this device.
+- Memcards are valid: 8,650,752 bytes, header
+  `Sony PS2 Memory Card Format 1.2.0.0`, mtime at session end. The log's
+  `MCDBAK ... UNREADABLE` is the app's **auto-backup** step failing, not the
+  memcard itself.
+- Auto-tune is on. Committed per-game values:
+  - GTA Vice City Stories: `fpsLimit:30`
+  - Crash Tag Team Racing (SLUS-21191): `hwScaler:1`,
+    `hardwareDownloadMode:5`
+- Playtime: SLUS-21191 (Crash) 1002 s. Session CPU: 41m40s user + 2m15s
+  kernel, 45m49s foreground.
+- The log shows `ANDROID_SWAP_DISC` to other games (Crash, CvS2, GTA SA, NFS
+  Underground) while GTA VCS was running. Use the game list to switch titles;
+  disc swap is for multi-disc games.
+- OSD FPS was off, so no frame-rate numbers were recorded. Enable it in
+  ARMSX2 → Settings → OSD for the next run.
+
+Expectation: T618 + Mali-G52 MP2 is below the comfortable PS2 floor. 2D and
+light 3D titles (CvS2, Metal Slug Anthology, Grandia II) are the targets;
+GTA/Crash will be ~15–30 fps even at 1x native with auto-tune.
+
+---
+
+## 13. Next steps
 
 1. Insert the card into the phone; confirm `public:…` mounts and
    `/storage/<uuid>/ROMs` is readable.
