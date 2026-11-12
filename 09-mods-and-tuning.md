@@ -340,9 +340,9 @@ locally (`/home/souhail/rg405v-gammaos/`, 5 parts, 2.42 GB) and is the correct
 RG405V variant; the flash log shows the standard `FlashPartitions.sh` flow.
 No re-download/reflash is required for the screen.
 
-The only genuinely missing rollback item is the **RG405V unbricker**
-(`RG405V_UNBRICKER_SPD_Upgrade_Tool_R26.21.2801.7z`, ~2.55 GB) — download it
-before any future reflash.
+The **RG405V unbricker** was downloaded and verified on 2026-11-12:
+`RG405V_UNBRICKER_SPD_Upgrade_Tool_R26.21.2801.7z`, 2,549,946,021 bytes,
+SHA-256 `9212eec4274da0bd811a776078b9636e56af01d62d4a7f97d00960e2796b3b71`; `7z t` OK (115 files). The rollback gate is now covered.
 
 ---
 

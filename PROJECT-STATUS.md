@@ -15,7 +15,7 @@ be compacted and work resumed from this file alone. Mirrored in the device repos
 |---|---|---|---|
 | **Powkiddy RGB10 Max 2** | RK3326, 1 GB | andr36oid (Android 11) on SD | `adb connect <ip>:5555` (192.168.0.99 / 192.168.31.190); root daemon via `/data/local/tmp/cmd.in`; **currently: new SD card pending** |
 | **Anbernic RG353V** | RK3566, 2 GB | **GammaOS_Lite_v1.5** (Android 12, eMMC) + **ArkOS** (TF1) + ROMs (TF2) | Android: wireless adb `192.168.1.148:5555` (Magisk). ArkOS: `ssh ark@192.168.1.148`, password `ark`. Both currently offline |
-| **Anbernic RG405V** | Unisoc T618, Mali-G52 MP2, 4 GB | **GammaOS Next v1.1 Lite** (Android 14, no GApps), bootloader unlocked, Magisk 26.1/app 29.0; 4" IPS **640x480** (native); 116.5 GB eMMC | **USB ADB** `79783730379533`. Wi-Fi verified; customisations backed up (`/home/souhail/rg405v-backup/custom-2026-11-12/`). Unbricker download in progress. PS2: ARMSX2 2.9.3, stock Mali driver (no MaliSX2 on G52) |
+| **Anbernic RG405V** | Unisoc T618, Mali-G52 MP2, 4 GB | **GammaOS Next v1.1 Lite** (Android 14, no GApps), bootloader unlocked, Magisk 26.1/app 29.0; 4" IPS **640x480** (native); 116.5 GB eMMC | **USB ADB** `79783730379533`. Wi-Fi verified; customisations backed up (`/home/souhail/rg405v-backup/custom-2026-11-12/`). Unbricker downloaded/verified 2026-11-12. PS2: ARMSX2 2.9.3, stock Mali driver (no MaliSX2 on G52) |
 
 Host: `/home/souhail/Andr36oid` workspace. Devices are on `192.168.x` networks
 that change between sessions — re-scan if connect fails.
@@ -266,7 +266,7 @@ SELinux Permissive, bootloader **unlocked** (`flash.locked=0`,
   one title per system → andr36oid L3 layer.
 - **Rollback:** GammaOS RG405V unbricker
   (`RG405V_UNBRICKER_SPD_Upgrade_Tool_R26.21.2801.7z`, 2.55 GB, Windows
-  `UpgradeDownload.exe`) — **download started 2026-11-12**; verify size/SHA-256 before use.
+  `UpgradeDownload.exe`) — **downloaded/verified 2026-11-12** (2,549,946,021 bytes; SHA-256 `9212eec4274da0bd811a776078b9636e56af01d62d4a7f97d00960e2796b3b71`).
   Until it is fetched and proven, the first partition write is one-way.
 - **Stock-era installs (2026-11-08, lost in the wipe):** Daijishō 1.5.0
   (32 platforms), Droidify 0.7.8, Shizuku-Next 14.0.33; performance tuning
@@ -385,7 +385,7 @@ opened #2 manually).
   Data: `rg405v-internals/02-recon-results.md`.
 - **GammaOS Next plan written** (`rg405v-internals/03-gammaos-next-plan.md`):
   Android 14 Lite, fresh install, unlock via `unisoc-unlock`/subut-rehost,
-  fastbootd flash, mandatory data erase, RG405V unbricker as rollback gate (download started 2026-11-12).
+  fastbootd flash, mandatory data erase, RG405V unbricker as rollback gate (downloaded/verified 2026-11-12, SHA-256 `9212eec4274da0bd…`).
   **Nothing flashed.**
 - **User decision: RG405V stays stock for now** — no unlock, no backup, no
   device changes. Plan + Windows unbricker path recorded for later.

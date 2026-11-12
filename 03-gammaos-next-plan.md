@@ -200,7 +200,7 @@ Official GammaOS Next "Stock Firmware / Unbricking" for **RG405V**:
   path exists; `spd_dump` is untested with this PAC. Use a Windows VM with USB
   passthrough.
 - After a successful stock restore, repeat the unlock/flash from §4.
-- **Status 2026-11-12: download started** (2.55 GB; verify size/SHA-256 before use).
+- **Status 2026-11-12: downloaded and verified** (2,549,946,021 bytes; SHA-256 `9212eec4274da0bd811a776078b9636e56af01d62d4a7f97d00960e2796b3b71`; `7z t` OK).
   fast connection). Until then, §6 is one-way.
 
 > **Pre-flight gate:** download the unbricker and verify the tool can see the

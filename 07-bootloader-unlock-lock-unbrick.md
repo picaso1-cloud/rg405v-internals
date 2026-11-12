@@ -8,7 +8,7 @@ docs / vendor tooling · **[unknown]** not verified here.
 
 > **State on 2026-11-11: bootloader UNLOCKED, stock Android 12 V1.23, user data
 > wiped, GammaOS Next not yet flashed.** The unlock was done on Linux with
-> `unisoc-unlock`; the official unbricker download was started on **2026-11-12** (verify size/SHA-256 before trusting it).
+> `unisoc-unlock`; the official unbricker was **downloaded and verified on 2026-11-12** (2,549,946,021 bytes; SHA-256 `9212eec4274da0bd811a776078b9636e56af01d62d4a7f97d00960e2796b3b71`; `7z t` OK).
 
 ---
 
@@ -44,7 +44,7 @@ adb reboot fastboot       # Android -> fastbootd directly (needs adb)
 - [ ] `python3 -m venv` + `pip install unisoc-unlock`.
 - [ ] A **known-good USB data cable**; the unit enumerates on a USB-2 bus at
       `high-speed` — that is normal for this bootloader [seen].
-- [~] **Unbricker downloading** (2026-11-12); verify before writing partitions (§7).
+- [x] **Unbricker downloaded/verified** 2026-11-12 (2,549,946,021 bytes; SHA-256 `9212eec4274da0bd811a776078b9636e56af01d62d4a7f97d00960e2796b3b71`).
 
 Build/tool versions used: Android 12 **V1.23**, `fastboot 35.0.2`,
 `unisoc-unlock 0.0.2`.
