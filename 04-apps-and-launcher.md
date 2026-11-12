@@ -53,3 +53,33 @@ system partition changes**.
 - [ ] Apply safe optimizations: animation scales 0.5, battery exemption for
       Daijishō/emulators, AOT compile, optional reversible Google debloat.
 - [ ] Update emulators (PPSSPP/RetroArch/Flycast/Azahar) after Daijishō is set.
+
+
+## Daijishō artwork (box art) scraping
+
+Daijishō has no separate "artbox on/off" switch. Box art is scraped
+automatically when a platform is **synced**; the useful controls are:
+
+1. **Settings → Library → Aggressive scraping** — enable it when covers are
+   missing or the ROM name is not an exact match. Description in the app:
+   "Scraping box-arts with minimum constraints. Might result in wrong
+   box-arts scraped." Leave it off when the library is clean.
+2. **Sync the platform** — top-bar sync icon, or
+   **Settings → Library → Sync entirely**. This downloads box art, details and
+   (unless disabled) preview media.
+3. **Settings → Library → "Do not scrape preview media"** — keep this **off**
+   if you want Daijishō's images/videos; turn it on only if you supply your own
+   media.
+4. **Video and sounds → Preview video** — this toggles the video preview only;
+   it does not affect box art.
+5. **Per-game fix**: Library → highlight the game → **Edit Item** →
+   **Scraper Keyword** → add the exact title → **Save and scrape**.
+6. **Naming** — No-Intro / Redump names scrape best. Arcade platforms use
+   ArcadeItalia, which has a local limit; use a VPN or import media/XML if
+   needed (see the Daijishō FAQ wiki).
+
+Current card note: the 118 GB exFAT card reports as
+`00000000-0000-0000-0000-000000000001` to apps (ROMs at
+`/storage/00000000-0000-0000-0000-000000000001/ROMs`); the older
+`EAFBBC4089760D1F` path above belongs to a different card. In Daijishō's file
+picker, pick the card by name and add each `ROMs/<system>` folder.
