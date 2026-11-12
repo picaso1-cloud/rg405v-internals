@@ -481,3 +481,25 @@ systemctl {stop,start} emulationstation
   and the RKNN/G52 OpenCL note).
 - **Fan:** active `pwm-fan`; GammaOS default `auto` resolves to **off**.
   `persist.gammaos.fan_mode cool|max` for sustained sessions.
+
+### 2026-11-12 — AI optimization blueprint reviewed (on-device bench)
+
+- **Blueprint:** a boot-resident Cactus Needle 3 that watches the device and
+  executes root tuning scripts. Reviewed and **reframed**: the telemetry +
+  shadow-mode idea is good; the "autonomous brain" part is not justified here.
+- **Measured on the device** (engine 4.1.0, 20-layer weights, 5 tools,
+  `--depth 20 --threads 2`, `stock`): **2.0–2.4 s** per call, **~76 MB** peak
+  RAM, ~110 tok/s decode, **8/10** curated prompts correct. At `--depth 8`:
+  1/10 correct (disqualified). 4 threads is slower than 2.
+- **Confidence is not a gate:** correct calls scored **0.38–0.88**; at 0.85 only
+  1/10 would execute. Dangerous case: "battery saver for the train" →
+  `profile=max` (auto-suppressed by the engine).
+- **Also verified:** `use_freezer=true` already; `cmd game` exposes only
+  `standard/custom` for ARMSX2/PPSSPP/Flycast (no performance mode); zram has
+  lz4 active and zstd available.
+- **Decision:** deterministic session table first; AI offline on the logs;
+  on-device model only as an on-demand, 5-tool, assist-only router after it
+  beats the rules on replay. ADR-012. No system changes, no boot install.
+- **Artifacts:** `17-ai-optimization-blueprint-review.md`,
+  `tools/cactus-bench/` (tools.json, prompts, bench, raw runs, checksums).
+  Test binaries live in `/data/local/tmp/` and can be removed with `rm`.

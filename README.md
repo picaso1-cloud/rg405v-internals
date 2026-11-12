@@ -118,7 +118,8 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 | [14-gpu-acceleration-plan.md](14-gpu-acceleration-plan.md) | **GPU plan**: mainline Panfrost GLES 3.1 + PanVK Vulkan 1.3 (experimental), kmsro/sprd-drm checks, ARMSX2 gate, kbase+MaliSX2 fallback profile |
 | [15-linux-gpu-parking-and-references.md](15-linux-gpu-parking-and-references.md) | **Parked track**: why we wait, resume triggers/watchlist, review of ARM Vulkan SDK, libGPULayers, fxlin/mali, PanVK article, RKNN/G52 note |
 | [16-power-audit-and-watchdog.md](16-power-audit-and-watchdog.md) | **Power audit + watchdog**: real drain numbers, Doze/wakelock/service findings, safe tweaks, 10-min telemetry daemon, analysis thresholds and A/B protocol |
-| [tools/](tools/) | Sources: `mousemode.c`, `hidpad.c` + `hid-gadget.sh`, `controlpanel/` (APK sources), `scripts/` (service.d, usbmode, perfmode) |
+| [17-ai-optimization-blueprint-review.md](17-ai-optimization-blueprint-review.md) | **AI blueprint review**: Needle 3 on-device bench (2 s, 76 MB, 8/10), why "autonomous root AI" is the wrong target, deterministic-first architecture and safety contract |
+| [tools/](tools/) | Sources: `mousemode.c`, `hidpad.c` + `hid-gadget.sh`, `controlpanel/` (APK sources), `scripts/` (service.d, usbmode, perfmode), `cactus-bench/` |
 | [tools/unisoc_unlock_long.py](tools/unisoc_unlock_long.py) | Unlock helper with a configurable confirmation window (`UNLOCK_WAIT_MS`, default 240 s) instead of the tool's hard-coded 60 s |
 
 ## First contact checklist (completed 2026-11-08 → 2026-11-11)

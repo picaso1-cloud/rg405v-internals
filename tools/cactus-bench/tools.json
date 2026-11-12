@@ -1,0 +1,60 @@
+[
+  {
+    "name": "start_session",
+    "description": "Start a gaming or emulation session for a console system. Use when the user says they are about to play, launch, or start a game on a system.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "system": {
+          "type": "string",
+          "enum": ["ps2", "psp", "psx", "nds", "n64", "snes", "neogeo", "openbor", "switch", "other"]
+        }
+      },
+      "required": ["system"]
+    }
+  },
+  {
+    "name": "set_performance_profile",
+    "description": "Set the device CPU and GPU clock profile. max for heavy 3D emulation, stock for normal use, powersave for maximum battery life.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "profile": {"type": "string", "enum": ["max", "stock", "powersave"]}
+      },
+      "required": ["profile"]
+    }
+  },
+  {
+    "name": "set_fan_mode",
+    "description": "Set the cooling fan mode. off is silent, auto follows temperature, cool runs the fan gently, max runs it at full speed for long heavy sessions.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "mode": {"type": "string", "enum": ["off", "auto", "cool", "max"]}
+      },
+      "required": ["mode"]
+    }
+  },
+  {
+    "name": "set_screen_timeout",
+    "description": "Change how long the screen stays on before sleeping, in milliseconds. Use for reading, watching, or when the screen turns off too quickly.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "milliseconds": {"type": "integer", "minimum": 60000, "maximum": 600000}
+      },
+      "required": ["milliseconds"]
+    }
+  },
+  {
+    "name": "note",
+    "description": "Record a remark, preference, or observation for later review. Does not change any device setting.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "text": {"type": "string"}
+      },
+      "required": ["text"]
+    }
+  }
+]

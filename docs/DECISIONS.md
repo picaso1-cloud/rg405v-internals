@@ -222,3 +222,33 @@ and the PS2/MaliSX2 Android setup stays intact. The Linux/GPU designs are
 documented (`11`–`15`) and can be restarted without re-research. This track does
 **not** share the ROCKNIX core used by the RGB10/RG353V.
 
+## ADR-012 — AI optimization layer is assist-only and deterministic-first
+
+**Status:** proposed (2026-11-12) · no runtime code deployed; bench only
+
+**Context:** The "autonomous Android optimization" blueprint proposes a
+Magisk-resident Cactus Needle 3 (8–29 MB, tool-calling model) that watches the
+device and executes root-level tuning scripts. We tested the engine on the
+RG405V: `android-arm64` 4.1.0 + 20-layer weights runs, at **2.0–2.4 s** and
+**~76 MB** per one-shot call (`--depth 20 --threads 2`), and routes **8/10**
+curated prompts correctly. But it is a grammar-constrained **router**, not a
+planner: at 8 layers it misroutes 9/10; confidence on correct calls was
+**0.38–0.88** (a 0.85 gate executes 1/10); and "battery saver for the train"
+produced `profile=max` (withheld only by the engine's own suppression). The
+device is already lean (**0 wake locks, 0–8 mA idle, no GApps**), its cache
+freezer is already enabled, and the real knobs are three GammaOS profiles, four
+fan modes and emulator configs — a lookup table, not a reasoning problem.
+
+**Decision:** Build **Tier B first** — a deterministic `system → {profile, fan,
+config}` session script with a journal and dry-run. Use AI **offline** (Tier A)
+on the watchdog logs for analysis and rule proposals. Treat the on-device model
+as an optional **assist-only router** (Tier C): on-demand, 20 layers, 5 tools,
+typed args, allowlist dispatcher, shadow mode, kill switch. It must beat the
+rule table on a replay set before any live execution; fan control is the only
+candidate for auto mode. Do **not** ship a resident daemon, auto-debloat, live
+zram resizing, manual cgroup freezing or FSR routing.
+
+**Consequences:** no new root risk or battery cost now; the shadow/replay data
+will show whether the router earns its place. The bench harness is reproducible
+in `rg405v-internals/tools/cactus-bench/`; the full review is doc 17.
+
