@@ -404,42 +404,58 @@ Magisk 26.1/app 29.0, `performance_mode=stock`, USB `adb`, log buffers 4 MiB.
 
 ---
 
-## 14. Custom GPU driver on Mali-G52 — the real path (2026-11-12)
+## 14. MaliSX2 on Mali-G52 — WORKING (2026-11-12)
 
-The stable ARMSX2 2.9.3 hides the GPU-driver page on G52, but the driver
-ecosystem moved after it:
+**Confirmed on hardware:** patched ARMSX2 Nightly 20261111 + **MaliSX2 0.4.1**
++ **Renderer = Vulkan** booted **Capcom vs. SNK 2** through the memory-card
+format to the title/character-select screen on the RG405V (T618, Mali-G52 MP2,
+4 GB).
 
-- **MaliSX2 0.4.1** (2026-11-09) lists **Mali-G52 / G52 r1 (v7) as
-  experimental** and is built specifically for ARMSX2. Its release notes say
-  **God of War Collection runs at about 30 fps on an Anbernic RG Vita** — and
-  the RG Vita is **T618 + Mali-G52 MP2**, the same SoC/GPU class as the RG405V.
-- Stable 2.9.3 gates the page with `isMaliSX2Supported`; **ARMSX2 Nightly
-  20261111** is newer and is the app to test. The nightly installs as a separate
-  app (`com.armsx2.nightly`).
-- Install the nightly, then **Settings → Renderer / custom GPU driver**. If
-  MaliSX2 is listed, install it; otherwise use **Install from file** with
-  `malisx2-0.4.1-a833123f35.zip`.
-- The MaliSX2 zip is 16.8 MB, `minApi 29`, `meta.json` with `libraryName` — the
-  ARMSX2 driver format. G52 is **experimental**: if a game misbehaves, switch
-  back to the system driver.
+Emulator log proof:
 
-Fallbacks if MaliSX2 is not offered/works poorly:
+```
+VKLoader: opening custom Vulkan driver via adrenotools (...) name=libvulkan_malisx2.so
+VK: driver is malisx2 (driverInfo "v1.r44p1-malisx2.0.4.1.s9eab19d3cbdb")
+VK: GPU 'Mali-G52' vendor=0x13B5 ... | ROAA=yes fbfetch=yes(in-tile) ...
+Vulkan: Swapchain 640x480 ...
+GS: Classic renderer active (renderer=Vulkan)
+```
 
-| Driver | Package | Notes |
-|---|---|---|
-| **LukeValen PanVK G52** | `PanVk-V7-0.0.2-alpha.zip` (47 MB) | G52 MC2, kbase/JM; `meta.json` + `libvulkan_panfrost.so` |
-| **FristOneRR PanVK** | `PanVK-FristOneRR-V.3.7.0.zip` (6 MB) | lists T618 / G52 MC2; Android kbase |
-| Zenithblue PanVK | `EMULATOR.zip` | **glibc/Bachata, not Android** — do not use on the RG405V; the Android `.so` is a separate asset |
+### Why the app hides it
 
-If the nightly still hides the page:
+ARMSX2 gates the MaliSX2 setup step behind
 
-1. Patch the `isMaliSX2Supported` gate in the APK (smali) or build ARMSX2 from
-   source with a generic Mali import.
-2. Or test a system-wide Vulkan ICD (PanVK `.so` + ICD JSON) via Magisk/`wrap`
-   for `com.armsx2` — riskier, with GammaOS reflash/unbricker as recovery.
+```
+NativeApp.setMaliSX2Offered(isMaliSX2Supported(gpu))
+```
 
-The zip files are in `/home/souhail/rg405v-gammaos/drivers-test/` and in the
-customisation backup under `drivers/`.
+and `isMaliSX2Supported()` is false for Mali-G52 in the stable 2.9.3 and the
+20261111 nightly. The driver itself **does** support G52: MaliSX2 0.4.1 lists
+`Mali-G52 / G52 r1 (v7) — experimental`, and its notes report God of War
+Collection at ~30 fps on an RG Vita (T618/G52 MP2).
+
+### Required setup
+
+1. **Patched nightly APK** — force `setMaliSX2Offered(true)`; the build script
+   and patch are in `tools/patches/armsx2-malisx2-g52/`.
+   Ready-made: `/storage/.../Drivers/ARMSX2-nightly-20261111-MaliSX2-G52-patched.apk`
+   (SHA-256 `76924c41…`; debug-signed — uninstall the official nightly first).
+2. **MaliSX2 0.4.1** — `malisx2-0.4.1-a833123f35.zip` (on the card).
+3. Setup → **GPU driver** → **Download and install** (or Import).
+4. **Renderer = Vulkan.** This is the second trap: `Auto` picks **OpenGL** on
+   G52 (`Auto renderer -> OpenGL, no rule steers this device to Vulkan`), so
+   the custom Vulkan driver is never used.
+5. GPU Driver → `malisx2 0.4.1` (Active) → **Apply & Restart**.
+
+### Caveats
+
+- G52 is experimental. If a game shows black/missing textures or crashes,
+  switch to **System Vulkan driver** (or OpenGL).
+- The patched APK is debug-signed; an official nightly update needs an uninstall
+  (data loss) and a re-patch. Keep the official APK and the build script.
+- The patch only changes the offered flag; the driver loads through ARMSX2's
+  normal adrenotools path.
+- PanVK is no longer needed for PS2; keep it for Winlator/GameHub experiments.
 
 ---
 

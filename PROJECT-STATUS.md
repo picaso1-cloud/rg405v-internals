@@ -297,12 +297,12 @@ SELinux Permissive, bootloader **unlocked** (`flash.locked=0`,
 - **Packages:** correct `RG405V_GammaOSNext_Lite_v1.1` (5 parts, 2.42 GB) is
   already local and was the one flashed; no re-download needed. The missing
   rollback gate is the RG405V unbricker (2.55 GB), downloading 2026-11-12.
-- **GPU/PS2:** Mali-G52 MP2. Stable ARMSX2 2.9.3 hides the GPU-driver page on
-  G52, but **MaliSX2 0.4.1 now supports G52/G52 r1 experimentally** and its
-  release notes show God of War Collection ~30 fps on an RG Vita (T618/G52
-  MP2). Test with **ARMSX2 Nightly 20261111** + `malisx2-0.4.1` install from
-  file. Fallbacks: LukeValen PanVK G52, FristOneRR PanVK. PS2 otherwise stock
-  Mali, 1x native, 30 fps cap.
+- **GPU/PS2:** **MaliSX2 0.4.1 works on the G52** via a patched ARMSX2
+  Nightly 20261111 (force `setMaliSX2Offered(true)`) + **Vulkan** renderer.
+  Confirmed: CvS2 boots to character select; emulog shows `driver is malisx2`
+  and `GS: Classic renderer active (renderer=Vulkan)`. Auto/OpenGL does not use
+  the driver. Patch/build scripts: `tools/patches/armsx2-malisx2-g52/`.
+  G52 is experimental; fallback = System Vulkan driver.
 - **Recovery:** the **GammaOS Next v1.1 Lite reflash** is the tested soft-brick
   path (fastbootd; writes Android partitions only). The **official unbricker**
  (2.55 GB, SHA-256 `9212eec4…`, `7z t` OK) is the hard-brick/stock gate. See
