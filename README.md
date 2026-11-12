@@ -110,7 +110,10 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 | [06-optimization.md](06-optimization.md) | Applied performance tuning: Daijishō default home, 0.5× animations, Doze exemptions, AOT compile, safe debloat + revert commands |
 | [07-bootloader-unlock-lock-unbrick.md](07-bootloader-unlock-lock-unbrick.md) | **Verified** unlock (Linux `unisoc-unlock`), state verification, lock, unbrick/rollback, mode matrix, troubleshooting |
 | [08-post-flash-health-check.md](08-post-flash-health-check.md) | Post-flash health check: subsystem matrix, setup-wizard spin, cosmetic D-state load, clock profiles (`max`→`stock`), Bluetooth HAL boot abort |
-| [09-mods-and-tuning.md](09-mods-and-tuning.md) | **Mouse mode** (L1+R1+Select), USB modes, **USB HID gamepad**, the **andr36oid Panel** settings app, tuning applied, and the full microSD validation |
+| [09-mods-and-tuning.md](09-mods-and-tuning.md) | **Mouse mode** (L1+R1+Select), USB modes, **USB HID gamepad**, the **andr36oid Panel** settings app, tuning applied, fan control, and the full microSD validation |
+| [10-emulator-gpu-drivers.md](10-emulator-gpu-drivers.md) | **PS2 reproduction**: patched ARMSX2 + MaliSX2 on G52, driver traps, other-emulator matrix, PS3 result |
+| [11-linux-port-feasibility.md](11-linux-port-feasibility.md) | **Linux on T618**: `ums512-1h10` board, rg-rotate/Arch-R bases, SD boot without eMMC writes, hardware bring-up list |
+| [12-recovery-and-twrp.md](12-recovery-and-twrp.md) | **Recovery interfaces**: A/B layout, fastbootd, BROM/SPD, TWRP feasibility (`EEBBK` UMS512 precedent), rescue initramfs plan |
 | [tools/](tools/) | Sources: `mousemode.c`, `hidpad.c` + `hid-gadget.sh`, `controlpanel/` (APK sources), `scripts/` (service.d, usbmode, perfmode) |
 | [tools/unisoc_unlock_long.py](tools/unisoc_unlock_long.py) | Unlock helper with a configurable confirmation window (`UNLOCK_WAIT_MS`, default 240 s) instead of the tool's hard-coded 60 s |
 
