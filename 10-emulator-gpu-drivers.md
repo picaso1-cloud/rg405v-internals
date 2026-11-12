@@ -139,7 +139,7 @@ whether it exposes an install UI and whether it gates by GPU.
 | **Vita3K-Plus** (PS Vita) | MaliSX2 release notes: G52 tested by contributor | MaliSX2 0.4.1 | promising | the release notes say Vita3K-Plus has only been played on G52 so far |
 | **Eden / Lemon** (Switch) | PanVK is the recommended path | PanVK (Zenithblue / FristOneRR / LukeValen) | untested | T618 CPU is the limit; light games only |
 | **Winlator / GameHub** (Windows) | PanVK | Winlator zip / FristOneRR / LukeValen | untested | not a PS2 path; Winlator+PCSX2 is slower than native ARMSX2 |
-| **ARMSX3** (PS3) | yes — bundled adrenotools, generic zip loader | MaliSX2 0.4.1 | ⚠️ driver works; XMB hangs, **direct game boot works** | Minecraft boots past XMB at ~53 fps on the loading screen; gameplay TBD; see §5 |
+| **ARMSX3** (PS3) | yes — bundled adrenotools, generic zip loader | MaliSX2 0.4.1 | ❌ closed — memory wall | XMB hangs; direct boot works; gameplay ~20 fps then **OOM kill at 2.7 GB RSS** on 4 GB; see §5 |
 | **PPSSPP** (PSP) | no known Mali custom-driver UI | — | use system Vulkan | PPSSPP's own backends |
 | **RetroArch** | no per-app Mali driver UI | — | use system Vulkan | a system-wide ICD is the only advanced route |
 | **Flycast / Mupen64Plus / DraStic** | no known Mali custom-driver UI | — | use system driver | GLES/Vulkan as provided |
@@ -260,6 +260,18 @@ The "cheap game boot" test was run with the strongest settings available:
 - **XMB remains non-viable; direct game boot is the working path.** This also
   means the earlier "PS3 is not viable" verdict was too broad: the PS3 *boot
   path* works, the *XMB* does not.
+- **Final outcome (15:28) — OOM kill in first gameplay.** The compile bar
+  completed (module 66/66) ~33 min after launch, the world started, and
+  framerate dropped **53 → 23.7 → 19.8 fps** for roughly 90 s of real gameplay.
+  RSS then ballooned to **~2.7 GB** on the 4 GB device; `lowmemorykiller`
+  breached its watermark with swap also low and killed `com.armsx3` at
+  **15:28:44** (`oom_score_adj 0`, foreground TOP app). ARMSX3's own
+  next-launch banner confirms: `Previous exit: killed by Android for low
+  memory ... (985 MB PSS, 1075 MB RSS)`. A quick relaunch died the same way.
+- **Measured gameplay: ~20–24 fps before the OOM.** The limit is **RAM, not
+  CPU or GPU**: no clock, fan, or zram setting fixes a 2.7 GB working set on a
+  4 GB device (ARMSX3 minimum is 8 GB). **PS3 track closed with measured
+  limits:** boots ✓, loads ✓ (~33 min), playable ✗ (OOM in under 2 min).
 
 Revert with `setprop persist.gammaos.performance_mode stock` and
 `setprop persist.gammaos.fan_mode auto` when the test is over.
