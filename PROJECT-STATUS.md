@@ -463,3 +463,21 @@ systemctl {stop,start} emulationstation
 - RG353V: GammaOS = GSI+vendor; wireless adb persistence; gamemode/janitor;
   ARMSX2-on-ArkOS blocked by display stack (full record); ROCKNIX identified as
   the modern path; Arch-R port plan written.
+
+### 2026-11-12 — Linux / GPU track PARKED
+
+- **Decision:** Android remains the daily driver; **no Linux port, U-Boot
+  multiboot or TWRP work** until upstream compatibility improves. No
+  eMMC/U-Boot/SPL writes were made. See ADR-011.
+- **Why:** PanVK on G52 is Vulkan 1.3 **experimental** (non-conformant, gated);
+  MaliSX2 Linux needs **kbase** and is **ARMSX2-only** (not a general ICD);
+  Mesa kmsro ↔ **sprd-drm** is unproven; dual-boot adds custom U-Boot/SPL risk.
+- **What is proven/shared:** board is `ums512-1h10`; `rg-rotate` mainline 7.1
+  runs the same board (panel/USB/Wi-Fi/BT); Panfrost GLES 3.1 is conformant on
+  G52; Arch-R is a viable userland; U-Boot bootmenu is the only sane multiboot
+  (kexec is disabled).
+- **Resume triggers + reference review:** `15-linux-gpu-parking-and-references.md`
+  (includes ARM vulkan-sdk, libGPULayers, fxlin/mali, the 2022 PanVK article,
+  and the RKNN/G52 OpenCL note).
+- **Fan:** active `pwm-fan`; GammaOS default `auto` resolves to **off**.
+  `persist.gammaos.fan_mode cool|max` for sustained sessions.

@@ -196,3 +196,29 @@ experimental; the patched APK is debug-signed, so each official nightly needs
 an uninstall + re-patch. Other emulators are untested; the same driver zip is
 usable only where they expose a custom GPU driver loader. No stock/system
 driver is modified; recovery remains GammaOS reflash + verified unbricker.
+
+## ADR-011 — Park the T618 Linux/GPU track until upstream compatibility matures
+
+**Status:** accepted (parked) · 2026-11-12
+
+**Context:** The RG405V is `ums512-1h10`, the same board a working mainline
+7.1 port targets, so a Linux port is feasible. But the GPU path is not ready
+for daily use: PanVK on Mali-G52 is Vulkan 1.3 **experimental** behind
+`PAN_I_WANT_A_BROKEN_VULKAN_DRIVER=1` (non-conformant; 2022 field reports show
+scheduler timeouts/page faults on the same GPU); MaliSX2's Linux package needs
+Arm's **kbase** and implements only ARMSX2 calls (not a general Vulkan/GL
+stack); and Mesa's kmsro pairing with **sprd-drm** is unproven on this board.
+Dual-boot/TWRP would add custom U-Boot + SPL risk on top.
+
+**Decision:** park the Linux port, U-Boot multiboot and TWRP work. Android
+(GammaOS Next) remains the daily driver. Make **no eMMC/U-Boot/SPL writes**.
+Keep the research and resume only when the triggers in
+`rg405v-internals/15-linux-gpu-parking-and-references.md` §3 are met (PanVK G52
+maturity, ARMSX2/PanVK validation, MaliSX2 general support, an RG405V DTS or
+Arch-R UMS512 profile, kmsro sprd-drm, etc.).
+
+**Consequences:** no sunk cost or brick risk now; the device stays fully usable
+and the PS2/MaliSX2 Android setup stays intact. The Linux/GPU designs are
+documented (`11`–`15`) and can be restarted without re-research. This track does
+**not** share the ROCKNIX core used by the RGB10/RG353V.
+
