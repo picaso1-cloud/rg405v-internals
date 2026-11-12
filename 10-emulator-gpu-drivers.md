@@ -139,7 +139,7 @@ whether it exposes an install UI and whether it gates by GPU.
 | **Vita3K-Plus** (PS Vita) | MaliSX2 release notes: G52 tested by contributor | MaliSX2 0.4.1 | promising | the release notes say Vita3K-Plus has only been played on G52 so far |
 | **Eden / Lemon** (Switch) | PanVK is the recommended path | PanVK (Zenithblue / FristOneRR / LukeValen) | untested | T618 CPU is the limit; light games only |
 | **Winlator / GameHub** (Windows) | PanVK | Winlator zip / FristOneRR / LukeValen | untested | not a PS2 path; Winlator+PCSX2 is slower than native ARMSX2 |
-| **ARMSX3** (PS3) | yes — bundled adrenotools, generic zip loader | MaliSX2 0.4.1 | ⚠️ driver works, emulator not viable | XMB PPU hangs in a `silk_webkit` reload loop; see §5 |
+| **ARMSX3** (PS3) | yes — bundled adrenotools, generic zip loader | MaliSX2 0.4.1 | ⚠️ driver works; XMB hangs, **direct game boot works** | Minecraft boots past XMB at ~53 fps on the loading screen; gameplay TBD; see §5 |
 | **PPSSPP** (PSP) | no known Mali custom-driver UI | — | use system Vulkan | PPSSPP's own backends |
 | **RetroArch** | no per-app Mali driver UI | — | use system Vulkan | a system-wide ICD is the only advanced route |
 | **Flycast / Mupen64Plus / DraStic** | no known Mali custom-driver UI | — | use system driver | GLES/Vulkan as provided |
@@ -164,7 +164,7 @@ GammaOS reflash and the verified unbricker as recovery.
 
 ---
 
-## 5. PS3 — ARMSX3 (tested 2026-11-12: driver loads, emulator not viable)
+## 5. PS3 — ARMSX3 (tested 2026-11-12: driver works, XMB hangs, game boot works)
 
 **Short answer: no patch is needed to load MaliSX2 in ARMSX3 1.6.7 — and it
 still does not produce a usable PS3.** The blocker is CPU/PPU, not the GPU
@@ -225,16 +225,17 @@ dozens of modules, so it is not a usable progress indicator.
 
 ARMSX3's own published minimum is **Snapdragon 865/870, Adreno 650+ or
 Mali-G57+, 8 GB RAM**. The RG405V is a **T618 / Mali-G52 MP2 / 4 GB** — below
-the floor on every axis. Even a game that boots will be single-digit fps.
+the floor on every axis. The Minecraft loading screen still renders at ~53 fps,
+but that is not a gameplay number; expect low gameplay fps until measured.
 
 - Keep MaliSX2 selected if experimenting; it is strictly better than stock for
   Vulkan device creation.
-- Do not spend more time on the XMB path. A game boot (skip XMB) is the only
-  remaining cheap test; `Minecraft (PS3).iso` is the lightest title on hand.
+- The XMB path is a dead end. **Direct game boot works** (`Minecraft`), so use
+  that path to measure actual gameplay before judging viability.
 - To revert the driver: set `customDriverId` back to `""` (backup of the prefs
   file was kept at `/data/local/tmp/ARMSX2.xml.bak`).
 
-### 2026-11-12 retest — Minecraft (BLUS31426), max clocks
+### 2026-11-12 retest — Minecraft (BLUS31426), max clocks — **it boots**
 
 The "cheap game boot" test was run with the strongest settings available:
 
@@ -245,17 +246,22 @@ The "cheap game boot" test was run with the strongest settings available:
   `Vulkan driver bound (custom)`, `custom Vulkan driver applied:
   libvulkan_malisx2.so`, `Found Vulkan-compatible GPU: 'Mali-G52' running on
   driver 44.1.0`, identity `v1.r44p1-malisx2.0.4.1`.
-- **12 min after launch there was still no `emulog.txt` and no RSX frame.** The
-  `LLVM JIT` thread sat at ~103 % CPU with a **new PID every ~60 s** and its
-  `TIME+` resetting to ~21 s each time; RSS grew **0.9 → 1.2 GB**. That is the
-  same PPU recompilation/restart wall as the XMB run, not a GPU or thermal
-  limit.
-- Thermals stayed healthy on `fan_max`: soc **63.5 → 59.8 °C**, cputop
-  55.2 → 52.8 °C, GPU 54.1 → 52.6 °C.
+- **First correction: it is not stuck.** The first 12 minutes looked like the
+  XMB wall (JIT PID churn, no `emulog.txt`), but that was per-module PPU
+  compilation while the RSX thread was already rendering. Screenshots show the
+  Minecraft loading screen at **~53 fps**, and the progress bar advanced
+  **41 % → 48 % → 58 % in 5.5 min** (~3 %/min). Direct game boot bypasses the
+  XMB/`silk_webkit` loop that killed the previous test.
+- Thermals on `fan_max`: soc **59 → 67 °C**, cputop ~60 °C, GPU ~57 °C; RSS
+  0.9–1.2 GB with ~0.4–0.6 GB free. No OOM so far.
+- **Gameplay performance is still unmeasured.** The loading screen's 53 fps is
+  not a gameplay number; terrain generation is CPU-bound (one A75 at 2 GHz,
+  JIT thread 80–100 %). Wait for the world to load before judging playability.
+- **XMB remains non-viable; direct game boot is the working path.** This also
+  means the earlier "PS3 is not viable" verdict was too broad: the PS3 *boot
+  path* works, the *XMB* does not.
 
-**Verdict unchanged:** max clocks/fan remove the thermal excuse but do not fix
-the PPU JIT bottleneck. PS3 remains non-viable on the T618. Revert with
-`setprop persist.gammaos.performance_mode stock` and
+Revert with `setprop persist.gammaos.performance_mode stock` and
 `setprop persist.gammaos.fan_mode auto` when the test is over.
 
 ## 6. Recovery and fallbacks
