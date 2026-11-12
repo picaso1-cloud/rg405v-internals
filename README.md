@@ -113,11 +113,10 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 | [09-mods-and-tuning.md](09-mods-and-tuning.md) | **Mouse mode** (L1+R1+Select), USB modes, **USB HID gamepad**, the **andr36oid Panel** settings app, tuning applied, fan control, and the full microSD validation |
 | [10-emulator-gpu-drivers.md](10-emulator-gpu-drivers.md) | **PS2 reproduction**: patched ARMSX2 + MaliSX2 on G52, driver traps, other-emulator matrix, PS3 result |
 | [11-linux-port-feasibility.md](11-linux-port-feasibility.md) | **Linux on T618**: `ums512-1h10` board, rg-rotate/Arch-R bases, SD boot without eMMC writes, hardware bring-up list |
-| [14-gpu-acceleration-plan.md](14-gpu-acceleration-plan.md) |
-| [15-linux-gpu-parking-and-references.md](15-linux-gpu-parking-and-references.md) | **Parked track**: why we wait, resume triggers/watchlist, review of ARM Vulkan SDK, libGPULayers, fxlin/mali, PanVK article, RKNN/G52 note |
- **GPU plan**: mainline Panfrost GLES 3.1 + PanVK Vulkan 1.3 (experimental), kmsro/sprd-drm checks, ARMSX2 gate, kbase+MaliSX2 fallback profile |
-| [13-multiboot-menu.md](13-multiboot-menu.md) | **Multiboot design**: U-Boot bootmenu for Android / Linux / TWRP / rescue, SPL selection, one-shot `boot_target`, rollout phases |
 | [12-recovery-and-twrp.md](12-recovery-and-twrp.md) | **Recovery interfaces**: A/B layout, fastbootd, BROM/SPD, TWRP feasibility (`EEBBK` UMS512 precedent), rescue initramfs plan |
+| [13-multiboot-menu.md](13-multiboot-menu.md) | **Multiboot design**: U-Boot bootmenu for Android / Linux / TWRP / rescue, SPL selection, one-shot `boot_target`, rollout phases |
+| [14-gpu-acceleration-plan.md](14-gpu-acceleration-plan.md) | **GPU plan**: mainline Panfrost GLES 3.1 + PanVK Vulkan 1.3 (experimental), kmsro/sprd-drm checks, ARMSX2 gate, kbase+MaliSX2 fallback profile |
+| [15-linux-gpu-parking-and-references.md](15-linux-gpu-parking-and-references.md) | **Parked track**: why we wait, resume triggers/watchlist, review of ARM Vulkan SDK, libGPULayers, fxlin/mali, PanVK article, RKNN/G52 note |
 | [tools/](tools/) | Sources: `mousemode.c`, `hidpad.c` + `hid-gadget.sh`, `controlpanel/` (APK sources), `scripts/` (service.d, usbmode, perfmode) |
 | [tools/unisoc_unlock_long.py](tools/unisoc_unlock_long.py) | Unlock helper with a configurable confirmation window (`UNLOCK_WAIT_MS`, default 240 s) instead of the tool's hard-coded 60 s |
 
