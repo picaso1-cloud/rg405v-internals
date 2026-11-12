@@ -404,39 +404,42 @@ Magisk 26.1/app 29.0, `performance_mode=stock`, USB `adb`, log buffers 4 MiB.
 
 ---
 
-## 14. Custom GPU driver on Mali-G52 — why the option is missing
+## 14. Custom GPU driver on Mali-G52 — the real path (2026-11-12)
 
-The RG405V uses **Mali-G52 MP2** (GLES r34p0, kernel 5.4.161, vendor
-`mali_gondul`). ARMSX2 2.9.3 does **not** offer a custom driver on this SoC:
+The stable ARMSX2 2.9.3 hides the GPU-driver page on G52, but the driver
+ecosystem moved after it:
 
-- The Android UI exposes its **MaliSX2** GPU-driver page only when
-  `isMaliSX2Supported` is true (Mali-G57/G68/G77/G78). On G52 the page is
-  hidden, so there is no "custom GPU driver" entry.
-- The Qt **Driver Packs** page is **Adreno/Turnip-only**:
-  `DriverPacks::IsAdrenoGpu()` → `NoMatchingGpu`, with the message
-  "No driver packs for this GPU. Driver packs are Turnip builds ... Qualcomm
-  Adreno GPUs, and this device has none."
-- The FristOneRR PanVK zip's `meta.json` uses `"libraryName"`; ARMSX2's
-  driver-pack manifest expects `"manifest"`/`"library"`. It is not loadable
-  through ARMSX2.
+- **MaliSX2 0.4.1** (2026-11-09) lists **Mali-G52 / G52 r1 (v7) as
+  experimental** and is built specifically for ARMSX2. Its release notes say
+  **God of War Collection runs at about 30 fps on an Anbernic RG Vita** — and
+  the RG Vita is **T618 + Mali-G52 MP2**, the same SoC/GPU class as the RG405V.
+- Stable 2.9.3 gates the page with `isMaliSX2Supported`; **ARMSX2 Nightly
+  20261111** is newer and is the app to test. The nightly installs as a separate
+  app (`com.armsx2.nightly`).
+- Install the nightly, then **Settings → Renderer / custom GPU driver**. If
+  MaliSX2 is listed, install it; otherwise use **Install from file** with
+  `malisx2-0.4.1-a833123f35.zip`.
+- The MaliSX2 zip is 16.8 MB, `minApi 29`, `meta.json` with `libraryName` — the
+  ARMSX2 driver format. G52 is **experimental**: if a game misbehaves, switch
+  back to the system driver.
 
-| Option | G52? | ARMSX2? | Verdict |
-|---|---|---|---|
-| ARMSX2 MaliSX2 | No (G57/G68/G77/G78) | hidden on G52 | Not available |
-| ARMSX2 Driver Packs (Turnip) | No (Adreno only) | hidden on Mali | Not available |
-| FristOneRR PanVK 3.7.0 | Yes (G52 MC2 listed) | **No** — MaliSX2-specific loader | Use in Winlator/GameHub, not ARMSX2 |
-| Newer ARM Mali blob | Likely | replaces `/vendor/lib*/libmali.so` | risky, kernel ABI |
-| ARMSX2 GLES backend | Yes | app setting | use for tuning |
+Fallbacks if MaliSX2 is not offered/works poorly:
 
-**Conclusion:** on the RG405V there is **no custom Vulkan driver in ARMSX2**.
-PS2 stays on the stock Mali driver; tune 1x native, 30 fps cap, EE/VU 0,
-auto-tune. PanVK remains useful for **Winlator/GameHub** (Windows games) or
-another emulator with a generic Mali-kbase loader; Winlator+PCSX2 is slower
-than native ARMSX2 here, so it is not a PS2 win.
+| Driver | Package | Notes |
+|---|---|---|
+| **LukeValen PanVK G52** | `PanVk-V7-0.0.2-alpha.zip` (47 MB) | G52 MC2, kbase/JM; `meta.json` + `libvulkan_panfrost.so` |
+| **FristOneRR PanVK** | `PanVK-FristOneRR-V.3.7.0.zip` (6 MB) | lists T618 / G52 MC2; Android kbase |
+| Zenithblue PanVK | `EMULATOR.zip` | **glibc/Bachata, not Android** — do not use on the RG405V; the Android `.so` is a separate asset |
 
-The PanVK zip is still on the SD card (`Drivers/`) and in the customisation
-backup, for use in apps that accept the generic driver. It is not an ARMSX2
-drop-in.
+If the nightly still hides the page:
+
+1. Patch the `isMaliSX2Supported` gate in the APK (smali) or build ARMSX2 from
+   source with a generic Mali import.
+2. Or test a system-wide Vulkan ICD (PanVK `.so` + ICD JSON) via Magisk/`wrap`
+   for `com.armsx2` — riskier, with GammaOS reflash/unbricker as recovery.
+
+The zip files are in `/home/souhail/rg405v-gammaos/drivers-test/` and in the
+customisation backup under `drivers/`.
 
 ---
 
