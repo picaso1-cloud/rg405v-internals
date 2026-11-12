@@ -273,6 +273,45 @@ The "cheap game boot" test was run with the strongest settings available:
   4 GB device (ARMSX3 minimum is 8 GB). **PS3 track closed with measured
   limits:** boots ✓, loads ✓ (~33 min), playable ✗ (OOM in under 2 min).
 
+### Could PS3 ever be playable here? — walls and resume triggers
+
+What we proved in one day: the driver chain works (MaliSX2 on G52 via
+adrenotools), direct game boot bypasses XMB, and a real title reaches
+**~20 fps of gameplay** on a 2×A75. That is a CPU/JIT result, not a fantasy
+number. The remaining walls, and what could clear each:
+
+| Wall | Measured | What would clear it | Plausible? |
+|---|---|---|---|
+| XMB hang | `silk_webkit` loop | direct boot (done) | **solved** |
+| Boot time | ~33 min (first run, PPU LLVM compile) | **PPU cache persists** → second launch should skip most compiles | test now, cheap |
+| OOM kill | 2.7 GB RSS vs ~2.3 GB zram + ~2.3 GB RAM | bigger zram (3.5–4 GB zstd), lmkd watermark tuning, in-game render-distance cut | test now, cheap |
+| Gameplay fps | ~20 fps at world spawn | upstream JIT/SPU improvements; ARMv9 targets on future chips | wait on upstream |
+| Working set | Minecraft PS3 wants ~2.7 GB+ | ARMSX3 upstream memory work (cache eviction, RSX buffers); 8 GB T7xx/T8xx handhelds | hardware or upstream |
+
+**Cheap next tests (unrun):**
+
+1. **Second launch.** The PPU cache was written to
+   `cache/BLUS31426/ppu-*/`. If the relaunch loads cached modules, the 33-min
+   boot collapses — record the new boot time.
+2. **OOM mitigation.** Raise zram to ~3.5–4 GB with zstd (currently 2.3 GB
+   lz4), optionally tune `ro.lmk.*` watermarks via `resetprop`, then relaunch.
+   Even reaching 10+ min of gameplay at ~20 fps would make light titles
+   *borderline playable* rather than impossible.
+3. **In-game settings.** If the world opens long enough to open the Minecraft
+   menu: cut render distance to minimum — the working set is chunk-driven, so
+   this directly attacks the 2.7 GB.
+
+**Resume triggers (ADR-011 style — revisit when ≥2 are true):**
+
+- ARMSX3 upstream ships a memory-footprint reduction (cache eviction or
+  smaller RSX buffers) validated by changelog.
+- Second-launch boot time measured under ~10 min with stable RSS.
+- An OOM-mitigated run sustains ≥15 min gameplay without an LMK kill.
+- A T618-class-or-better handheld with ≥8 GB becomes available.
+
+Until then: PS2 (ARMSX2 nightly + MaliSX2 + per-game Vulkan) is the working
+path on this device; PS3 stays documented but parked.
+
 Revert with `setprop persist.gammaos.performance_mode stock` and
 `setprop persist.gammaos.fan_mode auto` when the test is over.
 
