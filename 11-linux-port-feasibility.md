@@ -78,7 +78,57 @@ Already supports the RG405V. Software rendering, audio stutter. Fine for
 - Cost: hybrid Android-kernel userspace, no mainline DRM/Panfrost, fragile
   upgrades. This is a research track, not a clean ROM.
 
-## 4. What “working” will and will not mean
+## 4. Base distribution: Arch-R (plan, 2026-11-12)
+
+**Arch-R** (`archr-linux/Arch-R`) is the right *userland* base, but it is an
+**RK3326** distribution — not a drop-in T618 image.
+
+What it is: Arch Linux ARM + pacman + systemd, kernel 6.12 LTS, Mesa 26
+Panfrost (libmali also shipped), a Rust/SDL2 launcher written for **640×480**
+(`archr-launcher`), RetroArch + standalone cores, PortMaster, and a Docker
+build (`make docker-RK3326`). Partition layout is FAT32 `BOOT` + ext4 `ROOT` +
+ext4 `STORAGE` with an `extlinux.conf`/overlay boot flow.
+
+| Keep from Arch-R | Replace for UMS512/RG405V |
+|---|---|
+| Arch Linux ARM rootfs, pacman, systemd | kernel: UMS512 SPRD tree (`rg-rotate` 7.1) or mainline 6.12/6.18 + UMS512 patches |
+| `archr-launcher` (native 640×480) | U-Boot/boot chain: UMS512 vendor U-Boot (`ums512_1h10`) or `fastboot boot` |
+| RetroArch/standalone packaging | DTS: panel, goodix touch, `singleadc-joypad`, `pwm-fan`, SC2730, WCN SDIO |
+| FAT32 BOOT + ext4 ROOT/STORAGE layout | GPU stack: **Mesa Panfrost** for G52 — do **not** reuse the RK3326 libmali blob |
+| zram/network/update scripts | board auto-detect via SARADC → hardcode a DTS first, adapt later |
+
+Integration shape: fork Arch-R, add
+`projects/ArchR/devices/UMS512/{linux,dts,patches,options}` and a
+`make docker-UMS512` target. The rootfs is reused almost unchanged; only the
+kernel, boot chain and device tree are new.
+
+### 4.1 Booting from SD without flashing the eMMC
+
+The stock chain is **SPL → U-Boot (`uboot_a/b`) → `boot_a` → Android**
+(slot `_a`, verified-boot state `orange`, `flash.locked=0`). The SD-card
+extlinux scan used by `rg-rotate` lives in **its patched U-Boot**, not in the
+stock one. So "SD boot with zero writes" has to be engineered:
+
+| Method | Writes eMMC? | Needs PC each boot? | Notes |
+|---|---|---|---|
+| **`fastboot boot <boot.img>`** | **no** | yes | kernel+DTB+initramfs loaded to RAM; best bring-up path |
+| **kexec from rooted Android** | no | no | **not available**: vendor kernel exposes only the weak `__arm64_sys_kexec_load` stub |
+| **Flash patched U-Boot to `uboot_a`** | yes (bootloader partition only) | no | what `rg-rotate` does; reversible; keep a dump |
+| **Swap `boot_a` for a Linux boot image** | yes (`boot_a` only) | no | no-PC SD boot; restore the backup with fastboot |
+| BootROM SD boot | — | — | UMS512 BootROM does not scan the TF slot |
+
+Recommended sequence: **`fastboot boot` during bring-up → then `boot_a` swap
+(with a verified backup) for a no-PC daily boot.** Userdata/Android are never
+touched by either.
+
+### 4.2 Vulkan: still the fork in the road
+
+Arch-R's stack is GLES via Mesa Panfrost. **MaliSX2 0.5.0's Linux package
+requires Arm's kbase driver**, not mainline Panfrost, so a mainline Arch-R
+image cannot use it. A Vulkan/PS2 Linux build would need the vendor 5.4 kernel
++ kbase as a second profile — a separate track, not a tweak.
+
+## 5. What “working” will and will not mean
 
 | Capability | Mainline (B) | Vendor kbase (C) |
 |---|---|---|
@@ -95,7 +145,7 @@ Already supports the RG405V. Software rendering, audio stutter. Fine for
 (PS1, SNES, N64, Saturn, DS, PSP). It is **not** a PS2 machine unless path C
 works, and even then the T618 CPU is the limit.
 
-## 5. Effort and risk
+## 6. Effort and risk
 
 - **Console + panel + touch:** 1–2 weekends if the rg-rotate kernel and DTS
   carry over.
@@ -109,16 +159,17 @@ works, and even then the T618 CPU is the limit.
   by the RGB10/RG353V. If pursued, record it as a separate ADR (proposed
   ADR-011) so the “shared core” decision stays honest.
 
-## 6. Recommended next step
+## 7. Recommended next step
 
 1. Back up the current eMMC/Android state and confirm the SPD unbricker path.
 2. Clone `rg-rotate-linux` with submodules; build the kernel + `ums512-1h10`
-   DTB; boot it **read-only from TF** with an initramfs and USB console.
+   DTB; **`fastboot boot`** it with an initramfs and USB console (no eMMC write).
+   Fork Arch-R in parallel and add the `UMS512` device profile.
 3. Add RG405V DTS deltas one block at a time (panel → touch → fan → joypad).
 4. Only after console/panel/controls work, choose the rootfs (Debian 13 vs
    Buildroot) and the GPU path (Panfrost vs vendor kbase + MaliSX2).
 
-## 7. Sources
+## 8. Sources
 
 - `beebono/rg-rotate-linux` — mainline 7.1 on UMS512/T618, `ums512_1h10`,
   SD-card boot, panel/USB/Wi-Fi/BT working.
