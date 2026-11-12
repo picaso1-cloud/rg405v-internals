@@ -226,7 +226,33 @@ fastboot reboot fastboot                             # fastbootd for flashing
 
 ---
 
-## 10. Maintenance
+## 10. Mali-G52 custom Vulkan driver (ARMSX2 / Android)
+
+**Verified 2026-11-12 on the RG405V (T618, Mali-G52 MP2).**
+
+- **MaliSX2 0.4.1** supports `Mali-G52 / G52 r1 (v7)` as **experimental**; its
+  release notes report God of War Collection ~30 fps on an RG Vita (T618/G52).
+- ARMSX2 stable 2.9.3 and nightly 20261111 hide the MaliSX2 setup step because
+  `isMaliSX2Supported()` is false for G52. The driver itself is fine. Patch:
+  force `NativeApp.setMaliSX2Offered(true)` in `ek2.smali`; build/sign the APK
+  (`tools/patches/armsx2-malisx2-g52/`). Patched nightly SHA-256 `76924c41…`.
+- **Second trap:** `Auto` renderer picks **OpenGL** on G52
+  (`Auto renderer -> OpenGL, no rule steers this device to Vulkan`). You must
+  select **Vulkan**; otherwise the custom Vulkan driver is never used.
+- Driver zip format: `meta.json` + `libvulkan_<name>.so` at the zip root.
+  MaliSX2 uses `libvulkan_malisx2.so`; ARMSX2's generic "GPU Driver" page is
+  Adreno/Turnip-only (`libvulkan_freedreno.so`) and will reject Mali zips.
+- Verify in `Android/data/com.armsx2.nightly/files/logs/emulog.txt`:
+  `VKLoader ... libvulkan_malisx2.so`, `VK: driver is malisx2`,
+  `GS: Classic renderer active (renderer=Vulkan)`.
+- Other emulators: MaliSX2 release notes list Dolphin, hakuX and Vita3K-Plus;
+  PanVK (FristOneRR/Zenithblue/LukeValen) is the route for Winlator/GameHub and
+  other generic loaders. Full matrix: `10-emulator-gpu-drivers.md`.
+- G52 is experimental. Fall back to System Vulkan/OpenGL; keep the official
+  APK and the stable app. The patched APK is debug-signed, so official nightly
+  updates need an uninstall + re-patch.
+
+## 11. Maintenance
 
 - Add a row whenever a finding is reusable on a second device.
 - If a finding is device-specific, it still belongs here with its applicability.

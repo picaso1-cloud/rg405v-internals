@@ -40,6 +40,12 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 
 ## Status
 
+> **PS2 custom driver (2026-11-12):** **MaliSX2 0.4.1 works on the G52** via a
+> patched ARMSX2 Nightly + **Vulkan** (CvS2 verified). See
+> [`10-emulator-gpu-drivers.md`](10-emulator-gpu-drivers.md) for the exact
+> reproduction and the other-emulator matrix.
+
+
 > **2026-11-11: GammaOS Next v1.1 Lite is installed and booting.** Sequence:
 > unlock (Linux `unisoc-unlock`) → `adb reboot fastboot` (fastbootd) →
 > `FlashPartitions.sh` (exit 0, 0 failures) → `EraseUserData.sh` → first boot in

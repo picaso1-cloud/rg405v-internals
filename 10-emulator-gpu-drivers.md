@@ -1,0 +1,182 @@
+# Custom GPU drivers on the RG405V (Mali-G52 MP2)
+
+**Last updated:** 2026-11-12
+
+This is the reproducible guide for the MaliSX2/ARMSX2 work, plus what is known
+about the same approach in the other emulators. It assumes the RG405V on
+GammaOS Next v1.1 Lite (Android 14), Mali-G52 MP2, vendor `mali_gondul` kbase.
+
+---
+
+## 1. The one verified result
+
+**PS2 — ARMSX2 Nightly 20261111 (patched) + MaliSX2 0.4.1 + Renderer Vulkan.**
+
+Capcom vs. SNK 2 booted through the memory-card format to the title/VS-ranking
+screen on the RG405V. Confirmed in `emulog.txt`:
+
+```
+VKLoader: opening custom Vulkan driver via adrenotools (...) name=libvulkan_malisx2.so
+VK: driver is malisx2 (driverInfo "v1.r44p1-malisx2.0.4.1.s9eab19d3cbdb")
+VK: GPU 'Mali-G52' vendor=0x13B5 ... fbfetch=yes(in-tile) ...
+Vulkan: Swapchain 640x480 ...
+GS: Classic renderer active (renderer=Vulkan)
+```
+
+---
+
+## 2. The two traps (read this before anything else)
+
+1. **The app hides the driver page on G52.** ARMSX2 stable and nightly compute
+   `setMaliSX2Offered(isMaliSX2Supported(gpu))`; `isMaliSX2Supported()` is false
+   for Mali-G52, so the MaliSX2 setup step never appears. MaliSX2 **0.4.1**
+   itself lists `Mali-G52 / G52 r1 (v7) — experimental`, so the gate is wrong
+   for this driver version. The patch forces the flag to true.
+2. **`Auto` renderer picks OpenGL on G52.** Even with the driver installed,
+   `Auto renderer -> OpenGL, no rule steers this device to Vulkan`. You must
+   select **Vulkan** manually; otherwise the custom Vulkan driver is never used.
+
+The same pattern applies to other emulators: *custom driver installed* ≠
+*driver used*. Always verify the renderer and the driver name in the log.
+
+---
+
+## 3. PS2 — reproduce from scratch
+
+### Files
+
+| File | Purpose | SHA-256 |
+|---|---|---|
+| `ARMSX2-nightly-20261111-MaliSX2-G52-patched.apk` | patched nightly (debug-signed) | `76924c41…` |
+| `malisx2-0.4.1-a833123f35.zip` | MaliSX2 driver | `feb44fcb…` |
+| `ARMSX2-nightly-20261111.apk` | official nightly fallback | — |
+
+All are on the SD card at `/storage/00000000-0000-0000-0000-000000000001/Drivers/`
+and in `/home/souhail/rg405v-backup/custom-2026-11-12/drivers/`.
+
+### Install
+
+```sh
+adb uninstall com.armsx2.nightly          # if the official nightly is installed
+adb install ARMSX2-nightly-20261111-MaliSX2-G52-patched.apk
+```
+
+### Configure
+
+1. Finish the setup wizard (**App Data Folder**, **BIOS**, **ROMs**).
+2. When the **GPU driver** step appears, choose **Download and install**
+   (MaliSX2 0.4.1), or **Import** the zip.
+3. Start a game, open the pause menu → **Renderer** tab.
+4. Select **Vulkan** (not Auto).
+5. Under **GPU Driver**, select **malisx2 0.4.1** (it should show **Active**).
+6. **Apply & Restart**.
+
+### Verify
+
+`Android/data/com.armsx2.nightly/files/logs/emulog.txt` must contain:
+
+```
+VKLoader: opening custom Vulkan driver via adrenotools ... libvulkan_malisx2.so
+VK: driver is malisx2
+GS: Classic renderer active (renderer=Vulkan)
+```
+
+If it says `Auto renderer -> OpenGL` or `GL_RENDERER: Mali-G52`, the renderer
+is still OpenGL and the custom driver is not in use.
+
+### Rebuild the patch for a future nightly
+
+```sh
+cd rg405v-internals/tools/patches/armsx2-malisx2-g52
+./build-patched-apk.sh ARMSX2-nightly-YYYYMMDD-...-Android-arm64.apk
+```
+
+This decompiles, replaces the boolean before `setMaliSX2Offered` with
+`const/4 v1, 0x1`, reassembles `classes.dex`, swaps it into the APK, zipaligns
+and signs with a local debug key. If a nightly changes `ek2.smali`, the script
+aborts instead of producing a broken APK; adjust the pattern then.
+
+**Signing:** the patched APK is debug-signed. Official nightly updates require
+an uninstall (losing app data) and a re-patch. Keep the official APK and the
+stable `com.armsx2` app as fallbacks.
+
+### Test matrix
+
+| Game | Status |
+|---|---|
+| Capcom vs. SNK 2 | ✅ boots to title/VS ranking on Vulkan+MaliSX2 |
+| Metal Slug Anthology | to test |
+| Grandia II | to test |
+| GTA San Andreas / Vice City Stories | to test; heavy |
+| Crash Tag Team Racing | to test; heavy |
+
+G52 is **experimental**. If a game shows black/missing textures or crashes,
+switch **GPU Driver → System Vulkan driver** (or OpenGL). MSAA is not
+implemented in MaliSX2; games that require it may not start.
+
+---
+
+## 4. Other emulators — what is known
+
+The driver zip format is the same for every app that accepts custom Vulkan
+drivers: `meta.json` + `libvulkan_*.so` at the zip root. The **app** decides
+whether it exposes an install UI and whether it gates by GPU.
+
+| Emulator | Custom driver support | Driver | Status on this device | Notes |
+|---|---|---|---|---|
+| **ARMSX2** (PS2) | yes (MaliSX2) | MaliSX2 0.4.1 | ✅ verified | patched nightly + Vulkan |
+| **Dolphin** (GC/Wii) | MaliSX2 release notes list Dolphin | MaliSX2 0.4.1 | untested | install zip in Dolphin's GPU driver setting; Vulkan; UI may vary |
+| **hakuX** (Xbox) | MaliSX2 release notes list hakuX | MaliSX2 0.4.1 | untested | Vulkan; check driver UI |
+| **Vita3K-Plus** (PS Vita) | MaliSX2 release notes: G52 tested by contributor | MaliSX2 0.4.1 | promising | the release notes say Vita3K-Plus has only been played on G52 so far |
+| **Eden / Lemon** (Switch) | PanVK is the recommended path | PanVK (Zenithblue / FristOneRR / LukeValen) | untested | T618 CPU is the limit; light games only |
+| **Winlator / GameHub** (Windows) | PanVK | Winlator zip / FristOneRR / LukeValen | untested | not a PS2 path; Winlator+PCSX2 is slower than native ARMSX2 |
+| **ARMSX3 / RPCSX** (PS3) | no MaliSX2 listing | — | not recommended | T618 is far below the PS3 floor |
+| **PPSSPP** (PSP) | no known Mali custom-driver UI | — | use system Vulkan | PPSSPP's own backends |
+| **RetroArch** | no per-app Mali driver UI | — | use system Vulkan | a system-wide ICD is the only advanced route |
+| **Flycast / Mupen64Plus / DraStic** | no known Mali custom-driver UI | — | use system driver | GLES/Vulkan as provided |
+
+### How to try another emulator
+
+1. Use a build that has a **custom GPU driver** / **GPU driver** setting.
+2. Put the driver zip on the SD card (`/Drivers/` is fine).
+3. Install the zip from the emulator's driver screen.
+4. Select **Vulkan** as the renderer.
+5. Start a game and check the app's log for the driver name and `Vulkan`.
+6. If the setting is missing, the app may gate by GPU like ARMSX2; check the
+   project's source/issues before patching. Do not patch blindly.
+
+### Advanced: system-wide ICD (not recommended yet)
+
+A Mali Vulkan ICD (MaliSX2 or PanVK `.so` + JSON) could be added under
+`/system/etc/vulkan/icd.d/` with a Magisk module and forced with
+`VK_ICD_FILENAMES`/`wrap.<package>`. This can black-screen Vulkan apps and is
+harder to revert than a per-app driver. Use only as an experiment, with the
+GammaOS reflash and the verified unbricker as recovery.
+
+---
+
+## 5. Recovery and fallbacks
+
+- **System driver:** ARMSX2 → pause → Renderer → GPU Driver → System Vulkan
+  driver (or OpenGL). The stock driver is untouched.
+- **Official app:** keep the official nightly and stable APK; uninstall the
+  patched app if needed.
+- **ROMs/saves:** ROMs on the SD card are untouched. App data (memcards, saves)
+  is in the app's data folder; back it up if you uninstall.
+- **System:** GammaOS reflash = soft-brick recovery; official RG405V unbricker =
+  hard-brick/stock recovery. See `RECOVERY.md`.
+
+---
+
+## 6. Maintenance checklist
+
+- [ ] Every new ARMSX2 nightly: re-run `build-patched-apk.sh`, test Vulkan +
+      MaliSX2, keep the previous working APK.
+- [ ] Every new MaliSX2 release: update the zip, clear shader cache, re-test
+      CvS2 / Metal Slug / Grandia II; record results.
+- [ ] Test one Dolphin/hakuX/Vita3K-Plus game with the same zip; record whether
+      the app exposes the driver UI and whether G52 is stable.
+- [ ] Keep the official APKs, driver zips and `MALISX2-WORKING.txt` on the SD
+      card and in the customisation backup.
+- [ ] If G52 artifacts appear: switch to system driver, capture logcat/emulog,
+      report to the driver project (MaliSX2 or PanVK).

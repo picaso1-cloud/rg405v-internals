@@ -173,3 +173,25 @@ SELinux Permissive, Magisk 29.0, **no GMS/Play Store**, 110 GB `/data`.
 microSD is preserved. The stock image is not recoverable from userspace (no
 root), so the unbricker is the rollback. Post-install, port the andr36oid L3
 layer only after the device is stable.
+
+## ADR-010 — RG405V: patched ARMSX2 Nightly + MaliSX2 0.4.1 for PS2
+
+**Status:** accepted · 2026-11-12
+
+**Context:** ARMSX2 stable 2.9.3 and nightly 20261111 hide the MaliSX2 setup
+step on Mali-G52 because `isMaliSX2Supported()` is false for G52. MaliSX2 0.4.1
+itself supports G52/G52 r1 (v7) as experimental. Even with the driver
+installed, the `Auto` renderer selects OpenGL on G52, so the Vulkan driver is
+not used.
+
+**Decision:** use a **patched ARMSX2 Nightly 20261111** that forces
+`setMaliSX2Offered(true)`, install **MaliSX2 0.4.1**, set **Renderer =
+Vulkan**, and keep the official nightly + stable `com.armsx2` as fallbacks.
+The patch/build and reproduction steps live in
+`tools/patches/armsx2-malisx2-g52/` and `10-emulator-gpu-drivers.md`.
+
+**Consequences:** real custom Vulkan driver on G52 (CvS2 verified), but G52 is
+experimental; the patched APK is debug-signed, so each official nightly needs
+an uninstall + re-patch. Other emulators are untested; the same driver zip is
+usable only where they expose a custom GPU driver loader. No stock/system
+driver is modified; recovery remains GammaOS reflash + verified unbricker.

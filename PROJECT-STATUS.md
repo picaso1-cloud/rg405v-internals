@@ -295,21 +295,26 @@ SELinux Permissive, bootloader **unlocked** (`flash.locked=0`,
   `lcd_name=...960X544` string is a shared panel-driver name; `lcd_size=640x480`
   and the 480x640 DRM mode are correct. Do not change `wm size`.
 - **Packages:** correct `RG405V_GammaOSNext_Lite_v1.1` (5 parts, 2.42 GB) is
-  already local and was the one flashed; no re-download needed. The missing
-  rollback gate is the RG405V unbricker (2.55 GB), downloading 2026-11-12.
+  already local and was the one flashed; no re-download needed. The RG405V unbricker is
+  downloaded/verified (2,549,946,021 bytes, SHA-256 `9212eec4…`, `7z t` OK).
 - **GPU/PS2:** **MaliSX2 0.4.1 works on the G52** via a patched ARMSX2
   Nightly 20261111 (force `setMaliSX2Offered(true)`) + **Vulkan** renderer.
-  Confirmed: CvS2 boots to character select; emulog shows `driver is malisx2`
-  and `GS: Classic renderer active (renderer=Vulkan)`. Auto/OpenGL does not use
-  the driver. Patch/build scripts: `tools/patches/armsx2-malisx2-g52/`.
-  G52 is experimental; fallback = System Vulkan driver.
+  Confirmed: CvS2 boots to title/VS ranking; emulog shows
+  `driver is malisx2` and `GS: Classic renderer active (renderer=Vulkan)`.
+  **Renderer must be Vulkan**; Auto picks OpenGL on G52 and never uses the
+  driver. Patch/build scripts: `tools/patches/armsx2-malisx2-g52/`.
+  Files: patched nightly SHA-256 `76924c41…`; MaliSX2 0.4.1 SHA-256
+  `feb44fcb…` (SD card `Drivers/`, backup `drivers/`). G52 experimental;
+  fallback = System Vulkan driver. Other emulators/guide:
+  `10-emulator-gpu-drivers.md`.
 - **Recovery:** the **GammaOS Next v1.1 Lite reflash** is the tested soft-brick
   path (fastbootd; writes Android partitions only). The **official unbricker**
  (2.55 GB, SHA-256 `9212eec4…`, `7z t` OK) is the hard-brick/stock gate. See
   `RECOVERY.md`.
 - **Customisation backup:** `/home/souhail/rg405v-backup/custom-2026-11-12/`
   (service.d, mousemode/hidpad/dpadkeys/usbmode/perfmode scripts, Panel APK,
-  Daijishō appdata, settings dumps, `MANIFEST.sha256`, restore README).
+  Daijishō appdata, settings dumps, drivers/patched APK/MaliSX2, `MANIFEST.sha256`,
+  restore README).
 
 ## Repositories & upstream
 
