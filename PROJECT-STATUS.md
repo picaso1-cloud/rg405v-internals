@@ -301,6 +301,10 @@ SELinux Permissive, bootloader **unlocked** (`flash.locked=0`,
   PanVK 3.7.0 explicitly lists G52 MC2 / T618 and marks PS2 recommended**;
   the 6 MB zip is on the device at `/sdcard/Download/` for testing. ARMSX2
   2.9.3 session: valid memcards, auto-tune on, GTA VCS 30 fps cap; OSD FPS off.
+- **Recovery:** the **GammaOS Next v1.1 Lite reflash** is the tested soft-brick
+  path (fastbootd; writes Android partitions only). The **official unbricker**
+ (2.55 GB, SHA-256 `9212eec4…`, `7z t` OK) is the hard-brick/stock gate. See
+  `RECOVERY.md`.
 - **Customisation backup:** `/home/souhail/rg405v-backup/custom-2026-11-12/`
   (service.d, mousemode/hidpad/dpadkeys/usbmode/perfmode scripts, Panel APK,
   Daijishō appdata, settings dumps, `MANIFEST.sha256`, restore README).
