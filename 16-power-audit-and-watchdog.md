@@ -199,3 +199,48 @@ cmd deviceidle sys-whitelist +com.android.messaging
 rm -f /data/adb/service.d/61-rg405v-watch.sh
 # keep /data/adb/rg405v-watch/ for the history, or rm -rf it
 ```
+
+---
+
+## 7. First real session — 2026-11-12
+
+Window: **13:39–14:29 UTC**. PSP (PPSSPP) at 13:39, **ARMSX2 nightly
+13:46:16–14:20:55**, stable ARMSX2 14:21–14:54, ARMSX3 from 14:54.
+
+| Metric | Value | Reading |
+|---|---|---|
+| Peak SoC | **68.4 °C** (13:59) | cputop 63.4, GPU 63.0, board 51.3; `Thermal Status: 0` |
+| Peak battery current | **658–702 mA** | 13:59, GTA SA; 312 mA at 14:09 |
+| Average over 78 min | **~385 mA** (100→90 %) | ~10 % / 1.3 h |
+| Fan | **off** (`auto`, pwm 204, `en=0`, `power=0`) | never enabled; trip is 70 °C |
+| Memory | MemAvailable min **1.32 GB**; zram **595 MB** | PSI memory 0.00 — no pressure |
+| Wakelocks | 2–3 | display + AudioMix/AudioOffload, expected |
+| Renderer | **OpenGL** (`GL_RENDERER: Mali-G52`) | GTA SA had no per-game Vulkan override |
+
+**Findings**
+
+1. **The fan never ran.** `auto` keeps `pwm_en=0`/`fan_power=0` until the 70 °C
+   trip; the session peaked just below it. For PS2 use `cool` (pwm 204) or
+   `max` (255) from the start and verify `pwm_en=1`, `fan_power=1`.
+2. **This was not a MaliSX2 run.** GTA SA (`SLUS-20946`) inherited global
+   `Auto` → OpenGL; only CvS2 (`SLUS-20246`) has a per-game `vulkan` override.
+   Emulog proves `renderer=OpenGL`, so the 68 °C/650 mA numbers are the
+   **OpenGL baseline**, not the custom Vulkan driver.
+3. **No memory pressure.** zram grew to 595 MB, MemAvailable stayed above
+   1.3 GB, PSI memory stayed 0.00. The LMK never had to act.
+4. **Watchdog gap.** No samples from **10:49 to 13:18** (148 min) while uptime
+   advanced normally: a `dumpsys`/`top` call blocked the loop. Add
+   `timeout 15` around each command and a heartbeat line. The gaming window
+   itself was sampled every 10 min.
+
+**Actions**
+
+```sh
+# fan for PS2 sessions
+setprop persist.gammaos.fan_mode cool      # or max
+cat /sys/devices/platform/pwm-fan/hwmon/hwmon0/pwm_en
+cat /sys/devices/platform/singleadc-joypad/fan_power
+
+# renderer: nightly -> Graphics -> Renderer -> Vulkan (global or per game)
+# verify in emulog.txt: "VK: driver is malisx2" / "renderer=Vulkan"
+```

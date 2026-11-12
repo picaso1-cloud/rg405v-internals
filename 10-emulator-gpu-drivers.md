@@ -39,6 +39,15 @@ GS: Classic renderer active (renderer=Vulkan)
 The same pattern applies to other emulators: *custom driver installed* ≠
 *driver used*. Always verify the renderer and the driver name in the log.
 
+**Per-game overrides matter (2026-11-12).** In the last session the GTA San
+Andreas profile (`SLUS-20946`) had **no** renderer override, so it inherited the
+global `Auto` and ran `renderer=OpenGL` / `GL_RENDERER: Mali-G52` even though
+MaliSX2 was installed. CvS2 (`SLUS-20246`) had `renderer=vulkan` and is the one
+configured for the custom driver. Check the **per-game** Graphics tab, not just
+the global setting. The official stable `com.armsx2` has an empty `drivers/`
+directory and `customDriverId=""`; only the patched nightly has MaliSX2
+installed.
+
 ---
 
 ## 3. PS2 — reproduce from scratch
