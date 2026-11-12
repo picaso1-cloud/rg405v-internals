@@ -234,6 +234,30 @@ the floor on every axis. Even a game that boots will be single-digit fps.
 - To revert the driver: set `customDriverId` back to `""` (backup of the prefs
   file was kept at `/data/local/tmp/ARMSX2.xml.bak`).
 
+### 2026-11-12 retest — Minecraft (BLUS31426), max clocks
+
+The "cheap game boot" test was run with the strongest settings available:
+
+- `persist.gammaos.performance_mode=max` → both CPU clusters pinned at
+  **2.0 GHz** (`userspace`), GPU **850 MHz** (`performance`);
+  `fan_mode=max` → pwm 255, `pwm_en=1`, `fan_power=1`.
+- MaliSX2 was definitely active:
+  `Vulkan driver bound (custom)`, `custom Vulkan driver applied:
+  libvulkan_malisx2.so`, `Found Vulkan-compatible GPU: 'Mali-G52' running on
+  driver 44.1.0`, identity `v1.r44p1-malisx2.0.4.1`.
+- **12 min after launch there was still no `emulog.txt` and no RSX frame.** The
+  `LLVM JIT` thread sat at ~103 % CPU with a **new PID every ~60 s** and its
+  `TIME+` resetting to ~21 s each time; RSS grew **0.9 → 1.2 GB**. That is the
+  same PPU recompilation/restart wall as the XMB run, not a GPU or thermal
+  limit.
+- Thermals stayed healthy on `fan_max`: soc **63.5 → 59.8 °C**, cputop
+  55.2 → 52.8 °C, GPU 54.1 → 52.6 °C.
+
+**Verdict unchanged:** max clocks/fan remove the thermal excuse but do not fix
+the PPU JIT bottleneck. PS3 remains non-viable on the T618. Revert with
+`setprop persist.gammaos.performance_mode stock` and
+`setprop persist.gammaos.fan_mode auto` when the test is over.
+
 ## 6. Recovery and fallbacks
 
 - **System driver:** ARMSX2 → pause → Renderer → GPU Driver → System Vulkan
