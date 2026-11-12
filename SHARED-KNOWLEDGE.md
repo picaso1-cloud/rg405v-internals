@@ -252,7 +252,23 @@ fastboot reboot fastboot                             # fastbootd for flashing
   APK and the stable app. The patched APK is debug-signed, so official nightly
   updates need an uninstall + re-patch.
 
-## 11. Maintenance
+## 11. T618: active fan and the Linux-port opening (2026-11-12)
+
+- **The RG405V has a real fan** (`pwm-fan`; `pwm1`, `pwm_en`,
+  `singleadc-joypad/fan_power`). GammaOS's default `fan_mode=auto` resolves to
+  `off`, so it is **silent and stopped during gaming**. `setprop
+  persist.gammaos.fan_mode cool|max` gives 204/255 PWM; `pwm_en` and
+  `fan_power` must both be 1. Trip points: 70/85/110 °C.
+- **Board identity:** `sprd,ums512` / `ums512-1h10` — the same board name as
+  `beebono/rg-rotate-linux`, a working mainline 7.1 port (panel, USB OTG,
+  Wi-Fi/BT, SD-card boot, eMMC untouched). GarlicOS 2.0.2 also lists the RG405V
+  but has no HW acceleration yet. ROCKNIX does not target T618.
+- **GPU split:** mainline = Panfrost (GLES) + experimental PanVK;
+  vendor kbase = Mali blob / **MaliSX2 0.5.0 ARM-Linux package**. Vulkan/PS2 on
+  Linux needs the kbase path, not mainline.
+- Full plan and hardware inventory: `rg405v-internals/11-linux-port-feasibility.md`.
+
+## 12. Maintenance
 
 - Add a row whenever a finding is reusable on a second device.
 - If a finding is device-specific, it still belongs here with its applicability.

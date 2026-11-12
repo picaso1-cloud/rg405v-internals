@@ -460,11 +460,54 @@ Collection at ~30 fps on an RG Vita (T618/G52 MP2).
 
 ---
 
-## 15. Next steps
+## 15. Fan and thermal headroom (2026-11-12)
+
+The RG405V **has an active fan** (Anbernic spec: “automatically heat
+dissipation”). It is a `pwm-fan` with three controls:
+
+```
+/sys/devices/platform/pwm-fan/hwmon/hwmon0/pwm1       # 0-255
+/sys/devices/platform/pwm-fan/hwmon/hwmon0/pwm_en     # 0/1
+/sys/devices/platform/singleadc-joypad/fan_power      # 0/1 (GPIO enable)
+```
+
+GammaOS exposes four modes through `persist.gammaos.fan_mode`, applied by
+`/vendor/bin/setfan_{off,auto,cool,max}.sh`:
+
+| Mode | pwm1 | Effective |
+|---|---:|---|
+| `off` | 0 | fan stopped |
+| `auto` | follows `persist.gammaos.fan_mode_auto` | currently **`off`** |
+| `cool` | 204 (~80 %) | quiet, strong |
+| `max` | 255 | loudest, best sustained clocks |
+
+**Important:** with the defaults (`fan_mode=auto`, `fan_mode_auto=off`) the fan
+is **off even during gaming**. Enabling it is the cheapest sustained-performance
+win on this device:
+
+```sh
+adb shell setprop persist.gammaos.fan_mode max     # benchmark / long session
+adb shell setprop persist.gammaos.fan_mode cool    # daily gaming
+adb shell setprop persist.gammaos.fan_mode auto    # restore default (off)
+```
+
+Verified 2026-11-12: `max` → `pwm1=255, pwm_en=1, fan_power=1`; `cool` → `204`;
+restored to the default `auto/off` afterwards. Writing `pwm1` alone does
+nothing — `fan_power` and `pwm_en` must both be 1.
+
+Thermal trip points on `soc-thmzone`: **70 °C / 85 °C / 110 °C**. With the fan
+on `cool`/`max`, `perfmode.sh max` can be sustained for a full session; with
+the fan off, the 12 nm T618 will throttle back toward the 70 °C trip. Fan
+`max` plus `perfmode.sh max` is the correct benchmarking configuration.
+
+---
+
+## 16. Next steps
 
 1. Insert the card into the phone; confirm `public:…` mounts and
    `/storage/<uuid>/ROMs` is readable.
 2. Point Daijishō at the seven platforms; run one title per system.
 3. Decide whether `51-adb-wifi.sh` should stay enabled (LAN exposure).
 4. Commit the panel/tools to the repo (done) and keep the APK in `tools/controlpanel/out`.
-5. Unbricker still pending — rollback unproven.
+5. Unbricker downloaded/verified (`9212eec4…`, `7z t` OK); the SPD rollback
+   itself is still not exercised.

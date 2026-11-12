@@ -294,6 +294,15 @@ SELinux Permissive, bootloader **unlocked** (`flash.locked=0`,
 - **Display:** **640x480 is native** (4" IPS, official Anbernic spec). The
   `lcd_name=...960X544` string is a shared panel-driver name; `lcd_size=640x480`
   and the 480x640 DRM mode are correct. Do not change `wm size`.
+- **Fan:** the RG405V has an **active `pwm-fan`** (`pwm1`, `pwm_en`,
+  `singleadc-joypad/fan_power`). GammaOS defaults to `fan_mode=auto` with
+  `fan_mode_auto=off` — i.e. **the fan is off even in games**. Enable `cool`
+  (pwm 204) or `max` (255) before long sessions; see `09-mods-and-tuning.md` §15.
+- **Linux:** board is **`sprd,ums512` / `ums512-1h10`**, the same board a
+  working mainline 7.1 port targets (`beebono/rg-rotate-linux`). A Linux port is
+  feasible (SD-card boot, no eMMC flash); mainline gives Panfrost GLES, Vulkan
+  only via experimental PanVK or vendor kbase + MaliSX2 0.5.0 Linux. See
+  `11-linux-port-feasibility.md`.
 - **Packages:** correct `RG405V_GammaOSNext_Lite_v1.1` (5 parts, 2.42 GB) is
   already local and was the one flashed; no re-download needed. The RG405V unbricker is
   downloaded/verified (2,549,946,021 bytes, SHA-256 `9212eec4…`, `7z t` OK).
