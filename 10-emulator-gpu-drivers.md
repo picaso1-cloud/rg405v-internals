@@ -303,14 +303,76 @@ number. The remaining walls, and what could clear each:
 
 **Resume triggers (ADR-011 style — revisit when ≥2 are true):**
 
-- ARMSX3 upstream ships a memory-footprint reduction (cache eviction or
-  smaller RSX buffers) validated by changelog.
-- Second-launch boot time measured under ~10 min with stable RSS.
-- An OOM-mitigated run sustains ≥15 min gameplay without an LMK kill.
-- A T618-class-or-better handheld with ≥8 GB becomes available.
+- ~~Second-launch boot time measured under ~10 min with stable RSS~~
+  **✅ MET 2026-11-12** — warm cache boots in minutes.
+- ~~An OOM-mitigated run sustains ≥15 min gameplay without an LMK kill~~ —
+  **partially met**: mitigated runs survive bursts to XMB/title, but no
+  in-world time yet.
+- ~~A T618-class-or-better handheld with ≥8 GB becomes available~~ — keep.
+- ARMSX3 upstream ships a memory-footprint reduction validated by changelog
+  (world-gen peak must drop below ~2.3 GB — the measured device ceiling).
+- A setting combination reduces the world-gen burst below ~2.3 GB (SPURS/SPU
+  thread caps applied in run 7 config are the first candidates).
+- MGLRU-capable kernel (≥5.15) becomes available for GammaOS (device is on
+  5.4.161 — no MGLRU, no smarter reclaim under pressure).
 
 Until then: PS2 (ARMSX2 nightly + MaliSX2 + per-game Vulkan) is the working
 path on this device; PS3 stays documented but parked.
+
+### 2026-11-12 afternoon — staged optimization experiment log
+
+The three "cheap tests" were executed as a staged ladder: one layer per run,
+device state verified between runs. **All OS-level tuning is session-only**
+(zram/`resetprop`/sysctl revert on reboot). ARMSX3 pref edits persist.
+
+**Layers applied (final state of the session):**
+
+| Layer | Stock | Applied | Mechanism |
+|---|---|---|---|
+| zram | 2.3 GB lz4 | **4.5 GB zstd** | live: `swapoff` → zram `reset` → `comp_algorithm=zstd` → `disksize` → `mkswap` → `swapon` |
+| lmkd swap floor | 10 % | **0 %** | `resetprop ro.lmk.swap_free_low_percentage 0` |
+| lmkd PSI | ~70 ms | **150 ms** | `resetprop ro.lmk.psi_partial_stall_ms 150` |
+| lmkd thrash limit | 100 | **300** | `resetprop ro.lmk.thrashing_limit 300` |
+| watermark scale | 20 | **150** | `/proc/sys/vm/watermark_scale_factor` (300 tried — too greedy, see run 3) |
+| ARMSX3 VRAM cap | 2048 MB | **1024 MB** | `ps3VramLimitMb` in `/data/data/com.armsx3/shared_prefs/ARMSX2.xml` (backup: `/data/local/tmp/ARMSX2-r405v.xml.bak`) |
+| ARMSX3 SPURS | 6 | **4** | `ps3MaxSpursThreads` (run 7 config, not yet executed) |
+| ARMSX3 pref SPU | auto | **4** | `ps3PreferredSpuThreads` (run 7 config, not yet executed) |
+
+**Run log:**
+
+| Run | Config delta | Outcome |
+|---|---|---|
+| 1 · 14:54 | stock OS | 33-min first boot (PPU LLVM, 66 modules). Loading bar at 53 fps. fps then dropped 53 → ~20–24 (probably title/menu panorama, **not** verified in-world — corrects the earlier "90 s of gameplay" claim). LMK kill 15:28:44 at **2.7 GB RSS**. |
+| 2 · ~15:46 | zram 4.5 + lmkd patience | **PPU cache hit — boot minutes, not 33 min.** **XMB rendered and animated** (18–36 fps; `silk_webkit` freeze did not reproduce). World-entry burst → LMK kill 15:59:07 at 2.58 GB; swap only 190 MB used (floor 10 % still active). |
+| 3 · ~16:00 | watermark 300 | **Title screen reached** (screenshot proof). kswapd over-swapped: RSS 1.98 GB → 226 MB resident, ~880 MB swapped → 2–3 fps thrash → game unresponsive → `The game did not react to the exit request in time. Terminating manually...` + `VK_ERROR_DEVICE_LOST` (teardown collateral, not a MaliSX2 failure). **Emulator survived and returned to XMB — first app-level survival.** Lesson: watermark 300 swaps out hot JIT code. |
+| 4 · 16:09 | watermark 150 | Healthy boot 51 fps; world-create menus 20–27 fps; **lmkd killed a 3 MB background process instead of the game** — staged protections working as designed. World-gen burst → fps 13→9→3 → **RSX thread fatal: `Verification failed (object: 0x0)`** right after video-memory heap growth (`heap 640M of 2048M cap, driver reports 647M of 1866M budget`). Memory was fine at death (959 MB free) — first *emulator-internal* failure. |
+| 5 · 16:16 | — | World created (default menus). **Kernel global OOM**: RSS peak **2919 MB**, `System: 3538/3538MB used (0MB free)`; `dmesg: oom-kill … global_oom, task=com.armsx3`; whole app killed. |
+| 6 · 16:19 | VRAM 1024 | Boot visibly lighter (RSS 1.6 GB at ESRB vs 2.6 in run 5). World-gen burst identical: 255 MB free → **0 MB in 10 s**, RSS peak **2816 MB**, global OOM again. **Conclusion: the burst is game-data driven (guest RAM + LLVM caches), not graphics-heap driven — VRAM cap is not the lever.** |
+
+**User-verified constraint:** Minecraft PS3 (Legacy Console) has **no world-size
+option** — PS3 worlds are fixed at the smallest legacy size (864×864). The
+measured gen burst is therefore already the game's minimum.
+
+**Measured kill chain (hierarchical, all observed):**
+`lmkd per-app kill` (runs 1–2) → `watermark breach` (runs 1–2) →
+`kernel global OOM` (runs 5–6, final and uncatchable). The staged OS tuning
+moved the failure point from "app killed with 2.3 GB zram lz4" to "app
+survives bursts up to ~2.8 GB and returns to XMB" — real progress, but the
+last 100 MB is the wall: **ARMSX3 2.9.3 world-gen needs a ~2.9 GB peak burst;
+the device OOMs at ~2.8.**
+
+**What is proven to work now:**
+- Boot in minutes via warm PPU cache (vs 33 min cold).
+- XMB fully interactive; title screen; world-create UI; on-screen keyboard —
+  all rendered, up to 50 fps with the final config.
+- App-level survival through memory bursts (no LMK kill in runs 3–4).
+
+**Run 7 (pending):** SPURS 4 + preferred SPU 4 + VRAM 1024. If world-gen still
+OOMs identically, the floor is confirmed for this ARMSX3 build and the track
+parks until upstream memory work or 8 GB-class hardware.
+
+**Revert paths:** OS tuning dies on reboot; prefs: restore
+`/data/local/tmp/ARMSX2-r405v.xml.bak` over `ARMSX2.xml` (app stopped).
 
 Revert with `setprop persist.gammaos.performance_mode stock` and
 `setprop persist.gammaos.fan_mode auto` when the test is over.

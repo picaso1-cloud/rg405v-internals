@@ -364,6 +364,39 @@ opened #2 manually).
 
 ---
 
+## Latest session update (2026-11-12 — PS3 staged-optimization experiments)
+
+Full record: `10-emulator-gpu-drivers.md` §5 ("staged optimization experiment
+log"). Raw evidence: `rg405v-backup/custom-2026-11-12/ps3-screenshots/` and
+`ps3-logs/` (ARMSX3.log, session.log, prefs backup).
+
+- **PS2 clarified:** only the patched ARMSX2 **nightly** has MaliSX2 installed
+  (stable `com.armsx2` has an empty `drivers/`); `auto` renderer picks OpenGL on
+  G52 — **Vulkan must be set per game** (only CvS2 has the override; GTA SA ran
+  OpenGL). Committed `ecb7e9e`.
+- **PS3 run ladder executed** (6 runs, stock → staged OS tuning → ARMSX3 prefs):
+  1. Boot wall **cleared** — PPU cache cuts 33-min first boot to minutes.
+  2. XMB wall **cleared** — renders/animates under direct game boot.
+  3. OS memory wall **moved** — zram 4.5 GB zstd + lmkd patience
+     (`swap_free_low 0`, PSI 150, thrash 300) + `watermark_scale_factor 150`
+     let the app survive bursts to title/menus (20–50 fps) instead of being
+     LMK-killed; the emulator now returns to XMB after a burst.
+  4. New wall exposed — **world-gen burst ~2.9 GB host RSS** → kernel
+     `global_oom` (runs 5–6, deterministic). VRAM cap 2048→1024 did NOT shrink
+     it (burst is guest RAM + LLVM caches, not graphics heaps). Title screen
+     renders, but world generation never completes on 4 GB.
+- **Constraint confirmed by user:** PS3 Minecraft has no world-size option
+  (legacy PS3 worlds are fixed smallest) — the burst is the game's minimum.
+- **Run 7 config staged, not yet run:** `ps3MaxSpursThreads 4`,
+  `ps3PreferredSpuThreads 4`, VRAM 1024. Prefs backup:
+  `/data/local/tmp/ARMSX2-r405v.xml.bak`.
+- **HDDs repaired in Linux** (see root `COPY-STATUS.md`): Transcend NTFS dirty
+  flag cleared + verified by clean rw mount (Windows chkdsk now optional);
+  LaCie exFAT already clean. Both SMART PASSED. Earlier simultaneous USB drop
+  = cable/port suspicion, not filesystems.
+- Kernel is **5.4.161 — no MGLRU**; noted as a PS3 resume trigger alongside
+  upstream ARMSX3 memory work (world-gen peak must fall below ~2.3 GB).
+
 ## Latest session update (2026-11-08, post-checkpoint)
 
 - **Goals clarified across all three devices** (RGB10 Max 2 / RG353V / RG405V):
