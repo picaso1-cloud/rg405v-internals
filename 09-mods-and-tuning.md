@@ -432,8 +432,10 @@ Documentation:
 `libvulkan_panfrost.so` (the same schema ARMSX2 uses for custom drivers).
 
 Test plan:
-1. ARMSX2 → Settings → custom GPU driver → install from file →
-   `Download/PanVK-FristOneRR-V.3.7.0.zip`.
+1. ARMSX2 → Settings → custom GPU driver → install from file. The zip is on
+   the SD card at
+   `/storage/00000000-0000-0000-0000-000000000001/Drivers/PanVK-FristOneRR-V.3.7.0.zip`
+   (also `Download/PanVK-FristOneRR-V.3.7.0.zip` on internal storage).
 2. Select it, clear the shader cache, test CvS2 / Metal Slug / Grandia II.
 3. If it fails to start on G52, try `PANVK_ATOM_STRIDE=56`; on 4 GB,
    `PANVK_HEAP_MB=2048` if textures are missing/broken.
