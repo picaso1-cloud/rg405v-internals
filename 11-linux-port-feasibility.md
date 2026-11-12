@@ -121,12 +121,23 @@ Recommended sequence: **`fastboot boot` during bring-up → then `boot_a` swap
 (with a verified backup) for a no-PC daily boot.** Userdata/Android are never
 touched by either.
 
-### 4.2 Vulkan: still the fork in the road
+### 4.2 GPU: mainline is not GL-only
 
-Arch-R's stack is GLES via Mesa Panfrost. **MaliSX2 0.5.0's Linux package
-requires Arm's kbase driver**, not mainline Panfrost, so a mainline Arch-R
-image cannot use it. A Vulkan/PS2 Linux build would need the vendor 5.4 kernel
-+ kbase as a second profile — a separate track, not a tweak.
+Correction to the earlier note (2026-11-12): Mesa's **PanVK supports Mali-G52
+(Bifrost v7) at Vulkan 1.3** — experimental, non-conformant, and gated behind
+`PAN_I_WANT_A_BROKEN_VULKAN_DRIVER=1`, but real. **Panfrost GLES 3.1 is
+Khronos-conformant on the G52**, and ARMSX2's release notes explicitly handle
+**PanVK** as a renderer. So a mainline Arch-R image can do **both GL and
+Vulkan** with one kernel.
+
+**MaliSX2 is different:** its 0.5.0 Linux package needs Arm's **kbase** driver,
+and the driver implements only what ARMSX2 calls ("every other entry point logs
+and fails"). It is a **targeted PS2 accelerator**, not a general Vulkan/GL
+stack — no Zink, no general apps.
+
+Plan: mainline + Panfrost + PanVK is the primary profile. A vendor-kbase
+profile (MaliSX2) is a fallback only if PanVK fails the PS2 performance gate.
+Full detail: `14-gpu-acceleration-plan.md`.
 
 ## 5. What “working” will and will not mean
 
