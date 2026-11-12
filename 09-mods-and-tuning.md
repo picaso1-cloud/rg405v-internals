@@ -404,46 +404,39 @@ Magisk 26.1/app 29.0, `performance_mode=stock`, USB `adb`, log buffers 4 MiB.
 
 ---
 
-## 14. Custom GPU driver on Mali-G52 — feasibility (2026-11-12)
+## 14. Custom GPU driver on Mali-G52 — why the option is missing
 
 The RG405V uses **Mali-G52 MP2** (GLES r34p0, kernel 5.4.161, vendor
-`mali_gondul`). Honest options:
+`mali_gondul`). ARMSX2 2.9.3 does **not** offer a custom driver on this SoC:
 
-| Option | G52 support | Android drop-in | Verdict |
+- The Android UI exposes its **MaliSX2** GPU-driver page only when
+  `isMaliSX2Supported` is true (Mali-G57/G68/G77/G78). On G52 the page is
+  hidden, so there is no "custom GPU driver" entry.
+- The Qt **Driver Packs** page is **Adreno/Turnip-only**:
+  `DriverPacks::IsAdrenoGpu()` → `NoMatchingGpu`, with the message
+  "No driver packs for this GPU. Driver packs are Turnip builds ... Qualcomm
+  Adreno GPUs, and this device has none."
+- The FristOneRR PanVK zip's `meta.json` uses `"libraryName"`; ARMSX2's
+  driver-pack manifest expects `"manifest"`/`"library"`. It is not loadable
+  through ARMSX2.
+
+| Option | G52? | ARMSX2? | Verdict |
 |---|---|---|---|
-| ARMSX2 **MaliSX2** | **No** — G57/G68/G77/G78 only | APK driver list | Not applicable |
-| `libadrenotools` | No — Adreno only | — | Not applicable |
-| **FristOneRR PanVK 3.7.0** | **Yes — G52 MC2 listed** | **Yes**: install the zip in ARMSX2's custom GPU driver | **Test this** (Mesa 27, Vulkan 1.4) |
-| zenithblue PanVK | Yes (Bifrost) | `EMULATOR.zip` / adrenotools packages | Alternative test |
-| Newer ARM Mali blob | Likely | Replaces `/vendor/lib*/libmali.so`; must match kernel `kbase` ABI | Risky (GPU hang) |
-| ARMSX2 **GLES backend** | Yes | App setting | Try this first |
+| ARMSX2 MaliSX2 | No (G57/G68/G77/G78) | hidden on G52 | Not available |
+| ARMSX2 Driver Packs (Turnip) | No (Adreno only) | hidden on Mali | Not available |
+| FristOneRR PanVK 3.7.0 | Yes (G52 MC2 listed) | **No** — MaliSX2-specific loader | Use in Winlator/GameHub, not ARMSX2 |
+| Newer ARM Mali blob | Likely | replaces `/vendor/lib*/libmali.so` | risky, kernel ABI |
+| ARMSX2 GLES backend | Yes | app setting | use for tuning |
 
-Documentation:
+**Conclusion:** on the RG405V there is **no custom Vulkan driver in ARMSX2**.
+PS2 stays on the stock Mali driver; tune 1x native, 30 fps cap, EE/VU 0,
+auto-tune. PanVK remains useful for **Winlator/GameHub** (Windows games) or
+another emulator with a generic Mali-kbase loader; Winlator+PCSX2 is slower
+than native ARMSX2 here, so it is not a PS2 win.
 
-- Panfrost: <https://docs.mesa3d.org/drivers/panfrost.html>
-- PanVK: <https://docs.mesa3d.org/drivers/panvk.html>
-- MaliSX2 (G57+): <https://github.com/bmdhacks/malisx2>
-- libadrenotools (Adreno): <https://github.com/bylaws/libadrenotools>
-- ARM Mali user-space drivers: <https://developer.arm.com/downloads/-/mali-drivers>
-
-**FristOneRR PanVK 3.7.0** (2026-11-02) explicitly lists
-**RGVITA · Unisoc T618 · Mali-G52 MC2 ✅** — the RG405V's SoC/GPU — and marks
-**PS2 ✅ recommended**. The zip is only 6 MB and contains `meta.json` +
-`libvulkan_panfrost.so` (the same schema ARMSX2 uses for custom drivers).
-
-Test plan:
-1. ARMSX2 → Settings → custom GPU driver → install from file. The zip is on
-   the SD card at
-   `/storage/00000000-0000-0000-0000-000000000001/Drivers/PanVK-FristOneRR-V.3.7.0.zip`
-   (also `Download/PanVK-FristOneRR-V.3.7.0.zip` on internal storage).
-2. Select it, clear the shader cache, test CvS2 / Metal Slug / Grandia II.
-3. If it fails to start on G52, try `PANVK_ATOM_STRIDE=56`; on 4 GB,
-   `PANVK_HEAP_MB=2048` if textures are missing/broken.
-4. G52 has no tessellation/geometry shaders (irrelevant for PS2); Vulkan 1.4.
-
-It is open source (Mesa PanVK). The native 640x480 panel means PS2 renders at
-native resolution; there is no upscale cost to recover. If PanVK works, it is
-the best performance lever available on this device.
+The PanVK zip is still on the SD card (`Drivers/`) and in the customisation
+backup, for use in apps that accept the generic driver. It is not an ARMSX2
+drop-in.
 
 ---
 

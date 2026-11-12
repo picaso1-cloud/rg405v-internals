@@ -297,10 +297,11 @@ SELinux Permissive, bootloader **unlocked** (`flash.locked=0`,
 - **Packages:** correct `RG405V_GammaOSNext_Lite_v1.1` (5 parts, 2.42 GB) is
   already local and was the one flashed; no re-download needed. The missing
   rollback gate is the RG405V unbricker (2.55 GB), downloading 2026-11-12.
-- **GPU/PS2:** Mali-G52 MP2. MaliSX2 does not support G52, **but FristOneRR
-  PanVK 3.7.0 explicitly lists G52 MC2 / T618 and marks PS2 recommended**;
-  the 6 MB zip is on the device at `/sdcard/Download/` for testing. ARMSX2
-  2.9.3 session: valid memcards, auto-tune on, GTA VCS 30 fps cap; OSD FPS off.
+- **GPU/PS2:** Mali-G52 MP2. **ARMSX2 2.9.3 has no custom driver path on G52**:
+  the MaliSX2 page is hidden (G57/G68/G77/G78 only) and the generic Driver
+  Packs page is Adreno/Turnip-only. PanVK 3.7.0 lists G52 MC2 but is not
+  loadable in ARMSX2; it is for Winlator/GameHub. PS2 = stock Mali, 1x native,
+  30 fps cap. ARMSX2 session: valid memcards, auto-tune on, OSD FPS off.
 - **Recovery:** the **GammaOS Next v1.1 Lite reflash** is the tested soft-brick
   path (fastbootd; writes Android partitions only). The **official unbricker**
  (2.55 GB, SHA-256 `9212eec4…`, `7z t` OK) is the hard-brick/stock gate. See
