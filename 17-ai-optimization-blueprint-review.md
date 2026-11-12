@@ -446,6 +446,88 @@ produce the data that would justify Tier C.
 
 ---
 
+## 12.1 Addendum — review of the implementation brief (2026-11-12)
+
+A second-pass brief adopted the three-tier design. It is **~90 % aligned and
+safe**, but it has one load-bearing false assumption and four under-specified
+mechanisms. Fix these before writing Phase 1.
+
+### The false assumption: Daijishō "launch and exit commands"
+
+The documented Daijishō player model is **an Android intent plus extras**
+(`am start -n <activity> -e ROM {file.path} …`) with a "kill process" flag.
+There is **no documented pre/post-launch shell hook**. A root script cannot
+simply "hook into Daijishō" to run before and after a game.
+
+Options, best first:
+
+1. **Wrapper activity in the existing `org.andr36oid.panel` app.** Daijishō
+   points at the wrapper as the player; it applies the profile, forwards the
+   original intent to the emulator, and restores on return/timeout. Requires a
+   small APK change, but it is a real, testable integration with lifecycle
+   events.
+2. **Root `logcat` watcher** on `ActivityTaskManager` `START`/`Displayed`
+   events. Event-driven and cheap, but string-parsing is fragile across
+   Android builds.
+3. **`dumpsys activity` polling** — rejected (≈17 k wakeups/day).
+
+Verify option 1 on the device before committing to it.
+
+### The missing input channel for Tier C
+
+The brief never says **what text the router receives**. If Daijishō triggers
+it, the system/package is already known — the model adds nothing. If the user
+types or speaks, where is that UI? Define one before building the router:
+a Panel quick-action with six fixed phrases, a text box, or drop Tier C for
+now. Without an input channel, Tier C is a solution looking for a problem.
+
+### Four mechanisms that are named but not designed
+
+1. **Session metrics.** `watch.log` samples every 10 min; a 20-min session may
+   yield one or two points. "Peak temp, throttles, average clocks" needs a
+   session sampler (30–60 s) or `dumpsys thermalservice` history, plus a
+   defined throttle signal (thermal status ≥ 2, or `scaling_max_freq` drop).
+2. **Config swaps.** Emulators rewrite their config on exit. A swap while the
+   app is running can be lost or corrupt the profile. Only swap with the app
+   stopped, back up first, checksum, and never let a model choose a path.
+3. **Crash detection / rollback.** "Foreground app crashes within 60 s" needs a
+   detector (`logcat` crash buffer or `dumpsys activity`). Revert only if the
+   current setting still equals the one we set (compare-and-swap), otherwise a
+   user change is silently overwritten.
+4. **Leash and boot recovery.** If the user kills the emulator, the session may
+   never call `stop` and the device stays on `max`. Add: restore after N minutes
+   without the session app in the foreground, and restore `stock`/`auto` at
+   boot from a state file. Add a lock file for concurrent launches.
+
+### Two policy gaps worth fixing now
+
+- **Thermostat, not a static fan.** The brief sets fan once at launch. The
+  winning deterministic rule is adaptive: `> 75 °C → fan max`, `> 82 °C →
+  profile stock`, `> 88 °C → pause/alert`. This is more valuable than Tier C.
+- **Battery-aware start.** `< 15 %` and not charging → `powersave` regardless
+  of the game profile, unless the user overrides.
+
+### Small corrections
+
+- "Build top-down" contradicts "Tier B first"; say **B → A → C**.
+- Kill criteria: **0 %** false actions for profile changes, **2 %** for fan;
+  "beat the table on ≥ 80 % of events" needs a confidence curve, not one gate.
+- Tier A should use a local model or redact game titles if it goes to a cloud.
+- If the 34 MB weights and 1.5 MB engine are published, add Apache-2.0
+  `LICENSE`/`NOTICE` and fetch by SHA-256 rather than committing binaries.
+- `start_session` overlaps `set_performance_profile`/`set_fan_mode`; our test
+  showed "n64 stuttering" choosing `start_session` instead of `max`. Define
+  precedence or add triggers, or merge the tools.
+
+### Revised Phase-1 acceptance
+
+`rg405v-session` + a real launch wrapper; `profiles.conf` schema tests;
+dry-run; session sampler; state file; auto-restore on exit/crash/boot; thermal
+escalation; no polling. Tier C stays out until the input channel and replay
+gate exist.
+
+---
+
 ## 13. Sources
 
 - Cactus Needle 3 model card — <https://huggingface.co/Cactus-Compute/needle3>
