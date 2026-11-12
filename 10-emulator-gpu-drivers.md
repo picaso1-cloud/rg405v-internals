@@ -130,7 +130,7 @@ whether it exposes an install UI and whether it gates by GPU.
 | **Vita3K-Plus** (PS Vita) | MaliSX2 release notes: G52 tested by contributor | MaliSX2 0.4.1 | promising | the release notes say Vita3K-Plus has only been played on G52 so far |
 | **Eden / Lemon** (Switch) | PanVK is the recommended path | PanVK (Zenithblue / FristOneRR / LukeValen) | untested | T618 CPU is the limit; light games only |
 | **Winlator / GameHub** (Windows) | PanVK | Winlator zip / FristOneRR / LukeValen | untested | not a PS2 path; Winlator+PCSX2 is slower than native ARMSX2 |
-| **ARMSX3 / RPCSX** (PS3) | no MaliSX2 listing | — | not recommended | T618 is far below the PS3 floor |
+| **ARMSX3** (PS3) | yes — bundled adrenotools, generic zip loader | MaliSX2 0.4.1 | ⚠️ driver works, emulator not viable | XMB PPU hangs in a `silk_webkit` reload loop; see §5 |
 | **PPSSPP** (PSP) | no known Mali custom-driver UI | — | use system Vulkan | PPSSPP's own backends |
 | **RetroArch** | no per-app Mali driver UI | — | use system Vulkan | a system-wide ICD is the only advanced route |
 | **Flycast / Mupen64Plus / DraStic** | no known Mali custom-driver UI | — | use system driver | GLES/Vulkan as provided |
@@ -155,7 +155,77 @@ GammaOS reflash and the verified unbricker as recovery.
 
 ---
 
-## 5. Recovery and fallbacks
+## 5. PS3 — ARMSX3 (tested 2026-11-12: driver loads, emulator not viable)
+
+**Short answer: no patch is needed to load MaliSX2 in ARMSX3 1.6.7 — and it
+still does not produce a usable PS3.** The blocker is CPU/PPU, not the GPU
+driver.
+
+### How the driver was made to load
+
+Unlike ARMSX2, ARMSX3 bundles `adrenotools` inside `libarmsx3-jni.so`
+(`adrenotools_open_libvulkan`, `supportsCustomDriverLoading`,
+`setCustomDriver`) and its importer honours `libraryName` from `meta.json` —
+there is no G52 boolean gate. Two ways to install:
+
+1. Normal: Settings → Renderer → GPU Driver → Import (a zip with `meta.json` +
+   `libvulkan_malisx2.so`). The UI was not reachable in Library mode on this
+   build, so the driver was sideloaded:
+   ```
+   /data/data/com.armsx3/files/drivers/malisx2-0.4.1/{meta.json,libvulkan_malisx2.so}
+   ```
+2. Then point the config at it (app stopped):
+   - `shared_prefs/ARMSX2.xml` → `config.global` JSON →
+     `"customDriverId":"malisx2-0.4.1"`
+   - also add the legacy `<string name="customDriverId">malisx2-0.4.1</string>`
+
+### Result — the driver really works
+
+```
+ARMSX3-UI: Loading custom driver .../drivers/malisx2-0.4.1/
+ARMSX3-Driver: custom Vulkan driver applied: libvulkan_malisx2.so
+MESA: malisx2 build a833123f35f6, driverInfo v1.r44p1-malisx2.0.4.1...
+RSX: Vulkan driver identity: 'Mali-G52' ... 'v1.r44p1-malisx2.0.4.1.s9eab19d3cbdb'
+RSX: Vulkan: Renderer initialized on device 'Mali-G52'
+RSX: Swapchain: 480x640 for a 640x480 window
+```
+
+This fixed a hard failure: with the **stock r34 driver** the same XMB boot died
+in `vk::render_device::create` (`Verification failed (object: 0x0)`); stock G52
+lacks `depthClamp`, shader clip distance, wide lines, depth bounds and
+`VK_EXT_shader_uniform_buffer_unsized_array`. MaliSX2 r44p1 supports enough to
+create the device and present at ~53 fps.
+
+### Why it still fails
+
+Booting the firmware XMB reached the PPU compile pass and then never converged:
+
+- **`silk_webkit.sprx` was compiled 42 times** between 0:42 and 0:58;
+  `sysconf_plugin` 13×, `avc_plugin` 13×, `PEmuCoreLib` 10×.
+- The PPU main thread went unresponsive:
+  `SIG: Thread [PPU[0x1000000] main_thread] is too sleepy. Waiting for it 9200893us already!`
+- At **03:04:59**, after **58 min**, the process exited:
+  `reason=2 (SIGNALED) status=9` (SIGKILL), RSS 627 MB.
+- 237 `Compiling module` vs 236 `Compiled module` — one compile never finished.
+
+The XMB reload loop points at the XMB's WebKit/browser stack, not at the RSX
+driver. The app's overlay (`Progress 31/32`) never moved while the log compiled
+dozens of modules, so it is not a usable progress indicator.
+
+### Verdict
+
+ARMSX3's own published minimum is **Snapdragon 865/870, Adreno 650+ or
+Mali-G57+, 8 GB RAM**. The RG405V is a **T618 / Mali-G52 MP2 / 4 GB** — below
+the floor on every axis. Even a game that boots will be single-digit fps.
+
+- Keep MaliSX2 selected if experimenting; it is strictly better than stock for
+  Vulkan device creation.
+- Do not spend more time on the XMB path. A game boot (skip XMB) is the only
+  remaining cheap test; `Minecraft (PS3).iso` is the lightest title on hand.
+- To revert the driver: set `customDriverId` back to `""` (backup of the prefs
+  file was kept at `/data/local/tmp/ARMSX2.xml.bak`).
+
+## 6. Recovery and fallbacks
 
 - **System driver:** ARMSX2 → pause → Renderer → GPU Driver → System Vulkan
   driver (or OpenGL). The stock driver is untouched.
@@ -168,7 +238,7 @@ GammaOS reflash and the verified unbricker as recovery.
 
 ---
 
-## 6. Maintenance checklist
+## 7. Maintenance checklist
 
 - [ ] Every new ARMSX2 nightly: re-run `build-patched-apk.sh`, test Vulkan +
       MaliSX2, keep the previous working APK.
