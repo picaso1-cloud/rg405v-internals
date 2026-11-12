@@ -10,7 +10,7 @@ live recon in `02-recon-results.md`.
 
 > **Update 2026-11-11: §4 (unlock) is EXECUTED.** The bootloader is unlocked
 > (`flash.locked=0`, `verifiedbootstate=orange`) and internal storage is wiped.
-> §5 archive is downloading; §6 (flash) and §7 (rollback proof) are the remaining
+> §5 archive is downloaded/verified; §6 (flash) is done; §7 unbricker is downloaded/verified (SPD rollback not yet exercised).
 > steps. See [07-bootloader-unlock-lock-unbrick.md](07-bootloader-unlock-lock-unbrick.md)
 > for the verified unlock/lock/unbrick runbook.
 

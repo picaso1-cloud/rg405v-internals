@@ -272,9 +272,9 @@ Practical notes:
   the saved networks.
 - The same dialog result issue does **not** affect the saved-network reconnects.
 
-Separate observation (not Wi-Fi): this GSI reports **640x480** from `wm size`,
-not the RG405V panel's 960x1280. That is a display-config/overlay issue in the
-GSI, worth investigating separately from the network stack.
+Separate observation (corrected 2026-11-12): 640x480 is the **native** RG405V
+panel. The earlier “960x1280 / RG505 panel” idea was wrong; see §11. No `wm
+size` change and no reflash are needed for the display.
 
 ---
 
@@ -351,8 +351,9 @@ SHA-256 `9212eec4274da0bd811a776078b9636e56af01d62d4a7f97d00960e2796b3b71`; `7z 
 Session log: `/sdcard/Android/data/com.armsx2/files/logs/session.log`.
 
 - GPU is **Mali-G52 MP2** (`GLES: ARM, Mali-G52, OpenGL ES 3.2 v1.r34p0...`),
-  **not G57**. MaliSX2 does not cover G52, so ARMSX2 is on the stock driver;
-  no custom driver is available for this device.
+  **not G57**. At the time of this session ARMSX2 was on the **stock driver**;
+  later on 2026-11-12 **MaliSX2 0.4.1 worked on G52** via a patched ARMSX2
+  Nightly + Vulkan. See §14 and `10-emulator-gpu-drivers.md`.
 - Memcards are valid: 8,650,752 bytes, header
   `Sony PS2 Memory Card Format 1.2.0.0`, mtime at session end. The log's
   `MCDBAK ... UNREADABLE` is the app's **auto-backup** step failing, not the

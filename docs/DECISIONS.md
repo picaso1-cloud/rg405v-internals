@@ -149,9 +149,10 @@ install. Hard gates before flashing: (1) internal `/sdcard` backup (~4.8 GB),
 card removed, (4) battery ≥ 50 %.
 
 **Progress 2026-11-11:** gates 3 and 4 met (card out, 100 % battery). Gate 1
-waived by user. Gate 2 **not yet met** — the RG405V unbricker
-(`RG405V_UNBRICKER_SPD_Upgrade_Tool_R26.21.2801.7z`, 2.55 GB, Google Drive) was
-not downloaded because of slow link; user will fetch it later.
+waived by user. Gate 2 **met 2026-11-12**: the RG405V unbricker
+(`RG405V_UNBRICKER_SPD_Upgrade_Tool_R26.21.2801.7z`, 2,549,946,021 bytes,
+SHA-256 `9212eec4…`, `7z t` OK) is downloaded and verified; the SPD rollback
+itself has not yet been exercised.
 
 **Bootloader unlocked (verified):** `ro.boot.flash.locked` 1 → **0**,
 `ro.boot.verifiedbootstate` green → **orange**. Unlock performed on Linux with
