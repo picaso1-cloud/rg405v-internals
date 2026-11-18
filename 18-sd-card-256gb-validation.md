@@ -90,6 +90,22 @@ data partition to fill the *reported* card on first boot — on this card that
 would grow into the dead zone. After flashing, disable the resize script and
 verify the last partition ends below 47 GiB before first boot.
 
+## Why controller reflashing is not an option (researched 2026-11-19)
+
+The famous "reflash fake flash with an MPTool" fix is **USB-stick-only**:
+USB controllers expose a vendor channel that factory Mass Production Tools
+(Phison MPALL, AlcorMP, SMI MPTool, FirstChip FCMpTool…) can drive, after
+identifying the chip via ChipGenius VID/PID. **SD/microSD cards have no
+equivalent**: the package is monolithic (NAND + controller molded together),
+the SD command set exposes no firmware-update channel, and no public MPTool
+exists for no-name SD controllers. RMPrepUSB's author: *"there are no 'repair'
+or reprogramming tools available for SD cards."* Gillware (recovery lab):
+firmware-repair tools for SD cards target legitimate firmware; applied to
+tampered firmware they typically brick the card. A successful reflash would
+also only make the card report ~52 GiB truthfully — which the f3fix partition
+cap already achieves in practice. **Conclusion: the capped card is the best
+possible state; do not attempt firmware "repair" tools on it.**
+
 **Method note:** f3probe is probabilistic — the f3 author recommends the full
 f3write/f3read pass after any f3fix, which is exactly step 4. Tools kept at
 `/tmp/opencode/f3-8.0/` (rebuildable: `make` + `make extra`).
