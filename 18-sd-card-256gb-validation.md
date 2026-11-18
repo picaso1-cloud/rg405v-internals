@@ -71,14 +71,24 @@ applied (f3 8.0, built from source; `parted` installed for f3fix):
    - *Sonic Adventure (DC)* → 120 GiB: **wrong immediately, data gone**
    - Neither stored even warm — writes above the true capacity are discarded
      or mis-mapped instantly; no power cycle needed to lose them.
-4. Full `f3write`/`f3read` certification of the 47 GiB partition: **pending**
-   (fills + verifies every sector; pass rule per f3 docs: any persistent
-   corruption on a second pass = junk).
+4. Full `f3write`/`f3read` certification of the 47 GiB partition: **✅ PASS**
+   — `Data OK: 46.99 GB (98,540,928 sectors); Corrupted 0; Lost 0; Changed 0;
+   Overwritten 0` (write 13.14 MB/s, read 22.74 MB/s).
+5. **Real-files ground test: ✅ PASS.** 27,686 real ROM files (~27 GiB: neogeo,
+   fbneo, mame2003, cps2, megadrive, nes, gbc, mastersystem, gamegear,
+   pcengine, snes, n64, psx, gba, dreamcast — whole + partial selections, 58 %
+   of the partition) copied from the Transcend hub → SHA-256 manifest →
+   **real power cycle** (`modprobe -r rtsx_pci_sdmmc`, the laptop's Realtek
+   reader) → cold re-read → **all 27,686 files identical**.
 
-**Salvage verdict so far:** genuine, stable **47 GiB** usable — a ~6× upgrade
-over the 8 GB RGB10 Max 2 card it is intended to replace. Usage rules: treat
+**FINAL VERDICT: certified stable at 47 GiB.** Deployed target: RGB10 Max 2
+ROM card (replacing an 8 GB card). Usage rules: treat
 as 47 GiB forever (never format the "unallocated" rest in Windows), read-mostly,
 ≤90 % fill, hub stays master copy, re-run `f3read` occasionally.
+**Firmware-flash warning:** handheld CFW (ArkOS/ROCKNIX etc.) auto-resizes the
+data partition to fill the *reported* card on first boot — on this card that
+would grow into the dead zone. After flashing, disable the resize script and
+verify the last partition ends below 47 GiB before first boot.
 
 **Method note:** f3probe is probabilistic — the f3 author recommends the full
 f3write/f3read pass after any f3fix, which is exactly step 4. Tools kept at
