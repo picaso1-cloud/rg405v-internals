@@ -55,6 +55,35 @@ a silent-corruption time bomb.
   writes in the last few % of capacity fail verification** — always test
   with a ≥1 GiB roundtrip near the end, not just far-end point checks.
 
+## Salvage (2026-11-11 evening): capped to 47 GiB — pending certification
+
+Rather than discard the card, the established fake-flash salvage protocol was
+applied (f3 8.0, built from source; `parted` installed for f3fix):
+
+1. `f3probe --destructive` (0.6 s): **counterfeit, type "limbo"; usable
+   52.39 GiB** of announced 250 GiB (matches the manual bisect: 48 ✅ / 52 ❌).
+2. `f3fix --last-sec=98567167` → single **47 GiB partition** (`RGB10ROMS`,
+   FAT32), capped 1 GiB below the last verified-good large write, leaving the
+   fake zone unallocated forever.
+3. **Real-file wall demo** (user's hypothesis "works above 120 GB" — tested
+   with real hub ROMs, written raw outside the partition):
+   - *Worms Armageddon (PSX)* → 52 GiB: **wrong immediately, data gone**
+   - *Sonic Adventure (DC)* → 120 GiB: **wrong immediately, data gone**
+   - Neither stored even warm — writes above the true capacity are discarded
+     or mis-mapped instantly; no power cycle needed to lose them.
+4. Full `f3write`/`f3read` certification of the 47 GiB partition: **pending**
+   (fills + verifies every sector; pass rule per f3 docs: any persistent
+   corruption on a second pass = junk).
+
+**Salvage verdict so far:** genuine, stable **47 GiB** usable — a ~6× upgrade
+over the 8 GB RGB10 Max 2 card it is intended to replace. Usage rules: treat
+as 47 GiB forever (never format the "unallocated" rest in Windows), read-mostly,
+≤90 % fill, hub stays master copy, re-run `f3read` occasionally.
+
+**Method note:** f3probe is probabilistic — the f3 author recommends the full
+f3write/f3read pass after any f3fix, which is exactly step 4. Tools kept at
+`/tmp/opencode/f3-8.0/` (rebuildable: `make` + `make extra`).
+
 ## Method (reproducible)
 
 ```sh
