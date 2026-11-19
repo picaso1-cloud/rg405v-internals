@@ -1,4 +1,21 @@
-# 18 — 256 GB SD card validation (2026-11-11, laptop SD reader)
+# 18 — SD card validation (fake "256GB" + genuine Samsung replacement)
+
+**2026-11-19 — replacement card: GENUINE ✅** (quick-gate results; full
+certification running)
+
+Samsung `EE8QT` (manfid 0x1b / oemid `SM`, made 11/2019), bought as 256 GB,
+**pre-owned — ex-drone** (DJI `MISC/LOG/gimbal_log.log` artifacts on it):
+
+- Capacity **238.5 GiB** = correct decimal 256 GB (vs the fake's impossible
+  250 GiB), UHS-I **SDR104** on the laptop's Realtek reader (proves the old
+  card's 24 MB/s was the card, not the reader).
+- `f3probe`: *"Good news: the device is the real thing"* — usable = announced,
+  no fakery (45 s probe).
+- Read sweep 0→224 GiB: **86.6–92.1 MB/s**, flat. Far-end 1 GiB write+verify
+  (the test that condemned the fake): **PASS**.
+- Full f3write/f3read certification: started, result pending.
+
+## Fake card (2026-11-11, laptop SD reader)
 
 **Verdict: ❌ DEFECTIVE — do not store data on it. Return it.**
 
