@@ -1,7 +1,6 @@
 # 18 — SD card validation (fake "256GB" + genuine Samsung replacement)
 
-**2026-11-19 — replacement card: GENUINE ✅** (quick-gate results; full
-certification running)
+**2026-11-19 — replacement card: GENUINE ✅ — CERTIFIED + FORMATTED CLEAN**
 
 Samsung `EE8QT` (manfid 0x1b / oemid `SM`, made 11/2019), bought as 256 GB,
 **pre-owned — ex-drone** (DJI `MISC/LOG/gimbal_log.log` artifacts on it):
@@ -13,7 +12,11 @@ Samsung `EE8QT` (manfid 0x1b / oemid `SM`, made 11/2019), bought as 256 GB,
   no fakery (45 s probe).
 - Read sweep 0→224 GiB: **86.6–92.1 MB/s**, flat. Far-end 1 GiB write+verify
   (the test that condemned the fake): **PASS**.
-- Full f3write/f3read certification: started, result pending.
+- Full f3write/f3read certification: **✅ PASS — `Data OK: 238.11 GB
+  (499,350,528 sectors)`; Corrupted 0; Lost 0; Changed 0; Overwritten 0**
+  (write 35.56 MB/s, read 79.21 MB/s).
+- **Formatted clean** (exFAT, label `SD256`), empty, unmounted — ready for any
+  role: ROM hub mirror, RGB10 primary card, or future OS card.
 
 ## Fake card (2026-11-11, laptop SD reader)
 
