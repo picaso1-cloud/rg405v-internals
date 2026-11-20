@@ -119,6 +119,8 @@ Evidence tags: **[seen]** observed here · **[inferred]** public docs/reasoning 
 | [15-linux-gpu-parking-and-references.md](15-linux-gpu-parking-and-references.md) | **Parked track**: why we wait, resume triggers/watchlist, review of ARM Vulkan SDK, libGPULayers, fxlin/mali, PanVK article, RKNN/G52 note |
 | [16-power-audit-and-watchdog.md](16-power-audit-and-watchdog.md) | **Power audit + watchdog**: real drain numbers, Doze/wakelock/service findings, safe tweaks, 10-min telemetry daemon, analysis thresholds and A/B protocol |
 | [17-ai-optimization-blueprint-review.md](17-ai-optimization-blueprint-review.md) | **AI blueprint review**: Needle 3 on-device bench (2 s, 76 MB, 8/10), why "autonomous root AI" is the wrong target, deterministic-first architecture and safety contract |
+| [18-sd-card-256gb-validation.md](18-sd-card-256gb-validation.md) | 256 GB Samsung card validation (cross-device storage) |
+| [19-garlicos-bootloader-analysis.md](19-garlicos-bootloader-analysis.md) | **GarlicOS 2.0 bootloader mechanism** (patched `vendor_boot` + `DHTB`-signed `vbmeta`, f2fs rootfs on exFAT SD, `chroot`) and the Arch plan that uses it — no bootloader porting, Android untouched |
 | [tools/](tools/) | Sources: `mousemode.c`, `hidpad.c` + `hid-gadget.sh`, `controlpanel/` (APK sources), `scripts/` (service.d, usbmode, perfmode), `cactus-bench/` |
 | [tools/unisoc_unlock_long.py](tools/unisoc_unlock_long.py) | Unlock helper with a configurable confirmation window (`UNLOCK_WAIT_MS`, default 240 s) instead of the tool's hard-coded 60 s |
 

@@ -36,6 +36,14 @@ the GPU/Vulkan story is split (see §4).
 GarlicOS is the proof that Linux boots on this exact model. `rg-rotate-linux` is
 the proof that a *clean mainline* port is practical on this exact board.
 
+> **2026-11-20 — the GarlicOS bootloader is now the recommended first step.**
+> Its source (`GarlicOS/bootloader_anbernic_rg405`) shows it is a **chain-load
+> from the stock verified boot chain**: patched `vendor_boot` ramdisk + `vbmeta`
+> re-signed with the AOSP test key and wrapped in a Unisoc `DHTB` header, then
+> an f2fs rootfs image on exFAT SD, `chroot`ed from the ramdisk. No bootloader
+> port, Android untouched, reversible. Full analysis and the Arch plan:
+> `19-garlicos-bootloader-analysis.md`.
+
 ## 2. Hardware inventory to port
 
 Read from the running Android system (2026-11-12):
