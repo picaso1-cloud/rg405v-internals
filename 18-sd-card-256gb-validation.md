@@ -1,4 +1,11 @@
-# 18 — SD card validation (fake "256GB" + genuine Samsung replacement)
+# 18 — SD card validation (cross-device storage assets: fake "256GB", Samsung replacement, RG353V TF1 card)
+
+**Scope note:** this doc covers storage assets tested on the laptop and used
+across devices (RGB10 Max 2 target, RG353V TF1). Device/backup files are kept
+separate per project: RG353V card backups + ROCKNIX image live in
+`/home/souhail/rg353v-backup/`; RG405V backups in `/home/souhail/rg405v-backup/`.
+The RG353V ArkOS card boot diagnosis lives in
+`/home/souhail/Andr36oid/PROJECT-STATUS.md` → Project 3.
 
 **2026-11-19 — replacement card: GENUINE ✅ — CERTIFIED + FORMATTED CLEAN**
 
